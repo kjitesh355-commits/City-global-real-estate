@@ -1,0 +1,6 @@
+{
+  "name": "City Global Real Estate",
+  "description": "Dubai's premium real estate portal featuring AI Property Finder, AI Investment Scores, mortgage calculators, and an interactive AI Concierge.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

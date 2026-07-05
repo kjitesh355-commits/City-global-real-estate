@@ -1,0 +1,279 @@
+import React, { useState, useCallback } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight, Check } from "lucide-react";
+import { TestimonialsColumn, Testimonial } from "./ui/testimonials-columns-1";
+import { Sparkles } from "./ui/sparkles";
+import { InfiniteSlider } from "./ui/infinite-slider";
+import { ProgressiveBlur } from "./ui/progressive-blur";
+import { GradientBackground } from "./ui/gradient-background-4";
+import { ScrollReveal } from "./ui/scroll-reveal";
+
+interface TestimonialsProps {
+  theme: "light" | "dark";
+}
+
+export default function Testimonials({ theme }: TestimonialsProps) {
+  const [activeDevIndex, setActiveDevIndex] = useState(0);
+
+  const developers = [
+    { name: "EMAAR", tagline: "Shaping Dubai's Skyline" },
+    { name: "DAMAC", tagline: "Luxury Residences" },
+    { name: "SOBHA", tagline: "Realty Redefined" },
+    { name: "NAKHEEL", tagline: "Waterfront Living Creator" },
+    { name: "ELLINGTON", tagline: "Bespoke Design Houses" },
+    { name: "MERAAS", tagline: "Iconic Urban Hubs" },
+    { name: "BINGHATTI", tagline: "Aerodynamic Luxury" },
+    { name: "OMNIYAT", tagline: "Artistic Architecture" }
+  ];
+
+  const dubaiTestimonials: Testimonial[] = [
+    {
+      text: "City Global's real-time AI scoring and risk-audit models enabled our family office to secure prime Palm Jumeirah villas with complete tax-free yield assurance. Absolute game-changer.",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Bilal Ahmed",
+      role: "Sovereign Wealth Advisor",
+    },
+    {
+      text: "The transition to City Global was immaculate. Their instant predictive heatmaps on capital growth allowed us to expand our residential portfolio ahead of market spikes.",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Farhan Siddiqui",
+      role: "Portfolio Director",
+    },
+    {
+      text: "Securing my family's golden visa residency was handled seamlessly by their concierge. Outstanding personal brokerage matched with institutional-grade tech.",
+      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Saman Malik",
+      role: "Private Investor",
+    },
+    {
+      text: "Their offline-first design and precise mortgage evaluation tools saved our team days of manual auditing. Extremely reliable systems and professional agents.",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Briana Patton",
+      role: "Family Office Principal",
+    },
+    {
+      text: "As an international investor, trust is everything. City Global's strict compliance with Dubai's RERA rules and verified escrow monitoring provided total peace of mind.",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Aliza Khan",
+      role: "Lead Asset Manager",
+    },
+    {
+      text: "The data integrity of their rental yield audit tool is outstanding. I have never seen a brokerage back up their projections with such clear, verifiable analytics.",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Michael Brown",
+      role: "Capital Markets VP",
+    },
+    {
+      text: "Their off-market luxury penthouses on Dubai Canal are second to none. We were able to negotiate and acquire premium units without any public noise.",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Sarah Johnson",
+      role: "UHNW Brokerage Partner",
+    },
+    {
+      text: "State-of-the-art interactive map views combined with rapid advisory callbacks. The best digital real estate agency in the GCC, bar none.",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Ahmed Al Mansoori",
+      role: "Downtown Portfolio Owner",
+    },
+    {
+      text: "A highly cooperative partner that bridges tech-forward design with deep local Dubai knowledge. They are shaping the future of global real estate investment.",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=120&h=120&q=80",
+      name: "Hassan Ali",
+      role: "Luxury Property Developer",
+    }
+  ];
+
+  const firstColumn = dubaiTestimonials.slice(0, 3);
+  const secondColumn = dubaiTestimonials.slice(3, 6);
+  const thirdColumn = dubaiTestimonials.slice(6, 9);
+
+  const handleNextDev = useCallback(() => {
+    setActiveDevIndex((prev) => (prev + 1) % developers.length);
+  }, [developers.length]);
+
+  const handlePrevDev = useCallback(() => {
+    setActiveDevIndex((prev) => (prev - 1 + developers.length) % developers.length);
+  }, [developers.length]);
+
+  return (
+    <section className={`relative z-10 w-full py-16 overflow-hidden transition-colors duration-500 ${
+      theme === "dark" ? "" : ""
+    }`} style={{ contain: "layout style" }}>
+      <GradientBackground />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+      
+      {/* 1. Our Trusted Developers Slider Row */}
+      <ScrollReveal>
+      <div className="mb-16">
+        <div className="flex justify-between items-end mb-8">
+          <div>
+            <p className="font-sans text-[10px] uppercase tracking-widest text-[#d4af37] font-semibold mb-1">Our Partners</p>
+            <h3 className={`font-serif text-xl sm:text-2xl font-bold tracking-wide transition-colors duration-300 ${
+              theme === "dark" ? "text-white" : "text-stone-900"
+            }`}>Our Trusted Developers</h3>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={handlePrevDev}
+              className={`cursor-pointer w-7 h-7 rounded-full border flex items-center justify-center hover:border-[#d4af37] hover:text-[#d4af37] transition-all duration-300 ${
+                theme === "dark" ? "border-gray-800 text-gray-400" : "border-stone-200 text-stone-500 hover:bg-stone-50"
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleNextDev}
+              className={`cursor-pointer w-7 h-7 rounded-full border flex items-center justify-center hover:border-[#d4af37] hover:text-[#d4af37] transition-all duration-300 ${
+                theme === "dark" ? "border-gray-800 text-gray-400" : "border-stone-200 text-stone-500 hover:bg-stone-50"
+              }`}
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Developers Logos horizontal carousel */}
+        <div className="relative w-full overflow-hidden py-2 mt-4" style={{ contain: "layout style" }}>
+          <InfiniteSlider 
+            className="flex h-full w-full items-center" 
+            duration={30}
+            gap={16}
+          >
+            {developers.map((dev, idx) => (
+              <div
+                key={`${dev.name}-${idx}`}
+                onClick={() => setActiveDevIndex(idx)}
+                className={`cursor-pointer p-4 rounded flex flex-col items-center justify-center text-center transition-all duration-300 h-18 w-44 border shrink-0 ${
+                  idx === activeDevIndex 
+                    ? "border-[#d4af37] bg-[#121110] shadow-[0_0_12px_rgba(212,175,55,0.25)]" 
+                    : (theme === "dark" ? "border border-white/10 bg-black/10 hover:border-white/20" : "border-stone-150 bg-stone-50/50 hover:border-stone-300")
+                }`}
+              >
+                <span className={`font-serif text-xs font-bold tracking-[0.3em] transition-colors duration-300 ${
+                  theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
+                }`}>{dev.name}</span>
+                <span className={`font-sans text-[8px] uppercase tracking-wider mt-1 leading-none transition-colors duration-300 ${
+                  theme === "dark" ? "text-gray-500" : "text-stone-400"
+                }`}>{dev.tagline}</span>
+              </div>
+            ))}
+          </InfiniteSlider>
+
+          <ProgressiveBlur
+            className="pointer-events-none absolute top-0 left-0 h-full w-[100px] z-10"
+            direction="left"
+            blurLayers={2}
+            blurIntensity={0.4}
+          />
+          <ProgressiveBlur
+            className="pointer-events-none absolute top-0 right-0 h-full w-[100px] z-10"
+            direction="right"
+            blurLayers={2}
+            blurIntensity={0.4}
+          />
+        </div>
+
+        {/* Sparkles Ambient luxury curve section under the slider */}
+        <div className="relative mt-2 h-40 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
+          <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#d4af37,transparent_75%)] before:opacity-20 pointer-events-none" />
+          <div className={`absolute -left-1/2 top-1/2 aspect-[1/0.7] z-0 w-[200%] rounded-[100%] border-t ${
+            theme === "dark" 
+              ? "border-zinc-800/20 bg-[#07080a]" 
+              : "border-stone-200 bg-stone-50"
+          }`} />
+          <Sparkles
+            density={40}
+            className="absolute inset-x-0 bottom-0 h-full w-full pointer-events-none z-10 [mask-image:radial-gradient(50%_50%,white,transparent_80%)]"
+            color={theme === "dark" ? "#d4af37" : "#aa7c11"}
+          />
+        </div>
+      </div>
+      </ScrollReveal>
+
+      {/* 2. What Our Clients Say Grid Section */}
+      <ScrollReveal delay={0.2}>
+      <div>
+        <div className="text-left mb-10">
+          <p className="font-sans text-[10px] uppercase tracking-widest text-[#d4af37] font-semibold mb-1">Endorsements</p>
+          <h3 className={`font-serif text-xl sm:text-2xl font-bold tracking-wide transition-colors duration-300 ${
+            theme === "dark" ? "text-white" : "text-stone-900"
+          }`}>What Our Clients Say</h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-stretch">
+          
+          {/* Google Reviews Card Summarizer (matching layout exactly) */}
+          <div className={`lg:col-span-1 p-6 rounded-lg border shadow-xl flex flex-col justify-between text-left transition-colors duration-300 ${
+            theme === "dark" 
+              ? "glass border-[#d4af37]/20 bg-[#121110]" 
+              : "bg-white border-[#aa7c11]/20 shadow-sm"
+          }`}>
+            <div>
+              <p className={`font-sans text-[10px] uppercase tracking-wider font-semibold mb-1 transition-colors duration-300 ${
+                theme === "dark" ? "text-gray-400" : "text-stone-500"
+              }`}>Audit Score</p>
+              <h4 className={`font-serif text-base font-bold tracking-wide mb-3 transition-colors duration-300 ${
+                theme === "dark" ? "text-white" : "text-stone-900"
+              }`}>Google Reviews</h4>
+              
+              <div className="flex items-baseline gap-2 mt-4 mb-1">
+                <span className={`font-mono text-4xl font-extrabold transition-colors duration-300 ${
+                  theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
+                }`}>4.9</span>
+                <span className={`text-xs transition-colors duration-300 ${theme === "dark" ? "text-gray-500" : "text-stone-400"}`}>/ 5.0</span>
+              </div>
+
+              <div className="flex items-center gap-0.5 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4.5 h-4.5 text-[#d4af37] fill-[#d4af37]" />
+                ))}
+              </div>
+
+              <p className={`font-sans text-[11px] transition-colors duration-300 ${theme === "dark" ? "text-gray-400" : "text-stone-600"}`}>Based on 320+ premium client reviews and RERA audits.</p>
+            </div>
+
+            {/* Overlapping small faces representing reviewers */}
+            <div className={`flex items-center justify-between pt-4 mt-6 transition-colors duration-300`}>
+              <div className="flex -space-x-2.5 overflow-hidden">
+                <img loading="lazy" className={`inline-block h-7 w-7 rounded-full ring-2 ${theme === "dark" ? "ring-[#0c0d14]" : "ring-white"}`} src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=64&h=64&q=80" alt="" referrerPolicy="no-referrer" />
+                <img loading="lazy" className={`inline-block h-7 w-7 rounded-full ring-2 ${theme === "dark" ? "ring-[#0c0d14]" : "ring-white"}`} src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=64&h=64&q=80" alt="" referrerPolicy="no-referrer" />
+                <img loading="lazy" className={`inline-block h-7 w-7 rounded-full ring-2 ${theme === "dark" ? "ring-[#0c0d14]" : "ring-white"}`} src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=64&h=64&q=80" alt="" referrerPolicy="no-referrer" />
+                <img loading="lazy" className={`inline-block h-7 w-7 rounded-full ring-2 ${theme === "dark" ? "ring-[#0c0d14]" : "ring-white"}`} src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=64&h=64&q=80" alt="" referrerPolicy="no-referrer" />
+              </div>
+              <div className="flex items-center gap-1.5 text-[10px] text-emerald-500 font-sans font-semibold uppercase">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Verified Client Reviews</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Animated scrolling testimonials (spans 3 columns on large screens) */}
+          <div className="lg:col-span-3 overflow-hidden relative max-h-[520px] rounded-lg border border-transparent" style={{ contain: "layout style" }}>
+            {/* Ambient gold/fading gradient overlays to hide clipping top and bottom */}
+            <div className={`absolute top-0 left-0 right-0 h-16 z-20 pointer-events-none transition-colors duration-500 ${
+              theme === "dark" 
+                ? "bg-gradient-to-b from-[#07080a] to-transparent" 
+                : "bg-gradient-to-b from-[#fcfbf9] to-transparent"
+            }`} />
+            
+            <div className={`absolute bottom-0 left-0 right-0 h-16 z-20 pointer-events-none transition-colors duration-500 ${
+              theme === "dark" 
+                ? "bg-gradient-to-t from-[#07080a] to-transparent" 
+                : "bg-gradient-to-t from-[#fcfbf9] to-transparent"
+            }`} />
+
+            <div className="flex justify-center gap-6">
+              <TestimonialsColumn testimonials={firstColumn} duration={35} className="w-full max-w-xs" />
+              <TestimonialsColumn testimonials={secondColumn} className="hidden md:block w-full max-w-xs" duration={42} />
+              <TestimonialsColumn testimonials={thirdColumn} className="hidden xl:block w-full max-w-xs" duration={38} />
+            </div>
+          </div>
+
+        </div>
+      </div>
+      </ScrollReveal>
+      </div>
+
+    </section>
+  );
+}
