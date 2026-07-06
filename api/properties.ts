@@ -1,12 +1,6 @@
 import express from "express";
-import path from "path";
-import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
-import dotenv from "dotenv";
 
-dotenv.config();
-
-// Properties database
 const PROPERTIES = [
   {
     id: "serenia-living",
@@ -169,14 +163,13 @@ const PROPERTIES = [
   }
 ];
 
-// Lazy Gemini Client Initialization Helper
-let geminiClient: GoogleGenAI | null = null;
+let geminiClient = null;
 
-function getGeminiClient(): GoogleGenAI {
+function getGeminiClient() {
   if (!geminiClient) {
     const key = process.env.GEMINI_API_KEY;
     if (!key) {
-      throw new Error("GEMINI_API_KEY environment variable is required but missing. Please add it via Secrets panel.");
+      throw new Error("GEMINI_API_KEY environment variable is required");
     }
     geminiClient = new GoogleGenAI({
       apiKey: key,
@@ -190,19 +183,10 @@ function getGeminiClient(): GoogleGenAI {
   return geminiClient;
 }
 
-async function startServer() {
-  const app = express();
-  const PORT = 3001;
-
-  app.use(express.json());
-
-  // API Endpoint: Get all properties
-  app.get("/api/properties", (req, res) => {
-    res.json(PROPERTIES);
-  });
-
-  // API Endpoint: AI Property Finder
-  app.post("/api/search-properties", async (req, res) => {
+export default async function handler(req, res) {
+  if (req.method === "GET") {
+    res.status(200).json(PROPERTIES);
+  } else if (req.method === "POST") {
     try {
       const { description } = req.body;
       if (!description || typeof description !== "string") {
@@ -211,7 +195,6 @@ async function startServer() {
 
       const client = getGeminiClient();
       
-      // Let Gemini match properties from our database and provide a premium explanation
       const response = await client.models.generateContent({
         model: "gemini-3.5-flash",
         contents: `You are an elite real estate expert in Dubai. Filter our property database based on the user's dream house description: "${description}".
@@ -249,8 +232,7 @@ Return ONLY a raw JSON array matching this schema:
       const text = response.text || "[]";
       const matches = JSON.parse(text);
 
-      // Map back to our full property details
-      const enrichedMatches = matches.map((m: any) => {
+      const enrichedMatches = matches.map((m) => {
         const prop = PROPERTIES.find(p => p.id === m.id);
         if (!prop) return null;
         return {
@@ -260,7 +242,6 @@ Return ONLY a raw JSON array matching this schema:
         };
       }).filter(Boolean);
 
-      // If no matches found or empty, return top 2 properties as general recommendation
       if (enrichedMatches.length === 0) {
         return res.json([
           {
@@ -276,61 +257,10 @@ Return ONLY a raw JSON array matching this schema:
         ]);
       }
 
-      res.json(enrichedMatches);
-    } catch (error: any) {
+      res.status(200).json(enrichedMatches);
+    } catch (error) {
       console.error("AI Property Finder Error:", error);
       res.status(500).json({ error: error.message || "An error occurred with the AI assistant" });
     }
-  });
-
-  // API Endpoint: AI Concierge Chat
-  app.post("/api/chat", async (req, res) => {
-    try {
-      const { messages } = req.body;
-      if (!messages || !Array.isArray(messages)) {
-        return res.status(400).json({ error: "Messages array is required" });
-      }
-
-      const client = getGeminiClient();
-
-      // Convert messages to Gemini SDK parts format
-      const chatMessages = messages.map(msg => ({
-        role: msg.role === "user" ? "user" as const : "model" as const,
-        parts: [{ text: msg.content }]
-      }));
-
-      // Initialize a new chat session using standard contents history
-      const response = await client.models.generateContent({
-        model: "gemini-3.5-flash",
-        contents: chatMessages,
-        config: {
-          systemInstruction: `You are 'City Global Real Estate's Elite AI Concierge' – an extremely sophisticated, highly informed, and polished real estate consultant based in Dubai.
-- Tone: Professional, warm, premium, elite, highly knowledgeable.
-- Expertise: Dubai Property market trends, Prime Areas (Palm Jumeirah, Downtown Dubai, Business Bay, Dubai Marina, Jumeirah, Dubai Hills Estate), UAE Golden Visa program, Return on Investment (ROI), rental yields, premium developments (EMAAR, DAMAC, Sobha, Meraas, Nakheel).
-- Focus: Be specific and factual. Do not say generic things. Mention real estate values, yields of 6-9%, prime tax-free lifestyle benefits, and the golden visa investment threshold (AED 2M+).
-- Structure: Keep your answers structured, elegant, and concise. Use clear bullet points if detailing multiple facts or steps. Limit responses to 2-3 brief paragraphs maximum.`
-        }
-      });
-
-      res.json({ content: response.text });
-    } catch (error: any) {
-      console.error("AI Concierge Chat Error:", error);
-      res.status(500).json({ error: error.message || "An error occurred with the AI assistant" });
-    }
-  });
-
-// Serve static assets
-   const distPath = path.join(process.cwd(), "dist");
-   app.use(express.static(distPath));
-   app.get("*", (req, res) => {
-     res.sendFile(path.join(distPath, "index.html"));
-   });
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-  });
+  }
 }
-
-startServer().catch(err => {
-  console.error("Server startup error:", err);
-});
