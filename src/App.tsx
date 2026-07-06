@@ -73,6 +73,11 @@ export default function App() {
   const [preferredDate, setPreferredDate] = useState("");
   const [notes, setNotes] = useState("");
 
+  // Cookie Consent
+  const [cookieAccepted, setCookieAccepted] = useState(() => {
+    return localStorage.getItem("cookie_consent") === "accepted";
+  });
+
   // Fetch properties from Express API on startup
   useEffect(() => {
     async function fetchProperties() {
@@ -183,6 +188,11 @@ export default function App() {
       setPreferredDate("");
       setNotes("");
     }, 4500);
+  };
+
+  const handleAcceptCookies = () => {
+    localStorage.setItem("cookie_consent", "accepted");
+    setCookieAccepted(true);
   };
 
   return (
@@ -612,6 +622,59 @@ export default function App() {
           </FloatingButtonItem>
         </FloatingButton>
       </div>
+
+      {/* Cookie Consent Banner */}
+      {!cookieAccepted && (
+        <div className={`fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-6 transition-all duration-500 ${
+          theme === "dark"
+            ? "bg-[#0a0c12]/95 backdrop-blur-xl border-t border-[#d4af37]/15"
+            : "bg-white/95 backdrop-blur-xl border-t border-stone-200 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]"
+        }`} style={{ animation: 'slideUpBanner 0.5s cubic-bezier(0.16, 1, 0.3, 1)' }}>
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-start gap-3 flex-1">
+              <span className="text-2xl mt-0.5">🍪</span>
+              <div>
+                <p className={`font-serif text-sm font-bold mb-1 transition-colors duration-300 ${
+                  theme === "dark" ? "text-[#f3e5ab]" : "text-[#6b4f1d]"
+                }`}>We value your privacy</p>
+                <p className={`font-sans text-xs leading-relaxed transition-colors duration-300 ${
+                  theme === "dark" ? "text-gray-400" : "text-stone-500"
+                }`}>
+                  This website uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our{" "}
+                  <a href="/privacy" className={`underline font-semibold transition-colors duration-300 ${
+                    theme === "dark" ? "text-[#d4af37] hover:text-[#f3e5ab]" : "text-[#aa7c11] hover:text-[#6b4f1d]"
+                  }`}>Privacy Policy</a>.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleAcceptCookies}
+                className={`cursor-pointer px-6 py-2.5 rounded-lg font-sans text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  theme === "dark"
+                    ? "bg-gradient-to-r from-[#d4af37] to-[#aa7c11] text-black hover:shadow-[0_0_16px_rgba(212,175,55,0.3)] hover:scale-105"
+                    : "bg-gradient-to-r from-[#aa7c11] to-[#d4af37] text-black hover:shadow-[0_4px_12px_rgba(170,124,17,0.25)] hover:scale-105"
+                } active:scale-95`}
+              >
+                Accept
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slideUpBanner {
+          from {
+            opacity: 0;
+            transform: translateY(100%);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
 
     </div>
   );
