@@ -15,14 +15,14 @@ export default function Testimonials({ theme }: TestimonialsProps) {
   const [activeDevIndex, setActiveDevIndex] = useState(0);
 
   const developers = [
-    { name: "EMAAR", tagline: "Shaping Dubai's Skyline" },
-    { name: "DAMAC", tagline: "Luxury Residences" },
-    { name: "SOBHA", tagline: "Realty Redefined" },
-    { name: "NAKHEEL", tagline: "Waterfront Living Creator" },
-    { name: "ELLINGTON", tagline: "Bespoke Design Houses" },
-    { name: "MERAAS", tagline: "Iconic Urban Hubs" },
-    { name: "BINGHATTI", tagline: "Aerodynamic Luxury" },
-    { name: "OMNIYAT", tagline: "Artistic Architecture" }
+    { name: "EMAAR", tagline: "Shaping Dubai's Skyline", logo: "https://companieslogo.com/img/emaar-properties/logo-e9236da7.png" },
+    { name: "DAMAC", tagline: "Luxury Residences", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Damac_logo.svg/512px-Damac_logo.svg.png" },
+    { name: "SOBHA", tagline: "Realty Redefined", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Sobha_Realty_logo.svg/512px-Sobha_Realty_logo.svg.png" },
+    { name: "NAKHEEL", tagline: "Waterfront Living Creator", logo: "https://companieslogo.com/img/nakheel/logo-f2c9ec22.png" },
+    { name: "ELLINGTON", tagline: "Bespoke Design Houses", logo: "https://companieslogo.com/img/ellington-properties/logo-e14b8c58.png" },
+    { name: "MERAAS", tagline: "Iconic Urban Hubs", logo: "https://companieslogo.com/img/meraas/logo-c3e1e7ab.png" },
+    { name: "BINGHATTI", tagline: "Aerodynamic Luxury", logo: "https://companieslogo.com/img/binghatti/logo-d9d7f2a0.png" },
+    { name: "OMNIYAT", tagline: "Artistic Architecture", logo: "https://companieslogo.com/img/omniyat/logo-e5f6c2a3.png" }
   ];
 
   const dubaiTestimonials: Testimonial[] = [
@@ -142,16 +142,27 @@ export default function Testimonials({ theme }: TestimonialsProps) {
               <div
                 key={`${dev.name}-${idx}`}
                 onClick={() => setActiveDevIndex(idx)}
-                className={`cursor-pointer p-4 rounded flex flex-col items-center justify-center text-center transition-all duration-300 h-18 w-44 border shrink-0 ${
+                className={`cursor-pointer px-6 py-4 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 h-20 w-48 border shrink-0 ${
                   idx === activeDevIndex 
-                    ? "border-[#d4af37] bg-[#121110] shadow-[0_0_12px_rgba(212,175,55,0.25)]" 
-                    : (theme === "dark" ? "border border-white/10 bg-black/10 hover:border-white/20" : "border-stone-150 bg-stone-50/50 hover:border-stone-300")
+                    ? "border-[#d4af37] bg-[#121110] shadow-[0_0_16px_rgba(212,175,55,0.2)]" 
+                    : (theme === "dark" ? "border-white/10 bg-black/10 hover:border-white/20" : "border-stone-200 bg-stone-50/50 hover:border-stone-300")
                 }`}
               >
-                <span className={`font-serif text-xs font-bold tracking-[0.3em] transition-colors duration-300 ${
+                <img
+                  src={dev.logo}
+                  alt={`${dev.name} logo`}
+                  className={`h-8 w-auto object-contain mb-1 ${
+                    theme === "dark" ? "brightness-0 invert opacity-80" : "opacity-90"
+                  } ${idx === activeDevIndex ? "opacity-100" : ""}`}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <span className={`hidden font-serif text-xs font-bold tracking-[0.25em] transition-colors duration-300 ${
                   theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
                 }`}>{dev.name}</span>
-                <span className={`font-sans text-[8px] uppercase tracking-wider mt-1 leading-none transition-colors duration-300 ${
+                <span className={`font-sans text-[8px] uppercase tracking-wider leading-none transition-colors duration-300 ${
                   theme === "dark" ? "text-gray-500" : "text-stone-400"
                 }`}>{dev.tagline}</span>
               </div>
