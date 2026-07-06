@@ -145,7 +145,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
               <div
                 key={`${dev.name}-${idx}`}
                 onClick={() => setActiveDevIndex(idx)}
-                className={`cursor-pointer px-6 py-4 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 h-20 w-48 border shrink-0 ${
+                className={`cursor-pointer px-6 py-4 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 h-24 w-52 border shrink-0 ${
                   idx === activeDevIndex 
                     ? "border-[#d4af37] bg-[#121110] shadow-[0_0_16px_rgba(212,175,55,0.2)]" 
                     : (theme === "dark" ? "border-white/10 bg-black/10 hover:border-white/20" : "border-stone-200 bg-stone-50/50 hover:border-stone-300")
@@ -154,7 +154,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
                 <img
                   src={dev.logo}
                   alt={`${dev.name} logo`}
-                  className={`h-8 w-auto object-contain mb-1 ${
+                  className={`h-10 w-auto object-contain mb-1 ${
                     theme === "dark" ? "brightness-0 invert opacity-80" : "opacity-90"
                   } ${idx === activeDevIndex ? "opacity-100" : ""}`}
                   onError={(e) => {
