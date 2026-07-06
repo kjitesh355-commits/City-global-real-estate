@@ -145,7 +145,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
               <div
                 key={`${dev.name}-${idx}`}
                 onClick={() => setActiveDevIndex(idx)}
-                className={`cursor-pointer px-6 py-4 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 h-24 w-52 border shrink-0 ${
+                className={`cursor-pointer px-6 py-4 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 h-28 w-56 border shrink-0 ${
                   idx === activeDevIndex 
                     ? "border-[#d4af37] bg-[#121110] shadow-[0_0_16px_rgba(212,175,55,0.2)]" 
                     : (theme === "dark" ? "border-white/10 bg-black/10 hover:border-white/20" : "border-stone-200 bg-stone-50/50 hover:border-stone-300")
@@ -154,7 +154,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
                 <img
                   src={dev.logo}
                   alt={`${dev.name} logo`}
-                  className={`h-10 w-auto object-contain mb-1 ${
+                  className={`h-14 w-auto object-contain ${
                     theme === "dark" ? "brightness-0 invert opacity-80" : "opacity-90"
                   } ${idx === activeDevIndex ? "opacity-100" : ""}`}
                   onError={(e) => {
@@ -165,9 +165,6 @@ export default function Testimonials({ theme }: TestimonialsProps) {
                 <span className={`hidden font-serif text-xs font-bold tracking-[0.25em] transition-colors duration-300 ${
                   theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
                 }`}>{dev.name}</span>
-                <span className={`font-sans text-[8px] uppercase tracking-wider leading-none transition-colors duration-300 ${
-                  theme === "dark" ? "text-gray-500" : "text-stone-400"
-                }`}>{dev.tagline}</span>
               </div>
             ))}
           </InfiniteSlider>
