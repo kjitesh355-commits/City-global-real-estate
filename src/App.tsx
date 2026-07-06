@@ -299,12 +299,12 @@ export default function App() {
           <GlobeFeatureSection theme={theme} />
         </div>
 
-        {/* Active AI Concierge Float-Console */}
-        <AIConcierge theme={theme} />
-
         {/* Footer & CTAs */}
         <Footer onOpenConsultation={() => setConsultationOpen(true)} theme={theme} />
       </BeamsBackground>
+
+      {/* AI Concierge - Outside BeamsBackground for proper floating */}
+      <AIConcierge theme={theme} />
       </>
       )}
 
