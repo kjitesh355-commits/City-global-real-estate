@@ -106,63 +106,88 @@ export default function Testimonials({ theme }: TestimonialsProps) {
       
       {/* 1. Our Trusted Developers Slider Row */}
       <ScrollReveal>
-      <div className="mb-16">
-        <div className="flex justify-between items-end mb-8">
-          <div>
-            <p className="font-sans text-[10px] uppercase tracking-widest text-[#d4af37] font-semibold mb-1">Our Partners</p>
-            <h3 className={`font-serif text-xl sm:text-2xl font-bold tracking-wide transition-colors duration-300 ${
-              theme === "dark" ? "text-white" : "text-stone-900"
-            }`}>Our Trusted Developers</h3>
+      <div className="mb-20">
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#d4af37] font-bold mb-3">Our Partners</p>
+          <h3 className={`font-serif text-3xl sm:text-4xl font-bold tracking-wide mb-4 transition-colors duration-300 ${
+            theme === "dark" ? "text-white" : "text-stone-900"
+          }`}>Our Trusted Developers</h3>
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <div className={`h-px w-16 ${theme === "dark" ? "bg-gradient-to-r from-transparent to-[#d4af37]/50" : "bg-gradient-to-r from-transparent to-[#aa7c11]/50"}`} />
+            <div className="w-2 h-2 rotate-45 bg-[#d4af37]" />
+            <div className={`h-px w-16 ${theme === "dark" ? "bg-gradient-to-l from-transparent to-[#d4af37]/50" : "bg-gradient-to-l from-transparent to-[#aa7c11]/50"}`} />
           </div>
-          <div className="flex gap-2">
-            <button
-              onClick={handlePrevDev}
-              className={`cursor-pointer w-7 h-7 rounded-full border flex items-center justify-center hover:border-[#d4af37] hover:text-[#d4af37] transition-all duration-300 ${
-                theme === "dark" ? "border-gray-800 text-gray-400" : "border-stone-200 text-stone-500 hover:bg-stone-50"
-              }`}
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
-              onClick={handleNextDev}
-              className={`cursor-pointer w-7 h-7 rounded-full border flex items-center justify-center hover:border-[#d4af37] hover:text-[#d4af37] transition-all duration-300 ${
-                theme === "dark" ? "border-gray-800 text-gray-400" : "border-stone-200 text-stone-500 hover:bg-stone-50"
-              }`}
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+          <p className={`font-sans text-xs max-w-md mx-auto ${theme === "dark" ? "text-gray-500" : "text-stone-400"}`}>
+            Partnered with Dubai's most prestigious real estate developers
+          </p>
+        </div>
+
+        {/* Navigation Arrows */}
+        <div className="flex justify-center gap-3 mb-8">
+          <button
+            onClick={handlePrevDev}
+            className={`cursor-pointer w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+              theme === "dark"
+                ? "border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 hover:border-[#d4af37]"
+                : "border-[#aa7c11]/30 text-[#aa7c11] hover:bg-[#aa7c11]/10 hover:border-[#aa7c11]"
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={handleNextDev}
+            className={`cursor-pointer w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+              theme === "dark"
+                ? "border-[#d4af37]/30 text-[#d4af37] hover:bg-[#d4af37]/10 hover:border-[#d4af37]"
+                : "border-[#aa7c11]/30 text-[#aa7c11] hover:bg-[#aa7c11]/10 hover:border-[#aa7c11]"
+            }`}
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
 
         {/* Developers Logos horizontal carousel */}
-        <div className="relative w-full overflow-hidden py-2 mt-4" style={{ contain: "layout style" }}>
+        <div className="relative w-full overflow-hidden py-4" style={{ contain: "layout style" }}>
           <InfiniteSlider 
             className="flex h-full w-full items-center" 
-            duration={30}
-            gap={16}
+            duration={25}
+            gap={24}
           >
             {developers.map((dev, idx) => (
               <div
                 key={`${dev.name}-${idx}`}
                 onClick={() => setActiveDevIndex(idx)}
-                className={`cursor-pointer px-6 py-4 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-300 h-28 w-56 border shrink-0 ${
+                className={`cursor-pointer group px-8 py-6 rounded-2xl flex flex-col items-center justify-center transition-all duration-500 h-36 w-64 shrink-0 ${
                   idx === activeDevIndex 
-                    ? "border-[#d4af37] bg-[#121110] shadow-[0_0_16px_rgba(212,175,55,0.2)]" 
-                    : (theme === "dark" ? "border-white/10 bg-black/10 hover:border-white/20" : "border-stone-200 bg-stone-50/50 hover:border-stone-300")
+                    ? `border-2 border-[#d4af37] ${
+                        theme === "dark"
+                          ? "bg-gradient-to-b from-[#1a1708] to-[#0d0b04] shadow-[0_0_30px_rgba(212,175,55,0.15)]"
+                          : "bg-gradient-to-b from-[#fdf8ef] to-white shadow-[0_8px_30px_rgba(170,124,17,0.12)]"
+                      }`
+                    : `border ${
+                        theme === "dark"
+                          ? "border-white/10 bg-white/5 hover:border-[#d4af37]/40 hover:bg-[#d4af37]/5 hover:shadow-[0_0_20px_rgba(212,175,55,0.08)]"
+                          : "border-stone-200 bg-white hover:border-[#aa7c11]/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]"
+                      }`
                 }`}
               >
                 <img
                   src={dev.logo}
                   alt={`${dev.name} logo`}
-                  className={`h-14 w-auto object-contain ${
-                    theme === "dark" ? "brightness-0 invert opacity-80" : "opacity-90"
-                  } ${idx === activeDevIndex ? "opacity-100" : ""}`}
+                  className={`h-16 w-auto object-contain transition-all duration-500 ${
+                    theme === "dark" ? "brightness-0 invert" : ""
+                  } ${
+                    idx === activeDevIndex
+                      ? "opacity-100 scale-110"
+                      : "opacity-60 group-hover:opacity-90 group-hover:scale-105"
+                  }`}
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     e.currentTarget.nextElementSibling?.classList.remove('hidden');
                   }}
                 />
-                <span className={`hidden font-serif text-xs font-bold tracking-[0.25em] transition-colors duration-300 ${
+                <span className={`hidden font-serif text-sm font-bold tracking-[0.2em] transition-colors duration-300 ${
                   theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
                 }`}>{dev.name}</span>
               </div>
@@ -170,29 +195,29 @@ export default function Testimonials({ theme }: TestimonialsProps) {
           </InfiniteSlider>
 
           <ProgressiveBlur
-            className="pointer-events-none absolute top-0 left-0 h-full w-[100px] z-10"
+            className="pointer-events-none absolute top-0 left-0 h-full w-[120px] z-10"
             direction="left"
-            blurLayers={2}
-            blurIntensity={0.4}
+            blurLayers={3}
+            blurIntensity={0.5}
           />
           <ProgressiveBlur
-            className="pointer-events-none absolute top-0 right-0 h-full w-[100px] z-10"
+            className="pointer-events-none absolute top-0 right-0 h-full w-[120px] z-10"
             direction="right"
-            blurLayers={2}
-            blurIntensity={0.4}
+            blurLayers={3}
+            blurIntensity={0.5}
           />
         </div>
 
         {/* Sparkles Ambient luxury curve section under the slider */}
-        <div className="relative mt-2 h-40 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
-          <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#d4af37,transparent_75%)] before:opacity-20 pointer-events-none" />
+        <div className="relative mt-4 h-48 w-full overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)]">
+          <div className="absolute inset-0 before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#d4af37,transparent_75%)] before:opacity-15 pointer-events-none" />
           <div className={`absolute -left-1/2 top-1/2 aspect-[1/0.7] z-0 w-[200%] rounded-[100%] border-t ${
             theme === "dark" 
               ? "border-zinc-800/20 bg-[#07080a]" 
               : "border-stone-200 bg-stone-50"
           }`} />
           <Sparkles
-            density={40}
+            density={50}
             className="absolute inset-x-0 bottom-0 h-full w-full pointer-events-none z-10 [mask-image:radial-gradient(50%_50%,white,transparent_80%)]"
             color={theme === "dark" ? "#d4af37" : "#aa7c11"}
           />
