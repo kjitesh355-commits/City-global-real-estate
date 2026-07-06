@@ -17,12 +17,14 @@ export default function Testimonials({ theme }: TestimonialsProps) {
   const developers = [
     { name: "EMAAR", tagline: "Shaping Dubai's Skyline", logo: "https://companieslogo.com/img/emaar-properties/logo-e9236da7.png" },
     { name: "DAMAC", tagline: "Luxury Residences", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Damac_logo.svg/512px-Damac_logo.svg.png" },
-    { name: "SOBHA", tagline: "Realty Redefined", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Sobha_Realty_logo.svg/512px-Sobha_Realty_logo.svg.png" },
+    { name: "SOBHA", tagline: "Realty Redefined", logo: "/shobha.png" },
     { name: "NAKHEEL", tagline: "Waterfront Living Creator", logo: "https://companieslogo.com/img/nakheel/logo-f2c9ec22.png" },
     { name: "ELLINGTON", tagline: "Bespoke Design Houses", logo: "https://companieslogo.com/img/ellington-properties/logo-e14b8c58.png" },
     { name: "MERAAS", tagline: "Iconic Urban Hubs", logo: "https://companieslogo.com/img/meraas/logo-c3e1e7ab.png" },
-    { name: "BINGHATTI", tagline: "Aerodynamic Luxury", logo: "https://companieslogo.com/img/binghatti/logo-d9d7f2a0.png" },
-    { name: "OMNIYAT", tagline: "Artistic Architecture", logo: "https://companieslogo.com/img/omniyat/logo-e5f6c2a3.png" }
+    { name: "BINGHATTI", tagline: "Aerodynamic Luxury", logo: "/binghatti.png" },
+    { name: "OMNIYAT", tagline: "Artistic Architecture", logo: "https://companieslogo.com/img/omniyat/logo-e5f6c2a3.png" },
+    { name: "DANUBE", tagline: "Affordable Luxury", logo: "/danube.png" },
+    { name: "BNW", tagline: "Premium Developments", logo: "/bnw.png" }
   ];
 
   const dubaiTestimonials: Testimonial[] = [
