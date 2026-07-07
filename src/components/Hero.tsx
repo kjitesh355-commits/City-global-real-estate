@@ -616,7 +616,7 @@ export default function Hero({
                   <Icon className="w-4 h-4 text-[#C9A227]" />
                 </div>
                 <div>
-                  <div className="font-serif text-lg font-bold text-white leading-none">
+                  <div className="font-num text-lg font-bold text-white leading-none">
                     <AnimatedCounter
                       target={parseInt(stat.value.replace(/[^0-9]/g, ""))}
                       suffix={stat.value.includes("+") ? "+" : stat.value.includes("%") ? "%" : ""}

@@ -221,7 +221,7 @@ export default function FeaturedProperties({
               <span className={`text-[8px] uppercase tracking-wider font-semibold transition-colors duration-300 ${
                 theme === "dark" ? "text-gray-500" : "text-stone-400"
               }`}>{t("prop.startingPrice", lang)}</span>
-              <span className={`font-serif text-sm sm:text-base font-bold leading-none transition-colors duration-300 ${
+              <span className={`font-num text-sm sm:text-base font-bold leading-none transition-colors duration-300 ${
                 theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
               }`}>
                 {formatPrice(p.price)}

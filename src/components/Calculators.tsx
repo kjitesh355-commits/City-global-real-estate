@@ -174,7 +174,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                 {/* Main Result */}
                 <div className={`mb-8 p-5 rounded-2xl ${isDark ? "bg-white/[0.03] border border-white/5" : "bg-stone-50 border border-stone-200/60"}`}>
                   <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.monthlyEmi", lang)}</p>
-                  <span className="font-mono text-3xl md:text-4xl font-extrabold text-[#E7C96A]">
+                  <span className="font-num text-3xl md:text-4xl font-extrabold text-[#E7C96A]">
                     AED {monthlyEmi.toLocaleString()}
                   </span>
                 </div>
@@ -184,7 +184,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div>
                     <div className="flex justify-between mb-2">
                         <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.propertyPrice", lang)}</span>
-                      <span className="font-mono text-xs font-bold text-[#E7C96A]">{formatPrice(propertyPrice)}</span>
+                      <span className="font-num text-xs font-bold text-[#E7C96A]">{formatPrice(propertyPrice)}</span>
                     </div>
                     <input
                       type="range"
@@ -201,7 +201,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div>
                     <div className="flex justify-between mb-2">
                         <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.downPayment", lang)} ({Math.round((downPayment / propertyPrice) * 100)}%)</span>
-                      <span className="font-mono text-xs font-bold text-[#E7C96A]">{formatPrice(downPayment)}</span>
+                      <span className="font-num text-xs font-bold text-[#E7C96A]">{formatPrice(downPayment)}</span>
                     </div>
                     <input
                       type="range"
@@ -219,7 +219,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                     <div>
                       <div className="flex justify-between mb-2">
                         <span className={`font-sans text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.interestRate", lang)}</span>
-                        <span className="font-mono text-xs font-bold text-[#E7C96A]">{interestRate}%</span>
+                        <span className="font-num text-xs font-bold text-[#E7C96A]">{interestRate}%</span>
                       </div>
                       <input
                         type="range"
@@ -234,7 +234,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                     <div>
                       <div className="flex justify-between mb-2">
                         <span className={`font-sans text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.loanTenure", lang)}</span>
-                        <span className="font-mono text-xs font-bold text-[#E7C96A]">{loanYears} Yr</span>
+                        <span className="font-num text-xs font-bold text-[#E7C96A]">{loanYears} Yr</span>
                       </div>
                       <input
                         type="range"
@@ -264,7 +264,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <PieChart className={`w-4 h-4 mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`} />
-                      <span className={`font-mono text-[10px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.breakdown", lang)}</span>
+                      <span className={`font-num text-[10px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.breakdown", lang)}</span>
                     </div>
                   </div>
 
@@ -275,26 +275,26 @@ export default function Calculators({ theme }: CalculatorsProps) {
                         <span className="w-2.5 h-2.5 rounded-full bg-[#C9A227]" />
                         <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>Down Payment</span>
                       </span>
-                      <span className={`font-mono text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(downPayment)}</span>
+                      <span className={`font-num text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(downPayment)}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]" />
                         <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.principalLoan", lang)}</span>
                       </span>
-                      <span className={`font-mono text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(loanAmount)}</span>
+                      <span className={`font-num text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(loanAmount)}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#3b82f6]" />
                         <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.totalInterest", lang)}</span>
                       </span>
-                      <span className={`font-mono text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(totalInterest)}</span>
+                      <span className={`font-num text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(totalInterest)}</span>
                     </div>
                     <div className={`pt-2 border-t ${isDark ? "border-white/5" : "border-stone-200/60"}`}>
                       <div className="flex items-center justify-between">
                         <span className={`font-sans text-[11px] font-semibold ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.totalPayment", lang)}</span>
-                        <span className="font-mono text-[11px] text-[#E7C96A] font-bold">{formatPrice(totalPayment)}</span>
+                        <span className="font-num text-[11px] text-[#E7C96A] font-bold">{formatPrice(totalPayment)}</span>
                       </div>
                     </div>
                   </div>
@@ -319,7 +319,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                 <div className={`mb-8 p-5 rounded-2xl ${isDark ? "bg-white/[0.03] border border-white/5" : "bg-stone-50 border border-stone-200/60"}`}>
                   <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.netAnnualRoi", lang)}</p>
                   <div className="flex items-baseline gap-3">
-                    <span className="font-mono text-3xl md:text-4xl font-extrabold text-emerald-400">
+                    <span className="font-num text-3xl md:text-4xl font-extrabold text-emerald-400">
                       {netRoi}%
                     </span>
                     <span className={`text-sm ${isDark ? "text-gray-500" : "text-stone-400"}`}>
@@ -335,7 +335,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div>
                     <div className="flex justify-between mb-2">
                         <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.expectedRent", lang)}</span>
-                      <span className="font-mono text-xs font-bold text-emerald-400">{formatPrice(annualRent)}</span>
+                      <span className="font-num text-xs font-bold text-emerald-400">{formatPrice(annualRent)}</span>
                     </div>
                     <input
                       type="range"
@@ -352,7 +352,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div>
                     <div className="flex justify-between mb-2">
                         <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.expenses", lang)}</span>
-                      <span className="font-mono text-xs font-bold text-yellow-400">{formatPrice(expenses)}</span>
+                      <span className="font-num text-xs font-bold text-yellow-400">{formatPrice(expenses)}</span>
                     </div>
                     <input
                       type="range"
@@ -369,7 +369,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div>
                     <div className="flex justify-between mb-2">
                         <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.appreciation", lang)}</span>
-                      <span className="font-mono text-xs font-bold text-[#E7C96A]">{propertyAppreciation}%</span>
+                      <span className="font-num text-xs font-bold text-[#E7C96A]">{propertyAppreciation}%</span>
                     </div>
                     <input
                       type="range"
@@ -396,7 +396,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                       return (
                         <div key={i} className="flex-1 flex flex-col items-center gap-2 group/bar">
                           <div className="relative w-full flex justify-center">
-                            <div className={`absolute -top-8 text-[9px] px-2 py-1 rounded border border-emerald-500/30 opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap z-30 font-mono ${isDark ? "bg-black/95 text-white" : "bg-white shadow-lg text-stone-900 border border-stone-200"}`}>
+                            <div className={`absolute -top-8 text-[9px] px-2 py-1 rounded border border-emerald-500/30 opacity-0 group-hover/bar:opacity-100 transition-opacity whitespace-nowrap z-30 font-num ${isDark ? "bg-black/95 text-white" : "bg-white shadow-lg text-stone-900 border border-stone-200"}`}>
                               {formatPrice(futureVal)}
                             </div>
                           </div>

@@ -301,19 +301,19 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
                     <div className="space-y-2.5 flex-1">
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.price", lang)}</span>
-                        <span className="font-mono text-sm font-bold text-[#f3e5ab]">{formatPrice(prop1.price)}</span>
+                        <span className="font-num text-sm font-bold text-[#f3e5ab]">{formatPrice(prop1.price)}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.yield", lang)}</span>
-                        <span className="font-mono text-sm font-bold text-emerald-400">{prop1.rentalYield}%</span>
+                        <span className="font-num text-sm font-bold text-emerald-400">{prop1.rentalYield}%</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.size", lang)}</span>
-                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.size.toLocaleString()} {t("explore.sqft", lang)}</span>
+                        <span className={`font-num text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.size.toLocaleString()} {t("explore.sqft", lang)}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.config", lang)}</span>
-                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.beds} Bed / {prop1.baths} Bath</span>
+                        <span className={`font-num text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.beds} Bed / {prop1.baths} Bath</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.status", lang)}</span>
@@ -336,19 +336,19 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
                     <div className="space-y-2.5 flex-1">
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.price", lang)}</span>
-                        <span className="font-mono text-sm font-bold text-[#f3e5ab]">{formatPrice(prop2.price)}</span>
+                        <span className="font-num text-sm font-bold text-[#f3e5ab]">{formatPrice(prop2.price)}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.yield", lang)}</span>
-                        <span className="font-mono text-sm font-bold text-emerald-400">{prop2.rentalYield}%</span>
+                        <span className="font-num text-sm font-bold text-emerald-400">{prop2.rentalYield}%</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.size", lang)}</span>
-                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.size.toLocaleString()} {t("explore.sqft", lang)}</span>
+                        <span className={`font-num text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.size.toLocaleString()} {t("explore.sqft", lang)}</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.config", lang)}</span>
-                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.beds} Bed / {prop2.baths} Bath</span>
+                        <span className={`font-num text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.beds} Bed / {prop2.baths} Bath</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.status", lang)}</span>

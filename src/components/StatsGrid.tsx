@@ -77,7 +77,7 @@ export default function StatsGrid({ theme }: StatsGridProps) {
             </div>
 
             {/* Stat Value */}
-            <h4 className={`font-serif text-xl sm:text-2xl font-bold tracking-wider mb-1 transition-colors duration-300 ${
+            <h4 className={`font-num text-xl sm:text-2xl font-bold tracking-wider mb-1 transition-colors duration-300 ${
               theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
             }`}>
               {stat.value}

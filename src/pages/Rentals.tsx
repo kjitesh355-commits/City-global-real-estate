@@ -135,7 +135,7 @@ function AnimatedCounter({ target, suffix = "", prefix = "" }: { target: number;
   }, [target]);
 
   return (
-    <div ref={ref} className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-[#d4af37]">
+    <div ref={ref} className="text-2xl sm:text-3xl lg:text-4xl font-num font-bold text-[#d4af37]">
       {prefix}{count}{suffix}
     </div>
   );

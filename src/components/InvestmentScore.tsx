@@ -213,7 +213,7 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
                   {/* Center Content */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <div className={`w-24 h-24 rounded-full flex flex-col items-center justify-center ${isDark ? "bg-white/[0.03] border-white/10" : "bg-stone-50 border-stone-200/60"} border`}>
-                      <span className="font-mono text-4xl font-extrabold text-[#E7C96A] leading-none">{score}</span>
+                      <span className="font-num text-4xl font-extrabold text-[#E7C96A] leading-none">{score}</span>
                       <span className={`text-[10px] mt-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>/ 100</span>
                     </div>
                   </div>
@@ -258,7 +258,7 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
                           {metric.isRisk ? (
                             <h4 className={`text-xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{metric.riskText}</h4>
                           ) : (
-                            <h4 className={`font-mono text-2xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>
+                            <h4 className={`font-num text-2xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>
                               <AnimatedNumber value={metric.value} suffix={metric.suffix} />
                             </h4>
                           )}

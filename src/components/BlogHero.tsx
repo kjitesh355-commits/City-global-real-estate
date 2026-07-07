@@ -130,7 +130,7 @@ function AnimatedCounter({ target, suffix = "", prefix = "" }: { target: number;
   }, [target]);
 
   return (
-    <div ref={ref} className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#d4af37]">
+    <div ref={ref} className="text-3xl sm:text-4xl lg:text-5xl font-num font-bold text-[#d4af37]">
       {prefix}{count}{suffix}
     </div>
   );
@@ -620,7 +620,7 @@ export default function BlogHero({ theme }: BlogHeroProps) {
                           </div>
                           <div>
                             {stat.display ? (
-                              <div className="text-3xl sm:text-4xl font-serif font-bold text-[#d4af37]">{stat.display}</div>
+                              <div className="text-3xl sm:text-4xl font-num font-bold text-[#d4af37]">{stat.display}</div>
                             ) : (
                               <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                             )}

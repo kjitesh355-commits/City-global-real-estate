@@ -310,7 +310,7 @@ export default function AboutUs({ theme, onNavigateHome, onOpenConsultation }: A
                   <div className="w-12 h-12 rounded-2xl bg-[#d4af37]/10 flex items-center justify-center mx-auto mb-4">
                     <Icon className="w-6 h-6 text-[#d4af37]" />
                   </div>
-                  <div className="font-mono text-3xl md:text-4xl font-bold text-[#d4af37] mb-1">
+                  <div className="font-num text-3xl md:text-4xl font-bold text-[#d4af37] mb-1">
                     {count}{stat.suffix}
                   </div>
                   <p className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{stat.label}</p>

@@ -270,7 +270,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
               }`}>{t("test.googleReviews", lang)}</h4>
               
               <div className="flex items-baseline gap-2 mt-4 mb-1">
-                <span className={`font-mono text-4xl font-extrabold transition-colors duration-300 ${
+                <span className={`font-num text-4xl font-extrabold transition-colors duration-300 ${
                   theme === "dark" ? "text-[#f3e5ab]" : "text-[#aa7c11]"
                 }`}>4.9</span>
                 <span className={`text-xs transition-colors duration-300 ${theme === "dark" ? "text-gray-500" : "text-stone-400"}`}>/ 5.0</span>
