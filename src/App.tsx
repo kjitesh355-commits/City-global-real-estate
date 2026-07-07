@@ -573,51 +573,67 @@ export default function App() {
       <div className="fixed bottom-26 right-4 sm:right-12 z-40">
         <FloatingButton
           triggerContent={
-            <button className="flex items-center justify-center h-12 w-12 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-2xl transition-all hover:scale-110 cursor-pointer">
+            <button className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-[#d4af37] via-[#aa7c11] to-[#d4af37] text-black shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all duration-300 hover:scale-110 cursor-pointer animate-pulse" style={{ animationDuration: '3s' }}>
               <Plus className="w-5 h-5" />
             </button>
           }
         >
+          {/* WhatsApp */}
           <FloatingButtonItem>
             <a
               href="https://wa.me/971501234567"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center h-11 w-11 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg transition-transform hover:scale-110"
+              className="group relative flex items-center justify-center h-11 w-11 bg-[#25d366] hover:bg-[#20bd5a] text-white rounded-full shadow-lg hover:shadow-[0_0_16px_rgba(37,211,102,0.5)] transition-all duration-300 hover:scale-110"
             >
-              <svg className="w-5.5 h-5.5 fill-current" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path d="M17.472 14.382c-.022-.015-.05-.03-.07-.043l-1.077-.525c-.247-.12-.486-.06-.633.1l-.478.587c-.1.123-.25.196-.4.185-.714-.055-1.56-.34-2.288-.89-.728-.55-1.127-1.12-1.353-1.683-.05-.13-.016-.273.08-.372l.412-.412c.11-.11.16-.255.13-.4l-.313-1.1c-.08-.28-.313-.485-.6-.485-.157 0-.313.06-.432.18l-.515.515c-.485.485-.615 1.21-.328 1.838.682 1.49 1.94 2.82 3.492 3.492.615.265 1.347.15 1.838-.328l.492-.492c.133-.133.316-.2.502-.2.074 0 .15.013.22.043l1.1.472c.28.12.443.376.433.682-.014.307-.21.57-.492.645l-.472.122c-.152.04-.316.03-.466-.026zm-5.47-11.4c-4.962 0-9 4.038-9 9 0 1.58.412 3.12 1.205 4.473l-1.28 4.673 4.793-1.258c1.3.725 2.766 1.11 4.28 1.11 4.964 0 9-4.036 9-9s-4.038-9-9-9zm0 16.5c-1.378 0-2.693-.382-3.83-1.1l-.274-.162-2.843.746.76-2.775-.178-.283C4.846 14.806 4.47 13.434 4.47 12c0-4.152 3.377-7.53 7.53-7.53 4.152 0 7.53 3.378 7.53 7.53 0 4.152-3.378 7.53-7.53 7.53z"/>
               </svg>
+              <span className="absolute right-full mr-3 px-3 py-1.5 bg-gray-900 text-white text-xs font-sans font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+                WhatsApp
+              </span>
             </a>
           </FloatingButtonItem>
+          {/* Facebook */}
           <FloatingButtonItem>
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center h-11 w-11 bg-[#1877f2] hover:bg-[#166fe5] text-white rounded-full shadow-lg transition-transform hover:scale-110"
+              className="group relative flex items-center justify-center h-11 w-11 bg-[#1877f2] hover:bg-[#166fe5] text-white rounded-full shadow-lg hover:shadow-[0_0_16px_rgba(24,119,242,0.5)] transition-all duration-300 hover:scale-110"
             >
               <Facebook className="w-5 h-5" />
+              <span className="absolute right-full mr-3 px-3 py-1.5 bg-gray-900 text-white text-xs font-sans font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+                Facebook
+              </span>
             </a>
           </FloatingButtonItem>
+          {/* LinkedIn */}
           <FloatingButtonItem>
             <a
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center h-11 w-11 bg-[#0a66c2] hover:bg-[#0958a8] text-white rounded-full shadow-lg transition-transform hover:scale-110"
+              className="group relative flex items-center justify-center h-11 w-11 bg-[#0a66c2] hover:bg-[#0077b5] text-white rounded-full shadow-lg hover:shadow-[0_0_16px_rgba(0,119,181,0.5)] transition-all duration-300 hover:scale-110"
             >
               <Linkedin className="w-5 h-5" />
+              <span className="absolute right-full mr-3 px-3 py-1.5 bg-gray-900 text-white text-xs font-sans font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+                LinkedIn
+              </span>
             </a>
           </FloatingButtonItem>
+          {/* Instagram */}
           <FloatingButtonItem>
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center h-11 w-11 bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] hover:opacity-90 text-white rounded-full shadow-lg transition-transform hover:scale-110"
+              className="group relative flex items-center justify-center h-11 w-11 bg-gradient-to-br from-[#f09433] via-[#e6683c] to-[#bc1888] hover:opacity-90 text-white rounded-full shadow-lg hover:shadow-[0_0_16px_rgba(225,48,108,0.5)] transition-all duration-300 hover:scale-110"
             >
               <Instagram className="w-5 h-5" />
+              <span className="absolute right-full mr-3 px-3 py-1.5 bg-gray-900 text-white text-xs font-sans font-medium rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap shadow-xl">
+                Instagram
+              </span>
             </a>
           </FloatingButtonItem>
         </FloatingButton>
