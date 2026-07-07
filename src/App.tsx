@@ -21,7 +21,7 @@ import Agents from "./pages/Agents";
 import Contact from "./pages/Contact";
 import { BeamsBackground } from "./components/ui/beams-background";
 import { Property } from "./types";
-import { X, Calendar, User, Mail, Phone, Clock, Sparkles, Compass, Plus, Facebook, Linkedin, Instagram } from "lucide-react";
+import { X, Calendar, User, Mail, Phone, Clock, Sparkles, Compass, Plus, Facebook, Linkedin, Instagram, ChevronUp } from "lucide-react";
 import { FloatingButton, FloatingButtonItem } from "./components/ui/floating-button";
 
 export default function App() {
@@ -77,6 +77,9 @@ export default function App() {
   const [cookieAccepted, setCookieAccepted] = useState(() => {
     return localStorage.getItem("cookie_consent") === "accepted";
   });
+
+  // Scroll to Top button visibility
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Fetch properties from Express API on startup
   useEffect(() => {
@@ -195,6 +198,19 @@ export default function App() {
     setCookieAccepted(true);
   };
 
+  // Scroll to Top handler
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className={`relative min-h-screen transition-colors duration-500 selection:bg-[#d4af37]/40 overflow-x-hidden ${
       theme === "dark" ? "bg-[#07080a] text-white" : "bg-[#fcfbf9] text-[#14161d]"
@@ -276,7 +292,7 @@ export default function App() {
         <StatsGrid theme={theme} />
 
         {/* Our Services */}
-        <OurServices theme={theme} />
+        <OurServices theme={theme} onNavigate={(page) => setActivePage(page)} />
 
         {/* Core Properties Viewport */}
         <FeaturedProperties
@@ -638,6 +654,17 @@ export default function App() {
           </FloatingButtonItem>
         </FloatingButton>
       </div>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-28 left-6 z-40 w-11 h-11 rounded-full bg-gradient-to-br from-[#d4af37] via-[#aa7c11] to-[#d4af37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-110 cursor-pointer flex items-center justify-center animate-in fade-in slide-in-from-bottom-4"
+          aria-label="Scroll to top"
+        >
+          <ChevronUp className="w-5 h-5" />
+        </button>
+      )}
 
       {/* Cookie Consent Banner */}
       {!cookieAccepted && (

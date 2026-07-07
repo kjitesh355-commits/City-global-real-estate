@@ -567,13 +567,13 @@ export default function FeaturedProperties({
       )}
 
       {/* Slide Indicators / Guide Accent */}
-      {viewMode === "grid" && (
+      {viewMode === "grid" && displayProperties.length > 1 && (
         <div className="flex justify-center gap-2 mt-12">
-          {[...Array(6)].map((_, i) => (
+          {displayProperties.map((_, i) => (
             <div
               key={i}
               className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                i === 1 ? "w-4 bg-[#d4af37]" : "bg-gray-700 hover:bg-gray-500"
+                i === 0 ? "w-4 bg-[#d4af37]" : "bg-gray-700 hover:bg-gray-500"
               }`}
             />
           ))}

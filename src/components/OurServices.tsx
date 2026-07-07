@@ -6,6 +6,7 @@ import { ScrollReveal } from "./ui/scroll-reveal";
 
 interface OurServicesProps {
   theme: "light" | "dark";
+  onNavigate?: (page: "projects" | "ready" | "rentals") => void;
 }
 
 const services = [
@@ -16,6 +17,7 @@ const services = [
       "Discover premium off-plan developments from Dubai's leading developers with expert investment guidance and flexible payment plans.",
     button: "Explore Projects",
     featured: false,
+    navigateTo: "projects" as const,
   },
   {
     icon: Building,
@@ -24,6 +26,7 @@ const services = [
       "Buy and invest in ready properties across Dubai with verified listings, transparent pricing, and professional advisory support.",
     button: "View Properties",
     featured: true,
+    navigateTo: "ready" as const,
   },
   {
     icon: Home,
@@ -32,6 +35,7 @@ const services = [
       "Find luxury apartments, villas, and commercial spaces that perfectly match your lifestyle and investment requirements.",
     button: "Find Rentals",
     featured: false,
+    navigateTo: "rentals" as const,
   },
 ];
 
@@ -84,7 +88,7 @@ function RippleButton({
   );
 }
 
-export default function OurServices({ theme }: OurServicesProps) {
+export default function OurServices({ theme, onNavigate }: OurServicesProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
 
@@ -318,6 +322,7 @@ export default function OurServices({ theme }: OurServicesProps) {
 
                   {/* Button */}
                   <RippleButton
+                    onClick={() => onNavigate?.(service.navigateTo)}
                     className={`cursor-pointer w-full flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-[14px] font-sans text-sm font-semibold uppercase tracking-wider transition-all duration-[400ms] ease-out ${
                       service.featured
                         ? theme === "dark"

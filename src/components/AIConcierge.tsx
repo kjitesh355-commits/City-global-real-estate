@@ -69,7 +69,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
       console.error(err);
       setMessages(prev => [
         ...prev,
-        { role: "assistant", content: "Apologies, I encountered a connection issue. Please ensure your GEMINI_API_KEY is configured." }
+        { role: "assistant", content: "I apologize, but I'm unable to connect to our AI service at the moment. Please try again in a few moments, or contact our team directly for assistance." }
       ]);
     } finally {
       setIsLoading(false);

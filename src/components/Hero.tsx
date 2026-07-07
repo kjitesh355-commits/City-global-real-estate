@@ -346,8 +346,10 @@ export default function Hero({
               <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
             </a>
 
-            <button
-              type="button"
+            <a
+              href="https://www.youtube.com/results?search_query=dubai+real+estate+investment+guide"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative flex items-center gap-3 cursor-pointer"
             >
               <div className="relative w-14 h-14 rounded-full border border-[#C9A227]/40 flex items-center justify-center transition-all duration-500 group-hover:border-[#C9A227] group-hover:shadow-[0_0_25px_rgba(201,162,39,0.3)]">
@@ -357,7 +359,7 @@ export default function Hero({
               <span className="font-sans text-xs uppercase tracking-widest text-[#B7B7B7] group-hover:text-[#C9A227] transition-colors duration-500">
                 Watch Investment Guide
               </span>
-            </button>
+            </a>
           </motion.div>
 
           {/* Search Panel */}
@@ -367,7 +369,7 @@ export default function Hero({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
             className="w-full max-w-5xl glass-hero rounded-2xl p-5 sm:p-6 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] mb-6"
-            style={{ animation: "float 6s ease-in-out infinite" }}
+            style={{ animation: "none" }}
           >
             <div className="grid grid-cols-2 md:grid-cols-6 gap-3 items-end">
               {/* Location */}

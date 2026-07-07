@@ -1,5 +1,5 @@
 import React from "react";
-import { Award, CheckCircle, Flame, Shield, Star, Award as ReraIcon, Users, Landmark, Home } from "lucide-react";
+import { Shield, Star, Users, Landmark, Home } from "lucide-react";
 import { GradientBackground } from "./ui/gradient-background-4";
 import { StaggerContainer, StaggerItem } from "./ui/scroll-reveal";
 
@@ -16,13 +16,13 @@ export default function StatsGrid({ theme }: StatsGridProps) {
     },
     {
       icon: <Home className="w-6 h-6 text-[#d4af37]" />,
-      value: "1,200+",
+      value: "15,000+",
       label: "Properties Sold"
     },
     {
       icon: <Users className="w-6 h-6 text-[#d4af37]" />,
-      value: "2,500+",
-      label: "Happy Clients"
+      value: "8,500+",
+      label: "Happy Investors"
     },
     {
       isRating: true,
