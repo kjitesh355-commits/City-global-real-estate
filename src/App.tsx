@@ -570,7 +570,7 @@ export default function App() {
       )}
 
       {/* Floating Action Button - WhatsApp & Social Links */}
-      <div className="fixed bottom-26 right-4 sm:right-12 z-40">
+      <div className="fixed bottom-6 right-4 sm:right-12 z-40">
         <FloatingButton
           triggerContent={
             <button className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-[#d4af37] via-[#aa7c11] to-[#d4af37] text-black shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all duration-300 hover:scale-110 cursor-pointer animate-pulse" style={{ animationDuration: '3s' }}>
