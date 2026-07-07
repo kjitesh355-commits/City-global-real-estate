@@ -14,6 +14,7 @@ import GlobeFeatureSection from "./components/ui/globe-feature-section";
 import AIConcierge from "./components/AIConcierge";
 import Footer from "./components/Footer";
 import SEO from "./components/SEO";
+import SectionNav from "./components/SectionNav";
 import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects";
 import ReadyToMove from "./pages/ReadyToMove";
@@ -229,6 +230,9 @@ export default function App() {
       {activePage === "agents" && <SEO title="Our Agents" description="Meet our expert real estate agents in Dubai. Professional, multilingual, and dedicated to finding your perfect property." />}
       {activePage === "contact" && <SEO title="Contact Us" description="Get in touch with City Global Real Estate. Free consultation, WhatsApp support, and office visits available." />}
       <Navbar onOpenConsultation={() => setConsultationOpen(true)} theme={theme} onToggleTheme={toggleTheme} activePage={activePage} onNavigateHome={() => setActivePage("home")} onNavigateAbout={() => setActivePage("about")} onNavigateProjects={() => setActivePage("projects")} onNavigateReady={() => setActivePage("ready")} onNavigateRentals={() => setActivePage("rentals")} onNavigateBlog={() => setActivePage("blog")} onNavigateAgents={() => setActivePage("agents")} onNavigateContact={() => setActivePage("contact")} />
+      
+      {/* Section Navigation Sidebar */}
+      {activePage === "home" && <SectionNav theme={theme} />}
 
       {activePage === "about" ? (
         <>

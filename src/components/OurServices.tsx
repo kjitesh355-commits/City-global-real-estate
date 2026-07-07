@@ -101,6 +101,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
       `}</style>
 
       <section
+        id="services-section"
         ref={sectionRef}
         className={`relative z-10 w-full overflow-hidden transition-colors duration-500 ${
           theme === "dark" ? "bg-[#07080a]" : "bg-[#FAFAFA]"

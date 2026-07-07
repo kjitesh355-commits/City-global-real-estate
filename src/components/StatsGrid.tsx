@@ -58,7 +58,7 @@ export default function StatsGrid({ theme }: StatsGridProps) {
   ];
 
   return (
-    <section className="relative z-10 w-full py-10 -mt-8 overflow-hidden">
+    <section id="stats-section" className="relative z-10 w-full py-10 -mt-8 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
       <GradientBackground />
       <StaggerContainer className="grid grid-cols-2 md:grid-cols-5 gap-4" staggerDelay={0.08}>

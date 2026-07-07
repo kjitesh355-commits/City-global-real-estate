@@ -9,7 +9,7 @@ import { cn } from "../../../lib/utils";
 export default function GlobeFeatureSection({ theme = "dark" }: { theme?: "light" | "dark" }) {
   const isDark = theme !== "light";
   return (
-    <section className={`relative w-full mx-auto overflow-hidden rounded-3xl shadow-md px-6 py-16 md:px-16 md:py-24 transition-colors duration-300 ${isDark ? "bg-white/[0.03] border border-white/10" : "bg-stone-50 border border-stone-200"}`}>
+    <section id="globe-section" className={`relative w-full mx-auto overflow-hidden rounded-3xl shadow-md px-6 py-16 md:px-16 md:py-24 transition-colors duration-300 ${isDark ? "bg-white/[0.03] border border-white/10" : "bg-stone-50 border border-stone-200"}`}>
       <div className="flex flex-col-reverse items-center justify-between gap-10 md:flex-row">
         <div className="z-10 max-w-xl text-left">
           <h1 className={`font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight transition-colors duration-300 ${isDark ? "text-white" : "text-[#1c1917]"}`}>

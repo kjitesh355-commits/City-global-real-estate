@@ -140,7 +140,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
   };
 
   return (
-    <section className="relative z-10 w-full py-20 md:py-28 overflow-hidden">
+    <section id="calculators-section" className="relative z-10 w-full py-20 md:py-28 overflow-hidden">
       <GradientBackground />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">

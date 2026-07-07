@@ -116,7 +116,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
   }, [developers.length]);
 
   return (
-    <section className={`relative z-10 w-full py-16 overflow-hidden transition-colors duration-500 ${
+    <section id="testimonials-section" className={`relative z-10 w-full py-16 overflow-hidden transition-colors duration-500 ${
       theme === "dark" ? "" : ""
     }`} style={{ contain: "layout style" }}>
       <GradientBackground />

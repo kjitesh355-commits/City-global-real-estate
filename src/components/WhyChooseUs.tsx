@@ -55,6 +55,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
 
   return (
     <section
+      id="why-section"
       ref={sectionRef}
       className={`relative z-10 w-full overflow-hidden transition-colors duration-500 ${
         theme === "dark"

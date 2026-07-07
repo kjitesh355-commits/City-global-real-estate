@@ -142,6 +142,7 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
 
   return (
     <section
+      id="investment-section"
       className="relative z-10 w-full py-20 md:py-28 overflow-hidden"
     >
       <GradientBackground />
