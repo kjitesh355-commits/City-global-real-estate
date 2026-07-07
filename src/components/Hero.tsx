@@ -202,6 +202,22 @@ export default function Hero({
           50% { transform: translateY(-40px) translateX(-5px); opacity: 0.3; }
           75% { transform: translateY(-20px) translateX(-10px); opacity: 0.5; }
         }
+        @keyframes gravity-pulse {
+          0%, 100% { opacity: 0.02; transform: scaleY(1); }
+          50% { opacity: 0.06; transform: scaleY(1.1); }
+        }
+        @keyframes gravity-scan {
+          0% { transform: translateY(-200%); opacity: 0; }
+          20% { opacity: 0.08; }
+          80% { opacity: 0.08; }
+          100% { transform: translateY(400%); opacity: 0; }
+        }
+        @keyframes gravity-float {
+          0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.015; }
+          33% { transform: translate(15px, -20px) scale(1.1); opacity: 0.03; }
+          66% { transform: translate(-10px, 10px) scale(0.95); opacity: 0.02; }
+        }
+        }
         .shimmer-text {
           background: linear-gradient(90deg, #C9A227 0%, #E7C96A 25%, #FFFFFF 50%, #E7C96A 75%, #C9A227 100%);
           background-size: 200% auto;
@@ -256,6 +272,54 @@ export default function Hero({
 
         {/* Dark Overlay */}
         <div className="absolute inset-0 z-[1] bg-black/85" />
+
+        {/* Low-Gravity Energy Shimmer */}
+        <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden">
+          {/* Primary blue-white shimmer wave */}
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              background: "linear-gradient(180deg, transparent 0%, rgba(100,180,255,0.15) 30%, rgba(200,220,255,0.08) 50%, transparent 70%)",
+              animation: "gravity-pulse 6s ease-in-out infinite",
+            }}
+          />
+          {/* Secondary gold shimmer */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              background: "radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.2) 0%, transparent 60%)",
+              animation: "gravity-pulse 8s ease-in-out infinite 2s",
+            }}
+          />
+          {/* Horizontal scan line */}
+          <div
+            className="absolute left-0 right-0 h-[1px] opacity-[0.06]"
+            style={{
+              background: "linear-gradient(90deg, transparent 0%, rgba(150,200,255,0.8) 30%, rgba(255,255,255,0.6) 50%, rgba(150,200,255,0.8) 70%, transparent 100%)",
+              animation: "gravity-scan 4s ease-in-out infinite",
+              top: "35%",
+            }}
+          />
+          {/* Floating orb highlights */}
+          <div
+            className="absolute w-[300px] h-[300px] rounded-full opacity-[0.02]"
+            style={{
+              background: "radial-gradient(circle, rgba(180,220,255,0.6) 0%, transparent 70%)",
+              animation: "gravity-float 10s ease-in-out infinite",
+              left: "20%",
+              top: "25%",
+            }}
+          />
+          <div
+            className="absolute w-[200px] h-[200px] rounded-full opacity-[0.02]"
+            style={{
+              background: "radial-gradient(circle, rgba(212,175,55,0.5) 0%, transparent 70%)",
+              animation: "gravity-float 8s ease-in-out infinite 3s",
+              right: "25%",
+              top: "40%",
+            }}
+          />
+        </div>
 
         {/* Animated Gold Light Streaks */}
         <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none">
