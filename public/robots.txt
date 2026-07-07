@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://city-global-real-estate.vercel.app/sitemap.xml

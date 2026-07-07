@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import StatsGrid from "./components/StatsGrid";
@@ -12,6 +13,7 @@ import OurServices from "./components/OurServices";
 import GlobeFeatureSection from "./components/ui/globe-feature-section";
 import AIConcierge from "./components/AIConcierge";
 import Footer from "./components/Footer";
+import SEO from "./components/SEO";
 import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects";
 import ReadyToMove from "./pages/ReadyToMove";
@@ -212,11 +214,20 @@ export default function App() {
   };
 
   return (
+    <HelmetProvider>
     <div className={`relative min-h-screen transition-colors duration-500 selection:bg-[#d4af37]/40 overflow-x-hidden ${
       theme === "dark" ? "bg-[#07080a] text-white" : "bg-[#fcfbf9] text-[#14161d]"
     }`}>
       
-      {/* Luxury Navigation Header */}
+      {/* Page-specific SEO */}
+      {activePage === "home" && <SEO />}
+      {activePage === "about" && <SEO title="About Us" description="Learn about City Global Real Estate - Dubai's trusted property agency with 10+ years experience, 15,000+ properties sold, and RERA certification." />}
+      {activePage === "projects" && <SEO title="Off Plan Projects" description="Explore premium off-plan projects in Dubai from top developers like EMAAR, DAMAC, and MERAAS. Flexible payment plans and high ROI." />}
+      {activePage === "ready" && <SEO title="Ready to Move" description="Browse ready-to-move properties in Dubai. Verified listings, transparent pricing, and professional advisory support." />}
+      {activePage === "rentals" && <SEO title="Rental Properties" description="Find luxury rental properties in Dubai - apartments, villas, and commercial spaces in prime locations." />}
+      {activePage === "blog" && <SEO title="Blog" description="Latest insights on Dubai real estate market, investment tips, golden visa updates, and property guides." />}
+      {activePage === "agents" && <SEO title="Our Agents" description="Meet our expert real estate agents in Dubai. Professional, multilingual, and dedicated to finding your perfect property." />}
+      {activePage === "contact" && <SEO title="Contact Us" description="Get in touch with City Global Real Estate. Free consultation, WhatsApp support, and office visits available." />}
       <Navbar onOpenConsultation={() => setConsultationOpen(true)} theme={theme} onToggleTheme={toggleTheme} activePage={activePage} onNavigateHome={() => setActivePage("home")} onNavigateAbout={() => setActivePage("about")} onNavigateProjects={() => setActivePage("projects")} onNavigateReady={() => setActivePage("ready")} onNavigateRentals={() => setActivePage("rentals")} onNavigateBlog={() => setActivePage("blog")} onNavigateAgents={() => setActivePage("agents")} onNavigateContact={() => setActivePage("contact")} />
 
       {activePage === "about" ? (
@@ -720,5 +731,6 @@ export default function App() {
       `}</style>
 
     </div>
+    </HelmetProvider>
   );
 }
