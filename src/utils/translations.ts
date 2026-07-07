@@ -951,14 +951,6 @@ export const translations: Record<string, Record<LangCode, string>> = {
     tl: "Inaasahang Taunang Renta",
     zh: "预期年租金"
   },
-  "calc.expenses": {
-    en: "Maintenance Expenses",
-    ar: "مصاريف الصيانة السنوية",
-    hi: "वार्षिक रखरखाव व्यय",
-    ur: "سالانہ دیکھ بھال کے اخراجات",
-    tl: "Mga Gastos sa Pagpapanatili",
-    zh: "年度物业及维护费"
-  },
   "calc.netRoi": {
     en: "Calculated Net ROI",
     ar: "العائد الصافي المحسوب",
@@ -1082,6 +1074,978 @@ export const translations: Record<string, Record<LangCode, string>> = {
     ur: "اے آئی جائیدادوں کا تجزیہ کر رہا ہے...",
     tl: "Sinusuri ng AI ang mga ari-arian...",
     zh: "AI正在为您精算最佳房源，请稍候..."
+  },
+
+  // StatsGrid
+  "statsGrid.yearsExperience": {
+    en: "Years Experience",
+    ar: "سنوات من الخبرة",
+    hi: "वर्षों का अनुभव",
+    ur: "سالوں کا تجربہ",
+    tl: "Taon ng Karanasan",
+    zh: "年经验"
+  },
+  "statsGrid.propertiesSold": {
+    en: "Properties Sold",
+    ar: "عقارات تم بيعها",
+    hi: "संपत्तियां बिकी",
+    ur: "پراپرٹیز فروخت",
+    tl: "Mga Naibentang Property",
+    zh: "已售房产"
+  },
+  "statsGrid.happyInvestors": {
+    en: "Happy Investors",
+    ar: "مستثمرون سعداء",
+    hi: "खुश निवेशक",
+    ur: "خوش سرمایہ کار",
+    tl: "Masayang Mamumuhunan",
+    zh: "满意投资者"
+  },
+  "statsGrid.googleRating": {
+    en: "Google Rating",
+    ar: "تقييم جوجل",
+    hi: "गूगल रेटिंग",
+    ur: "گوگل ریٹنگ",
+    tl: "Rating sa Google",
+    zh: "谷歌评分"
+  },
+  "statsGrid.certifiedAgency": {
+    en: "Certified Agency",
+    ar: "وكالة معتمدة",
+    hi: "प्रमाणित एजेंसी",
+    ur: "تصدیق شدہ ایجنسی",
+    tl: "Sertipikadong Ahensiya",
+    zh: "认证机构"
+  },
+
+  // Our Services
+  "services.label": {
+    en: "Our Services",
+    ar: "خدماتنا",
+    hi: "हमारी सेवाएं",
+    ur: "ہماری خدمات",
+    tl: "Ang Aming mga Serbisyo",
+    zh: "我们的服务"
+  },
+  "services.title": {
+    en: "What We Do?",
+    ar: "ماذا نقدم؟",
+    hi: "हम क्या करते हैं?",
+    ur: "ہم کیا کرتے ہیں؟",
+    tl: "Ano ang Ginagawa Namin?",
+    zh: "我们做什么？"
+  },
+  "services.desc": {
+    en: "Providing comprehensive real estate solutions tailored for investors, homeowners, and tenants across the UAE.",
+    ar: "توفير حلول عقارية شاملة مصممة خصيصاً للمستثمرين وأصحاب المنازل والمستأجرين في جميع أنحاء الإمارات.",
+    hi: "संयुक्त अरब अमीरात में निवेशकों, घर मालिकों और किरायेदारों के लिए व्यापक रियल एस्टेट समाधान प्रदान करना।",
+    ur: "امارات میں سرمایہ کاروں، گھر مالکان اور کرایہ داروں کے لیے جامع ریئل اسٹیٹ حل فراہم کرنا۔",
+    tl: "Nagbibigay ng komprehensibong real estate solutions para sa mga mamumuhunan, may-ari ng bahay, at mga umuupa sa buong UAE.",
+    zh: "为阿联酋的投资者、房主和租户提供量身定制的全方位房地产解决方案。"
+  },
+  "services.offPlan": {
+    en: "Off Plan Projects",
+    ar: "مشاريع على الخارطة",
+    hi: "ऑफ प्लान प्रोजेक्ट्स",
+    ur: "آف پلان پروجیکٹس",
+    tl: "Off Plan Projects",
+    zh: "期房项目"
+  },
+  "services.offPlanDesc": {
+    en: "Discover premium off-plan developments from Dubai's leading developers with expert investment guidance and flexible payment plans.",
+    ar: "اكتشف المشاريع العقارية المتميزة قيد الإنشاء من كبار مطورين دبي مع إرشادات استثمارية متخصصة وخطط دفع مرنة.",
+    hi: "दुबई के प्रमुख डेवलपर्स से प्रीमियम ऑफ-प्लान विकास की खोज करें, विशेषज्ञ निवेश मार्गदर्शन और लचीली भुगतान योजनाओं के साथ।",
+    ur: "دبئی کے معروف ڈویلپرز سے پریمیم آف پلان ڈیویلپمنٹس دریافت کریں، مخصوص سرمایہ کاری رہنمائی اور لچیلدا پیمنٹ پلانوں کے ساتھ۔",
+    tl: "Tuklasin ang mga premium off-plan development mula sa mga nangungunang developer ng Dubai na may ekspertong investment guidance at flexible payment plans.",
+    zh: "发现迪拜顶级开发商的优质期房项目，享受专业投资指导和灵活付款计划。"
+  },
+  "services.offPlanBtn": {
+    en: "Explore Projects",
+    ar: "استكشف المشاريع",
+    hi: "प्रोजेक्ट्स देखें",
+    ur: "پروجیکٹس دیکھیں",
+    tl: "Tingnan ang mga Proyekto",
+    zh: "探索项目"
+  },
+  "services.secondary": {
+    en: "Secondary Property",
+    ar: "عقارات مستعملة",
+    hi: "सेकेंडरी प्रॉपर्टी",
+    ur: "سیکنڈری پراپرٹی",
+    tl: "Secondary Property",
+    zh: "二手房"
+  },
+  "services.secondaryDesc": {
+    en: "Buy and invest in ready properties across Dubai with verified listings, transparent pricing, and professional advisory support.",
+    ar: "اشترِ واستثمر في العقارات الجاهزة في جميع أنحاء دبي مع قوائم موثقة وأسعار شفافة ودعم استشاري متخصص.",
+    hi: "दुबई भर में तैयार संपत्तियों में खरीदें और निवेश करें, सत्यापित लिस्टिंग, पारदर्शी मूल्य निर्धारण और पेशेवर सलाहकारी सहायता के साथ।",
+    ur: "دبئی بھر میں تیار پراپرٹیز میں خریداری اور سرمایہ کاری کریں، تصدیق شدہ لسٹنگ، شفاف قیمت اور پیشہ ورانہ مشاورتی معاونت کے ساتھ۔",
+    tl: "Bumili at mag-invest sa mga handang ari-arian sa buong Dubai na may verified listings, transparent na presyo, at propesyonal na advisory support.",
+    zh: "在迪拜各地购买和投资现房，享受经过验证的房源、透明定价和专业顾问支持。"
+  },
+  "services.secondaryBtn": {
+    en: "View Properties",
+    ar: "عرض العقارات",
+    hi: "संपत्तियां देखें",
+    ur: "پراپرٹیز دیکھیں",
+    tl: "Tingnan ang mga Property",
+    zh: "查看房产"
+  },
+  "services.rentals": {
+    en: "Rental Properties",
+    ar: "عقارات للإيجار",
+    hi: "किराये की संपत्तियां",
+    ur: "کرایے کی پراپرٹیز",
+    tl: "Rental Properties",
+    zh: "租赁房产"
+  },
+  "services.rentalsDesc": {
+    en: "Find luxury apartments, villas, and commercial spaces that perfectly match your lifestyle and investment requirements.",
+    ar: "ابحث عن شقق وفيلات ومساحات تجارية فاخرة تتناسب تماماً مع نمط حياتك ومتطلبات استثمارك.",
+    hi: "अपनी जीवनशैली और निवेश आवश्यकताओं के अनुरूप लक्जरी अपार्टमेंट, विला और वाणिज्यिक स्थान खोजें।",
+    ur: "اپنی لائف اسٹائل اور سرمایہ کاری کی ضروریات سے بالکل ملتی جلتی لگژری اپارٹمنٹس، ولا اور تجارتی جگہیں تلاش کریں۔",
+    tl: "Humanap ng mga marangyang apartment, villa, at commercial space na perpektong tumutugma sa iyong lifestyle at investment requirements.",
+    zh: "寻找完美契合您生活方式和投资需求的豪华公寓、别墅和商业空间。"
+  },
+  "services.rentalsBtn": {
+    en: "Find Rentals",
+    ar: "البحث عن الإيجارات",
+    hi: "किराये खोजें",
+    ur: "کرایے تلاش کریں",
+    tl: "Maghanap ng Paupahan",
+    zh: "寻找租赁"
+  },
+  "services.popular": {
+    en: "Popular",
+    ar: "شائع",
+    hi: "लोकप्रिय",
+    ur: "مقبول",
+    tl: "Sikat",
+    zh: "热门"
+  },
+
+  // Why Choose Us
+  "why.label": {
+    en: "Our Benefits",
+    ar: "مميزاتنا",
+    hi: "हमारे फायदे",
+    ur: "ہمارے فوائد",
+    tl: "Ang Aming mga Pakinabang",
+    zh: "我们的优势"
+  },
+  "why.title": {
+    en: "Why Choose City Global Real Estate?",
+    ar: "لماذا تختار سيتي جلوبال العقارية؟",
+    hi: "सिटी ग्लोबल रियल एस्टेट क्यों चुनें؟",
+    ur: "سٹی گلوبل ریئل اسٹیٹ کیوں منتخب کریں؟",
+    tl: "Bakit Pumili ng City Global Real Estate?",
+    zh: "为什么选择 City Global 房地产？"
+  },
+  "why.expertise": {
+    en: "Market Expertise",
+    ar: "خبرة السوق",
+    hi: "बाजार विशेषज्ञता",
+    ur: "مارکیٹ مہارت",
+    tl: "Kaalaman sa Market",
+    zh: "市场专业知识"
+  },
+  "why.expertiseDesc": {
+    en: "Extensive understanding of the UAE luxury and commercial property market, helping clients make informed investment decisions.",
+    ar: "فهم واسع لسوق العقارات الفاخرة والتجارية في الإمارات، لمساعدة العملاء على اتخاذ قرارات استثمارية مدروسة.",
+    hi: "UAE की लक्जरी और वाणिज्यिक संपत्ति बाजार की व्यापक समझ, ग्राहकों को सूचित निवेश निर्णय लेने में मदद करना।",
+    ur: "امارات میں لگژری اور تجارتی جائیداد مارکیٹ کا وسیع فہم، کلائنٹس کو آگاہ سرمایہ کاری فیصلے کرنے میں مدد کرنا۔",
+    tl: "Malawak na pag-unawa sa UAE luxury at commercial property market, tumutulong sa mga kliyente na gumawa ng matalinong investment decisions.",
+    zh: "深入了解阿联酋豪华商业地产市场，帮助客户做出明智的投资决策。"
+  },
+  "why.tailored": {
+    en: "Tailored Service",
+    ar: "خدمة مخصصة",
+    hi: "अनुकूलित सेवा",
+    ur: "حسب الطلب سروس",
+    tl: "Personalized na Serbisyo",
+    zh: "定制服务"
+  },
+  "why.tailoredDesc": {
+    en: "Personalized support throughout the buying and investment journey with complete transparency and professionalism.",
+    ar: "دعم شخصي طوال رحلة الشراء والاستثمار مع الشفافية والاحترافية التامتين.",
+    hi: "खरीद और निवेश यात्रा में पूर्ण पारदर्शिता और पेशेवरपन के साथ व्यक्तिगत सहायता।",
+    ur: "خریداری اور سرمایہ کاری کے سفر میں مکمل شفافیت اور پیشہ ورانگی کے ساتھ ذاتی معاونت۔",
+    tl: "Personalized na suporta sa buong pagbili at investment journey na may kumpletong transparency at propesyonalismo.",
+    zh: "在整个购房和投资过程中提供个性化支持，确保完全透明和专业。"
+  },
+  "why.connections": {
+    en: "Worldwide Connections",
+    ar: "علاقات عالمية",
+    hi: "विश्वव्यापी संपर्क",
+    ur: "دنیا بھر کے تعلقات",
+    tl: "Mga Ugnayang Pandaigdig",
+    zh: "全球资源"
+  },
+  "why.connectionsDesc": {
+    en: "Strong international investor network combined with deep knowledge of UAE real estate opportunities.",
+    ar: "شبكة مستثمرين دولية قوية مدعومة بمعرفة عميقة بفرص العقارات في الإمارات.",
+    hi: "UAE रियल एस्टेट अवसरों के गहन ज्ञान के साथ मजबूत अंतरराष्ट्रीय निवेशक नेटवर्क।",
+    ur: "امارات کے ریئل اسٹیٹ مواقع کے گہرے علم کے ساتھ مضبوط بین الاقوامی سرمایہ کاروں کا نیٹ ورک۔",
+    tl: "Malakas na international investor network na pinagsama sa malalim na kaalaman sa mga oportunidad ng UAE real estate.",
+    zh: "强大的国际投资者网络，结合对阿联酋房地产机会的深入了解。"
+  },
+  "why.strategy": {
+    en: "Investment Strategy",
+    ar: "استراتيجية الاستثمار",
+    hi: "निवेश रणनीति",
+    ur: "سرمایہ کاری کی حکمت عملی",
+    tl: "Estratehiya sa Pamumuhunan",
+    zh: "投资策略"
+  },
+  "why.strategyDesc": {
+    en: "Data-driven investment advice focused on maximizing returns and long-term value.",
+    ar: "نصائح استثمارية مبنية على البيانات تركز على تعظيم العوائد والقيمة طويلة الأجل.",
+    hi: "रिटर्न और दीर्घकालिक मूल्य को अधिकतम करने पर केंद्रित डेटा-संचालित निवेश सलाह।",
+    ur: "منافع اور طویل مدتی قیمت کو زیادہ سے زیادہ بنانے پر مرکز ڈیٹا پر مبنی سرمایہ کاری مشورہ۔",
+    tl: "Data-driven investment advice na nakatuon sa pag-maximize ng returns at long-term value.",
+    zh: "以数据驱动的投资建议，专注于最大化回报和长期价值。"
+  },
+
+  // AI Concierge
+  "ai.welcome": {
+    en: "Welcome to City Global Real Estate. How can I assist you today?",
+    ar: "مرحبًا بك في سيتي جلوبال العقارية. كيف يمكنني مساعدتك اليوم؟",
+    hi: "सिटी ग्लोबल रियल एस्टेट में आपका स्वागत है। आज मैं आपकी कैसे सहायता कर सकता हूं?",
+    ur: "سٹی گلوبل ریئل اسٹیٹ میں خوش آمدید۔ آج میں آپ کی کیسے مدد کر سکتا ہوں؟",
+    tl: "Maligayang pagdating sa City Global Real Estate. Paano kita matutulungan ngayon?",
+    zh: "欢迎来到 City Global Real Estate。请问今天我能为您做些什么？"
+  },
+  "ai.header": {
+    en: "Global Elite Consultant",
+    ar: "مستشار عالمي متميز",
+    hi: "ग्लोबल एलीट सलाहकार",
+    ur: "گلوبل الیٹ مشیر",
+    tl: "Global Elite Consultant",
+    zh: "全球精英顾问"
+  },
+  "ai.poweredBy": {
+    en: "Powered by Gemini AI",
+    ar: "بدعم من Gemini AI",
+    hi: "Gemini AI द्वारा संचालित",
+    ur: "Gemini AI کی طرف سے چلایا جاتا ہے",
+    tl: "Pinapagana ng Gemini AI",
+    zh: "由 Gemini AI 驱动"
+  },
+  "ai.loading": {
+    en: "Analyzing market data...",
+    ar: "جاري تحليل بيانات السوق...",
+    hi: "बाजार डेटा का विश्लेषण हो रहा है...",
+    ur: "مارکیٹ ڈیٹا کا تجزیہ ہو رہا ہے...",
+    tl: "Sinusuri ang data ng market...",
+    zh: "正在分析市场数据..."
+  },
+  "ai.inputPlaceholder": {
+    en: "Ask about Dubai Real Estate...",
+    ar: "اسأل عن العقارات في دبي...",
+    hi: "दुबई रियल एस्टेट के बारे में पूछें...",
+    ur: "دبئی ریئل اسٹیٹ کے بارے میں پوچھیں...",
+    tl: "Magtanong tungkol sa Dubai Real Estate...",
+    zh: "咨询迪拜房地产相关问题..."
+  },
+  "ai.clearChat": {
+    en: "Clear chat",
+    ar: "مسح المحادثة",
+    hi: "चैट साफ़ करें",
+    ur: "چیٹ صاف کریں",
+    tl: "I-clear ang chat",
+    zh: "清除对话"
+  },
+  "ai.copy": {
+    en: "Copy",
+    ar: "نسخ",
+    hi: "कॉपी",
+    ur: "کاپی",
+    tl: "Kopyahin",
+    zh: "复制"
+  },
+  "ai.chip1": {
+    en: "Best investment under AED 5M?",
+    ar: "أفضل استثمار تحت 5 مليون درهم؟",
+    hi: "50 लाख AED से कम में सबसे अच्छा निवेश?",
+    ur: "50 لاکھ AED سے کم میں بہترین سرمایہ کاری؟",
+    tl: "Pinakamainam na investment sa ilalim ng AED 5M?",
+    zh: "500万迪拉姆以下的最佳投资？"
+  },
+  "ai.chip2": {
+    en: "Compare Downtown vs Dubai Marina",
+    ar: "قارن بين وسط مدينة دبي ودبي مارينا",
+    hi: "डाउनटाउन बनाम दुबई मारिना की तुलना करें",
+    ur: "ڈاؤن ٹاؤن بنام دبئی مارینا کا موازنہ کریں",
+    tl: "Ihambing ang Downtown vs Dubai Marina",
+    zh: "对比市中心与迪拜码头"
+  },
+  "ai.chip3": {
+    en: "Show me off plan projects",
+    ar: "اعرض لي المشاريع على الخارطة",
+    hi: "मुझे ऑफ प्लान प्रोजेक्ट्स दिखाएं",
+    ur: "مجھے آف پلان پروجیکٹس دکھائیں",
+    tl: "Ipakita sa akin ang mga off plan project",
+    zh: "显示期房项目"
+  },
+  "ai.chip4": {
+    en: "Book a property viewing",
+    ar: "احجز موعد معاينة عقار",
+    hi: "संपत्ति देखने का समय बुक करें",
+    ur: "پراپرٹی دیکھنے کا وقت بک کریں",
+    tl: "Mag-book ng property viewing",
+    zh: "预约看房"
+  },
+  "ai.chip5": {
+    en: "ROI analysis for Palm Jumeirah",
+    ar: "تحليل العائد على الاستثمار لنخلة جميرا",
+    hi: "पाम जुमेराह के लिए ROI विश्लेषण",
+    ur: "پام جمیرہ کے لیے ROI تجزیہ",
+    tl: "ROI analysis para sa Palm Jumeirah",
+    zh: "棕榈岛投资回报分析"
+  },
+  "ai.chip6": {
+    en: "Golden Visa requirements",
+    ar: "متطلبات التأشيرة الذهبية",
+    hi: "गोल्डन वीज़ा आवश्यकताएं",
+    ur: "گولڈن ویزا کی تقاضائیں",
+    tl: "Mga kinakailangan para sa Golden Visa",
+    zh: "黄金签证要求"
+  },
+  "ai.errorConnection": {
+    en: "Failed to consult AI. Please try again.",
+    ar: "فشل في استشارة الذكاء الاصطناعي. يرجى المحاولة مرة أخرى.",
+    hi: "AI से परामर्श करने में विफल। कृपया पुनः प्रयास करें।",
+    ur: "AI سے مشورہ کرنے میں ناکامی۔ براہ کرم دوبارہ کوشش کریں۔",
+    tl: "Nabigo ang pagkonsulta sa AI. Mangyaring subukan muli.",
+    zh: "AI咨询失败。请重试。"
+  },
+  "ai.errorGeneral": {
+    en: "I apologize, but I'm unable to connect to our AI service at the moment. Please try again in a few moments, or contact our team directly for assistance.",
+    ar: "أعتذر، لكنني غير قادر على الاتصال بخدمة الذكاء الاصطناعي في الوقت الحالي. يرجى المحاولة مرة أخرى بعد بضع لحظات، أو الاتصال بفريقنا مباشرة للحصول على المساعدة.",
+    hi: "मुझे खेद है, लेकिन मैं इस समय हमारी AI सेवा से कनेक्ट करने में असमर्थ हूं। कृपया कुछ क्षणों में पुनः प्रयास करें, या सहायता के लिए सीधे हमारी टीम से संपर्क करें।",
+    ur: "مجھے معذرت ہے، لیکن میں اس وقت ہماری AI سروس سے رابطہ قائم کرنے سے قاصر ہوں۔ براہ کرم چند لمحوں میں دوبارہ کوشش کریں، یا مدد کے لیے ہماری ٹیم سے براہ راست رابطہ کریں۔",
+    tl: "Paumanhin, ngunit hindi ako makakonekta sa aming AI service sa ngayon. Mangyaring subukan muli pagkatapos ng ilang sandali, o makipag-ugnayan nang direkta sa aming team para sa tulong.",
+    zh: "很抱歉，我暂时无法连接到我们的AI服务。请稍后重试，或直接联系我们的团队获取帮助。"
+  },
+
+  // Testimonials
+  "test.partners": {
+    en: "Our Partners",
+    ar: "شركاؤنا",
+    hi: "हमारे साझेदार",
+    ur: "ہمارے پارٹنرز",
+    tl: "Ang Aming mga Kasosyo",
+    zh: "合作伙伴"
+  },
+  "test.trustedDevs": {
+    en: "Our Trusted Developers",
+    ar: "مطورونا الموثوقون",
+    hi: "हमारे विश्वसनीय डेवलपर्स",
+    ur: "ہمارے قابل اعتماد ڈویلپرز",
+    tl: "Ang Aming mga Pinagkakatiwalaang Developer",
+    zh: "信赖的开发商"
+  },
+  "test.partnersDesc": {
+    en: "Partnered with Dubai's most prestigious real estate developers",
+    ar: "شراكة مع أرقى مطورين عقاريين في دبي",
+    hi: "दुबई के सबसे प्रतिष्ठित रियल एस्टेट डेवलपर्स के साथ साझेदारी",
+    ur: "دبئی کے سب سے معروف ریئل اسٹیٹ ڈویلپرز کے ساتھ شراکت داری",
+    tl: "Kasosyo sa mga pinakaprestihiyosong real estate developer ng Dubai",
+    zh: "与迪拜最负盛名的房地产开发商合作"
+  },
+  "test.endorsements": {
+    en: "Endorsements",
+    ar: "توصيات",
+    hi: "समर्थन",
+    ur: "تائیدات",
+    tl: "Mga Endorsement",
+    zh: "权威认可"
+  },
+  "test.auditScore": {
+    en: "Audit Score",
+    ar: "نتيجة التدقيق",
+    hi: "ऑडिट स्कोर",
+    ur: "آڈٹ اسکور",
+    tl: "Audit Score",
+    zh: "审计评分"
+  },
+  "test.googleReviews": {
+    en: "Google Reviews",
+    ar: "تقييمات جوجل",
+    hi: "Google समीक्षाएं",
+    ur: "گوگل ریویوز",
+    tl: "Mga Review sa Google",
+    zh: "谷歌评价"
+  },
+  "test.basedOn": {
+    en: "Based on 320+ premium client reviews and RERA audits.",
+    ar: "مبني على أكثر من 320 تقييم من العملاء المميزين وتدقيقات RERA.",
+    hi: "320+ प्रीमियम क्लाइंट समीक्षाओं और RERA ऑडिट पर आधारित।",
+    ur: "320+ پریمیم کلائنٹ ریویوز اور RERA آڈٹس پر مبنی۔",
+    tl: "Nabase sa 320+ premium client review at RERA audit.",
+    zh: "基于320+优质客户评价与RERA审计数据。"
+  },
+  "test.verifiedReviews": {
+    en: "Verified Client Reviews",
+    ar: "تقييمات عملاء موثقة",
+    hi: "सत्यापित ग्राहक समीक्षाएं",
+    ur: "تصدیق شدہ کلائنٹ ریویوز",
+    tl: "Mga Na-verify na Client Review",
+    zh: "客户真实评价"
+  },
+
+  // Calculators
+  "calc.investTitle": {
+    en: "Investment Calculators",
+    ar: "حاسبات الاستثمار",
+    hi: "निवेश कैलकुलेटर",
+    ur: "سرمایہ کاری کیلکولیٹر",
+    tl: "Mga Calculator ng Pamumuhunan",
+    zh: "投资计算器"
+  },
+  "calc.investDesc": {
+    en: "Calculate mortgage payments and projected returns for Dubai properties.",
+    ar: "احسب مدفوعات الرهن العقاري والعوائد المتوقعة للعقارات في دبي.",
+    hi: "दुबई की संपत्तियों के लिए बंधक भुगतान और अनुमानित प्रतिफल की गणना करें।",
+    ur: "دبئی کی پراپرٹیز کے لیے مارگیج ادائیگیاں اور منصوبہ بندی منافع کا حساب لگائیں۔",
+    tl: "Kalkulahin ang mortgage payment at projected returns para sa mga property sa Dubai.",
+    zh: "计算迪拜房产的按揭付款和预期回报。"
+  },
+  "calc.mortgageTitle": {
+    en: "Mortgage Calculator",
+    ar: "حاسبة الرهن العقاري",
+    hi: "बंधक कैलकुलेटर",
+    ur: "مارگیج کیلکولیٹر",
+    tl: "Calculator ng Mortgage",
+    zh: "按揭计算器"
+  },
+  "calc.monthlyEmi": {
+    en: "Monthly EMI",
+    ar: "القسط الشهري",
+    hi: "मासिक ईएमआई",
+    ur: "ماہانہ ای ایم آئی",
+    tl: "Buwanang EMI",
+    zh: "每月供款"
+  },
+  "calc.propertyPrice": {
+    en: "Property Price",
+    ar: "سعر العقار",
+    hi: "संपत्ति की कीमत",
+    ur: "پراپرٹی کی قیمت",
+    tl: "Presyo ng Property",
+    zh: "房产价格"
+  },
+  "calc.downPayment": {
+    en: "Down Payment",
+    ar: "الدفعة المقدمة",
+    hi: "डाउन पेमेंट",
+    ur: "ڈاؤن پیمنٹ",
+    tl: "Down Payment",
+    zh: "首付"
+  },
+  "calc.interestRate": {
+    en: "Interest Rate",
+    ar: "معدل الفائدة",
+    hi: "ब्याज दर",
+    ur: "شرح سود",
+    tl: "Rate ng Interes",
+    zh: "利率"
+  },
+  "calc.loanTenure": {
+    en: "Loan Tenure",
+    ar: "مدة القرض",
+    hi: "ऋण अवधि",
+    ur: "قرض کی مدت",
+    tl: "Termino ng Loan",
+    zh: "贷款年限"
+  },
+  "calc.breakdown": {
+    en: "Breakdown",
+    ar: "تفاصيل",
+    hi: "विवरण",
+    ur: "تفصیل",
+    tl: "Breakdown",
+    zh: "明细"
+  },
+  "calc.principalLoan": {
+    en: "Principal Loan",
+    ar: "قرض رئيسي",
+    hi: "मूल ऋण",
+    ur: "اصلی قرض",
+    tl: "Principal Loan",
+    zh: "贷款本金"
+  },
+  "calc.totalInterest": {
+    en: "Total Interest",
+    ar: "إجمالي الفائدة",
+    hi: "कुल ब्याज",
+    ur: "کل سود",
+    tl: "Kabuuang Interes",
+    zh: "总利息"
+  },
+  "calc.totalPayment": {
+    en: "Total Payment",
+    ar: "إجمالي الدفع",
+    hi: "कुल भुगतान",
+    ur: "کل ادائیگی",
+    tl: "Kabuuang Bayad",
+    zh: "总还款额"
+  },
+  "calc.roiTitle": {
+    en: "ROI Calculator",
+    ar: "حاسبة العائد على الاستثمار",
+    hi: "ROI कैलकुलेटर",
+    ur: "ROI کیلکولیٹر",
+    tl: "Calculator ng ROI",
+    zh: "投资回报计算器"
+  },
+  "calc.netAnnualRoi": {
+    en: "Net Annual ROI",
+    ar: "العائد السنوي الصافي",
+    hi: "शुद्ध वार्षिक ROI",
+    ur: "خالص سالانہ ROI",
+    tl: "Net Annual ROI",
+    zh: "年度净回报率"
+  },
+  "calc.expectedRent": {
+    en: "Expected Annual Rent",
+    ar: "الإيجار السنوي المتوقع",
+    hi: "अपेक्षित वार्षिक किराया",
+    ur: "متوقع سالانہ کرایہ",
+    tl: "Inaasahang Taunang Renta",
+    zh: "预期年租金"
+  },
+  "calc.expenses": {
+    en: "Annual Service & Expenses",
+    ar: "الخدمات والمصاريف السنوية",
+    hi: "वार्षिक सेवा और व्यय",
+    ur: "سالانہ خدمات اور اخراجات",
+    tl: "Taunang Serbisyo at Gastos",
+    zh: "年度服务与费用"
+  },
+  "calc.appreciation": {
+    en: "Est. Property Appreciation",
+    ar: "تقدير ارتفاع قيمة العقار",
+    hi: "अनुमानित संपत्ति वृद्धि",
+    ur: "تخمینی پراپرٹی کی قیمت میں اضافہ",
+    tl: "Tinatayang Pagtaas ng Halaga ng Property",
+    zh: "预估房产增值"
+  },
+  "calc.projection": {
+    en: "5-Year Projection",
+    ar: "توقعات 5 سنوات",
+    hi: "5 वर्ष का अनुमान",
+    ur: "5 سال کا اندازہ",
+    tl: "5-Taong Projection",
+    zh: "5年预测"
+  },
+  "calc.year": {
+    en: "Yr",
+    ar: "سنة",
+    hi: "वर्ष",
+    ur: "سال",
+    tl: "Taon",
+    zh: "年"
+  },
+  "calc.ratingOutstanding": {
+    en: "Outstanding",
+    ar: "ممتاز",
+    hi: "उत्कृष्ट",
+    ur: "شاندار",
+    tl: "Outstanding",
+    zh: "杰出"
+  },
+  "calc.ratingVeryGood": {
+    en: "Very Good",
+    ar: "جيد جداً",
+    hi: "बहुत अच्छा",
+    ur: "بہت اچھا",
+    tl: "Napakabuti",
+    zh: "非常好"
+  },
+  "calc.ratingGood": {
+    en: "Good",
+    ar: "جيد",
+    hi: "अच्छा",
+    ur: "اچھا",
+    tl: "Mabuti",
+    zh: "好"
+  },
+  "calc.ratingModerate": {
+    en: "Moderate",
+    ar: "مقبول",
+    hi: "मध्यम",
+    ur: "درمیانہ",
+    tl: "Katamtaman",
+    zh: "中等"
+  },
+
+  // Explore & Compare
+  "explore.title": {
+    en: "Explore & Compare",
+    ar: "استكشف وقارن",
+    hi: "खोजें और तुलना करें",
+    ur: "تلاش اور موازنہ",
+    tl: "I-explore at Ihambing",
+    zh: "探索与对比"
+  },
+  "explore.desc": {
+    en: "Discover Dubai's prime neighborhoods and compare investment potential side by side.",
+    ar: "اكتشف الأحياء الراقية في دبي وقارن الاستثمارات المحتملة جنباً إلى جنب.",
+    hi: "दुबई के प्रमुख मोहल्लों की खोज करें और निवेश क्षमता की तुलना करें।",
+    ur: "دبئی کے بہترین علاقوں کو دریافت کریں اور سرمایہ کاری کی صلاحیت کا موازنہ کریں۔",
+    tl: "Tuklasin ang mga pangunahing kapitbahayan ng Dubai at ihambing ang potensyal na pamumuhunan.",
+    zh: "探索迪拜核心地段，并对比各区域的投资潜力。"
+  },
+  "explore.dubaiMap": {
+    en: "Dubai Map",
+    ar: "خريطة دبي",
+    hi: "दुबई मानचित्र",
+    ur: "دبئی کا نقشہ",
+    tl: "Mapa ng Dubai",
+    zh: "迪拜地图"
+  },
+  "explore.viewAll": {
+    en: "View All",
+    ar: "عرض الكل",
+    hi: "सभी देखें",
+    ur: "سب دیکھیں",
+    tl: "Tingnan Lahat",
+    zh: "查看全部"
+  },
+  "explore.properties": {
+    en: "properties",
+    ar: "عقارات",
+    hi: "संपत्तियां",
+    ur: "پراپرٹیز",
+    tl: "mga property",
+    zh: "处房产"
+  },
+  "explore.from": {
+    en: "From",
+    ar: "تبدأ من",
+    hi: "से",
+    ur: "سے",
+    tl: "Mula sa",
+    zh: "起"
+  },
+  "explore.compareTitle": {
+    en: "Compare Properties",
+    ar: "قارن العقارات",
+    hi: "संपत्तियों की तुलना करें",
+    ur: "پراپرٹیز کا موازنہ کریں",
+    tl: "Ihambing ang mga Property",
+    zh: "对比房产"
+  },
+  "explore.vs": {
+    en: "VS",
+    ar: "ضد",
+    hi: "बनाम",
+    ur: "برابر",
+    tl: "VS",
+    zh: "对比"
+  },
+  "explore.propertyA": {
+    en: "Property A",
+    ar: "العقار أ",
+    hi: "संपत्ति A",
+    ur: "پراپرٹی A",
+    tl: "Property A",
+    zh: "房产 A"
+  },
+  "explore.propertyB": {
+    en: "Property B",
+    ar: "العقار ب",
+    hi: "संपत्ति B",
+    ur: "پراپرٹی B",
+    tl: "Property B",
+    zh: "房产 B"
+  },
+  "explore.price": {
+    en: "Price",
+    ar: "السعر",
+    hi: "कीमत",
+    ur: "قیمت",
+    tl: "Presyo",
+    zh: "价格"
+  },
+  "explore.yield": {
+    en: "Yield",
+    ar: "العائد",
+    hi: "उपज",
+    ur: "پیداوار",
+    tl: "Yield",
+    zh: "回报率"
+  },
+  "explore.size": {
+    en: "Size",
+    ar: "المساحة",
+    hi: "आकार",
+    ur: "سائز",
+    tl: "Laki",
+    zh: "面积"
+  },
+  "explore.config": {
+    en: "Config",
+    ar: "التكوين",
+    hi: "कॉन्फ़िग",
+    ur: "کنفیگریشن",
+    tl: "Config",
+    zh: "户型"
+  },
+  "explore.status": {
+    en: "Status",
+    ar: "الحالة",
+    hi: "स्थिति",
+    ur: "حالت",
+    tl: "Status",
+    zh: "状态"
+  },
+  "explore.sqft": {
+    en: "sqft",
+    ar: "قدم مربع",
+    hi: "वर्ग फुट",
+    ur: "مربع فٹ",
+    tl: "sqft",
+    zh: "平方英尺"
+  },
+  "explore.higherYield": {
+    en: "higher yield",
+    ar: "عائد أعلى",
+    hi: "अधिक उपज",
+    ur: "زیادہ پیداوار",
+    tl: "mas mataas na yield",
+    zh: "更高回报"
+  },
+  "explore.than": {
+    en: "than",
+    ar: "مقارنة بـ",
+    hi: "से",
+    ur: "کے مقابلے",
+    tl: "kaysa sa",
+    zh: "高于"
+  },
+
+  // Investment Score
+  "score.title": {
+    en: "Investment Score",
+    ar: "درجة الاستثمار",
+    hi: "निवेश स्कोर",
+    ur: "سرمایہ کاری کا اسکور",
+    tl: "Iskor ng Pamumuhunan",
+    zh: "投资评分"
+  },
+  "score.desc": {
+    en: "Real-time analysis of rental yields, capital appreciation, and risk factors across Dubai's real estate market.",
+    ar: "تحليل فوري لعوائد الإيجار وارتفاع رأس المخاطر في سوق العقارات في دبي.",
+    hi: "दुबई के रियल एस्टेट बाजार में किराये की उपज, पूंजी वृद्धि और जोखिम कारकों का वास्तविक समय विश्लेषण।",
+    ur: "دبئی کے ریئل اسٹیٹ مارکیٹ میں رینٹل پیداوار، کیپٹل اپریشیشن اور خطرے کے عوامل کا ریئل ٹائم تجزیہ۔",
+    tl: "Real-time analysis ng rental yields, capital appreciation, at risk factors sa real estate market ng Dubai.",
+    zh: "实时分析迪拜房地产市场的租金收益、资本增值与风险因素。"
+  },
+  "score.analyzing": {
+    en: "Analyzing:",
+    ar: "تحليل:",
+    hi: "विश्लेषण:",
+    ur: "تجزیہ:",
+    tl: "Sinusuri:",
+    zh: "分析中:"
+  },
+  "score.investmentScore": {
+    en: "Investment Score",
+    ar: "درجة الاستثمار",
+    hi: "निवेश स्कोर",
+    ur: "سرمایہ کاری کا اسکور",
+    tl: "Investment Score",
+    zh: "投资评分"
+  },
+  "score.excellent": {
+    en: "Excellent",
+    ar: "ممتاز",
+    hi: "उत्कृष्ट",
+    ur: "شاندار",
+    tl: "Outstanding",
+    zh: "优秀"
+  },
+  "score.good": {
+    en: "Good",
+    ar: "جيد",
+    hi: "अच्छा",
+    ur: "اچھا",
+    tl: "Mabuti",
+    zh: "良好"
+  },
+  "score.average": {
+    en: "Average",
+    ar: "متوسط",
+    hi: "औसत",
+    ur: "اوسط",
+    tl: "Katamtaman",
+    zh: "中等"
+  },
+  "score.investment": {
+    en: "Investment",
+    ar: "الاستثمار",
+    hi: "निवेश",
+    ur: "سرمایہ کاری",
+    tl: "Pamumuhunan",
+    zh: "投资"
+  },
+  "score.rentalYield": {
+    en: "Rental Yield",
+    ar: "عائد الإيجار",
+    hi: "किराये की उपज",
+    ur: "رینٹل پیداوار",
+    tl: "Yield sa Renta",
+    zh: "租金收益率"
+  },
+  "score.appreciation": {
+    en: "Appreciation",
+    ar: "الارتفاع",
+    hi: "वृद्धि",
+    ur: "اپریشیشن",
+    tl: "Pagtaas ng Halaga",
+    zh: "增值"
+  },
+  "score.capitalGrowth": {
+    en: "Capital Growth",
+    ar: "نمو رأس المال",
+    hi: "पूंजी वृद्धि",
+    ur: "کیپٹل گروتھ",
+    tl: "Paglaki ng Kapital",
+    zh: "资本增值"
+  },
+  "score.riskLevel": {
+    en: "Risk Level",
+    ar: "مستوى المخاطرة",
+    hi: "जोखिम स्तर",
+    ur: "خطرے کی سطح",
+    tl: "Antas ng Panganib",
+    zh: "风险等级"
+  },
+  "score.high": {
+    en: "High",
+    ar: "مرتفع",
+    hi: "उच्च",
+    ur: "زیادہ",
+    tl: "Mataas",
+    zh: "高"
+  },
+  "score.veryHigh": {
+    en: "Very High",
+    ar: "مرتفع جداً",
+    hi: "बहुत उच्च",
+    ur: "بہت زیادہ",
+    tl: "Napakataas",
+    zh: "很高"
+  },
+  "score.verySafe": {
+    en: "Very Safe",
+    ar: "آمن جداً",
+    hi: "बहुत सुरक्षित",
+    ur: "بہت محفوظ",
+    tl: "Napakaligtas",
+    zh: "非常安全"
+  },
+  "score.reraMonitored": {
+    en: "RERA Monitored",
+    ar: "مراقبة من RERA",
+    hi: "RERA द्वारा निगरानी",
+    ur: "RERA نگرانی",
+    tl: "Sinusubaybayan ng RERA",
+    zh: "RERA 监管"
+  },
+  "score.escrowProtection": {
+    en: "Government Escrow Protection",
+    ar: "حماية الضمان الحكومي",
+    hi: "सरकारी एस्क्रो सुरक्षा",
+    ur: "حکومتی ایسکرو حفاظت",
+    tl: "Proteksyon ng Government Escrow",
+    zh: "政府托管保护"
+  },
+  "score.scoresUpdated": {
+    en: "Scores updated in real-time using market analysis",
+    ar: "تتحدث الدرجات في الوقت الفعلي باستخدام تحليل السوق",
+    hi: "बाजार विश्लेषण का उपयोग करके स्कोर वास्तविक समय में अपडेट होते हैं",
+    ur: "مارکیٹ تجزیے کا استعمال کرتے ہوئے اسکور ریئل ٹائم میں اپ ڈیٹ ہوتے ہیں",
+    tl: "Na-update ang mga iskor sa real-time gamit ang market analysis",
+    zh: "评分通过市场分析实时更新"
+  },
+  "score.howItWorks": {
+    en: "How it Works",
+    ar: "كيف يعمل",
+    hi: "यह कैसे काम करता है",
+    ur: "یہ کیسے کام کرتا ہے",
+    tl: "Paano Gumagana",
+    zh: "运作原理"
+  },
+
+  // Hero Stats
+  "hero.statProperties": {
+    en: "Properties Sold",
+    ar: "عقارات تم بيعها",
+    hi: "बेची गई संपत्तियां",
+    ur: "فروخت شدہ پراپرٹیز",
+    tl: "Mga Naibentang Property",
+    zh: "已售房产"
+  },
+  "hero.statInvestors": {
+    en: "Happy Investors",
+    ar: "مستثمرون سعداء",
+    hi: "खुश निवेशक",
+    ur: "خوش سرمایہ کار",
+    tl: "Masayang Mamumuhunan",
+    zh: "满意投资者"
+  },
+  "hero.statCountries": {
+    en: "Countries Served",
+    ar: "الدول المخدومة",
+    hi: "देशों में सेवा",
+    ur: "خدمت یافتہ ممالک",
+    tl: "Mga Bansang Pinagsilbihan",
+    zh: "服务国家"
+  },
+  "hero.statRoi": {
+    en: "ROI Achieved",
+    ar: "العائد المحقق",
+    hi: "प्राप्त ROI",
+    ur: "حاصل کردہ ROI",
+    tl: "Nakamit na ROI",
+    zh: "已实现回报率"
+  },
+  "hero.scrollExplore": {
+    en: "Scroll to Explore",
+    ar: "مرر للاستكشاف",
+    hi: "खोजने के लिए स्क्रॉल करें",
+    ur: "تلاش کے لیے سکرول کریں",
+    tl: "Mag-scroll para Mag-explore",
+    zh: "向下滚动探索"
+  },
+  "hero.popularSearches": {
+    en: "Popular Searches",
+    ar: "البحث الشائع",
+    hi: "लोकप्रिय खोजें",
+    ur: "مقبول تلاشیں",
+    tl: "Mga Sikat na Search",
+    zh: "热门搜索"
+  },
+
+  // Footer Extra
+  "footer.freeConsultation": {
+    en: "Free Consultation",
+    ar: "استشارة مجانية",
+    hi: "मुफ्त परामर्श",
+    ur: "مفت مشاورت",
+    tl: "Libreng Konsultasyon",
+    zh: "免费咨询"
+  },
+  "footer.startJourney": {
+    en: "Start Your Investment Journey",
+    ar: "ابدأ رحلة الاستثمار",
+    hi: "अपनी निवेश यात्रा शुरू करें",
+    ur: "اپنی سرمایہ کاری کا سفر شروع کریں",
+    tl: "Simulan ang Iyong Paglalakbay sa Pamumuhunan",
+    zh: "开启您的投资之旅"
   }
 };
 

@@ -1,40 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Shield, Star, Users, Landmark, Home } from "lucide-react";
 import { GradientBackground } from "./ui/gradient-background-4";
 import { StaggerContainer, StaggerItem } from "./ui/scroll-reveal";
+import { t } from "../utils/translations";
 
 interface StatsGridProps {
   theme: "light" | "dark";
 }
 
 export default function StatsGrid({ theme }: StatsGridProps) {
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
   const stats = [
     {
       icon: <Landmark className="w-6 h-6 text-[#d4af37]" />,
       value: "10+",
-      label: "Years Experience"
+      label: t("statsGrid.yearsExperience", lang)
     },
     {
       icon: <Home className="w-6 h-6 text-[#d4af37]" />,
       value: "15,000+",
-      label: "Properties Sold"
+      label: t("statsGrid.propertiesSold", lang)
     },
     {
       icon: <Users className="w-6 h-6 text-[#d4af37]" />,
       value: "8,500+",
-      label: "Happy Investors"
+      label: t("statsGrid.happyInvestors", lang)
     },
     {
       isRating: true,
       icon: <Star className="w-6 h-6 text-[#d4af37] fill-[#d4af37]" />,
       value: "4.9",
-      label: "Google Rating",
+      label: t("statsGrid.googleRating", lang),
       stars: 5
     },
     {
       icon: <Shield className="w-6 h-6 text-[#d4af37]" />,
       value: "RERA",
-      label: "Certified Agency"
+      label: t("statsGrid.certifiedAgency", lang)
     }
   ];
 

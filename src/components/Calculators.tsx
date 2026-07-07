@@ -4,6 +4,7 @@ import { GradientBackground } from "./ui/gradient-background-4";
 import { ScrollReveal, SlideIn } from "./ui/scroll-reveal";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { t } from "../utils/translations";
 
 interface CalculatorsProps {
   theme: "light" | "dark";
@@ -37,6 +38,24 @@ function AnimatedNumber({ value, prefix = "", suffix = "" }: { value: number; pr
 
 export default function Calculators({ theme }: CalculatorsProps) {
   const isDark = theme === "dark";
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
   // --- Mortgage Calculator States ---
   const [propertyPrice, setPropertyPrice] = useState<number>(5000000);
   const [downPayment, setDownPayment] = useState<number>(1000000);
@@ -98,11 +117,11 @@ export default function Calculators({ theme }: CalculatorsProps) {
     setNetRoi(Number(computedRoi.toFixed(2)));
     setNetAnnualReturn(netReturn);
 
-    if (computedRoi >= 8) setRoiRating("Outstanding");
-    else if (computedRoi >= 6) setRoiRating("Very Good");
-    else if (computedRoi >= 4) setRoiRating("Good");
-    else setRoiRating("Moderate");
-  }, [annualRent, expenses, propertyPrice]);
+    if (computedRoi >= 8) setRoiRating(t("calc.ratingOutstanding", lang));
+    else if (computedRoi >= 6) setRoiRating(t("calc.ratingVeryGood", lang));
+    else if (computedRoi >= 4) setRoiRating(t("calc.ratingGood", lang));
+    else setRoiRating(t("calc.ratingModerate", lang));
+  }, [annualRent, expenses, propertyPrice, lang]);
 
   // Donut chart
   const totalPool = downPayment + loanAmount + totalInterest;
@@ -129,10 +148,10 @@ export default function Calculators({ theme }: CalculatorsProps) {
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-[#1c1917]"}`}>
-              Investment Calculators
+              {t("calc.investTitle", lang)}
             </h2>
             <p className={`text-sm max-w-xl mx-auto leading-relaxed ${isDark ? "text-gray-400" : "text-stone-500"}`}>
-              Calculate mortgage payments and projected returns for Dubai properties.
+              {t("calc.investDesc", lang)}
             </p>
           </div>
         </ScrollReveal>
@@ -149,12 +168,12 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div className="w-10 h-10 rounded-xl bg-[#C9A227]/10 flex items-center justify-center">
                     <Landmark className="w-5 h-5 text-[#C9A227]" />
                   </div>
-                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>Mortgage Calculator</h3>
+                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{t("calc.mortgageTitle", lang)}</h3>
                 </div>
 
                 {/* Main Result */}
                 <div className={`mb-8 p-5 rounded-2xl ${isDark ? "bg-white/[0.03] border border-white/5" : "bg-stone-50 border border-stone-200/60"}`}>
-                  <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>Monthly EMI</p>
+                  <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.monthlyEmi", lang)}</p>
                   <span className="font-mono text-3xl md:text-4xl font-extrabold text-[#E7C96A]">
                     AED {monthlyEmi.toLocaleString()}
                   </span>
@@ -164,7 +183,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                 <div className="space-y-5 mb-8">
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Property Price</span>
+                        <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.propertyPrice", lang)}</span>
                       <span className="font-mono text-xs font-bold text-[#E7C96A]">{formatPrice(propertyPrice)}</span>
                     </div>
                     <input
@@ -181,7 +200,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   {/* Down Payment */}
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Down Payment ({Math.round((downPayment / propertyPrice) * 100)}%)</span>
+                        <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.downPayment", lang)} ({Math.round((downPayment / propertyPrice) * 100)}%)</span>
                       <span className="font-mono text-xs font-bold text-[#E7C96A]">{formatPrice(downPayment)}</span>
                     </div>
                     <input
@@ -199,7 +218,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <div className="flex justify-between mb-2">
-                        <span className={`font-sans text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Interest Rate</span>
+                        <span className={`font-sans text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.interestRate", lang)}</span>
                         <span className="font-mono text-xs font-bold text-[#E7C96A]">{interestRate}%</span>
                       </div>
                       <input
@@ -214,7 +233,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                     </div>
                     <div>
                       <div className="flex justify-between mb-2">
-                        <span className={`font-sans text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Loan Tenure</span>
+                        <span className={`font-sans text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.loanTenure", lang)}</span>
                         <span className="font-mono text-xs font-bold text-[#E7C96A]">{loanYears} Yr</span>
                       </div>
                       <input
@@ -245,7 +264,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                     </svg>
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <PieChart className={`w-4 h-4 mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`} />
-                      <span className={`font-mono text-[10px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>Breakdown</span>
+                      <span className={`font-mono text-[10px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.breakdown", lang)}</span>
                     </div>
                   </div>
 
@@ -261,20 +280,20 @@ export default function Calculators({ theme }: CalculatorsProps) {
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]" />
-                        <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>Principal Loan</span>
+                        <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.principalLoan", lang)}</span>
                       </span>
                       <span className={`font-mono text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(loanAmount)}</span>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full bg-[#3b82f6]" />
-                        <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>Total Interest</span>
+                        <span className={`font-sans text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.totalInterest", lang)}</span>
                       </span>
                       <span className={`font-mono text-[11px] font-semibold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{formatPrice(totalInterest)}</span>
                     </div>
                     <div className={`pt-2 border-t ${isDark ? "border-white/5" : "border-stone-200/60"}`}>
                       <div className="flex items-center justify-between">
-                        <span className={`font-sans text-[11px] font-semibold ${isDark ? "text-gray-500" : "text-stone-400"}`}>Total Payment</span>
+                        <span className={`font-sans text-[11px] font-semibold ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.totalPayment", lang)}</span>
                         <span className="font-mono text-[11px] text-[#E7C96A] font-bold">{formatPrice(totalPayment)}</span>
                       </div>
                     </div>
@@ -293,12 +312,12 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
                     <TrendingUp className="w-5 h-5 text-emerald-400" />
                   </div>
-                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>ROI Calculator</h3>
+                  <h3 className={`text-xl font-bold ${isDark ? "text-white" : "text-[#1c1917]"}`}>{t("calc.roiTitle", lang)}</h3>
                 </div>
 
                 {/* Main Result */}
                 <div className={`mb-8 p-5 rounded-2xl ${isDark ? "bg-white/[0.03] border border-white/5" : "bg-stone-50 border border-stone-200/60"}`}>
-                  <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>Net Annual ROI</p>
+                  <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.netAnnualRoi", lang)}</p>
                   <div className="flex items-baseline gap-3">
                     <span className="font-mono text-3xl md:text-4xl font-extrabold text-emerald-400">
                       {netRoi}%
@@ -315,7 +334,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   {/* Annual Rent */}
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Expected Annual Rent</span>
+                        <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.expectedRent", lang)}</span>
                       <span className="font-mono text-xs font-bold text-emerald-400">{formatPrice(annualRent)}</span>
                     </div>
                     <input
@@ -332,7 +351,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   {/* Expenses */}
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Annual Service & Expenses</span>
+                        <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.expenses", lang)}</span>
                       <span className="font-mono text-xs font-bold text-yellow-400">{formatPrice(expenses)}</span>
                     </div>
                     <input
@@ -349,7 +368,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                   {/* Appreciation */}
                   <div>
                     <div className="flex justify-between mb-2">
-                      <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>Est. Property Appreciation</span>
+                        <span className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("calc.appreciation", lang)}</span>
                       <span className="font-mono text-xs font-bold text-[#E7C96A]">{propertyAppreciation}%</span>
                     </div>
                     <input
@@ -366,7 +385,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
 
                 {/* 5-Year Projection Chart */}
                 <div className={`p-4 rounded-2xl ${isDark ? "bg-white/[0.03] border border-white/5" : "bg-stone-50 border border-stone-200/60"}`}>
-                  <p className={`text-xs mb-4 ${isDark ? "text-gray-500" : "text-stone-400"}`}>5-Year Projection</p>
+                  <p className={`text-xs mb-4 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.projection", lang)}</p>
                   <div className="h-32 flex items-end justify-between gap-2 px-1">
                     {[...Array(5)].map((_, i) => {
                       const year = i + 1;

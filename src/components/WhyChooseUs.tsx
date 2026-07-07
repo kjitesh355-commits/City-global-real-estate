@@ -1,42 +1,57 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "motion/react";
 import { Award, Settings, Globe, TrendingUp } from "lucide-react";
 import { GradientBackground } from "./ui/gradient-background-4";
+import { t } from "../utils/translations";
 
 interface WhyChooseUsProps {
   theme: "light" | "dark";
 }
 
-const features = [
-  {
-    icon: Award,
-    title: "Market Expertise",
-    description:
-      "Extensive understanding of the UAE luxury and commercial property market, helping clients make informed investment decisions.",
-  },
-  {
-    icon: Settings,
-    title: "Tailored Service",
-    description:
-      "Personalized support throughout the buying and investment journey with complete transparency and professionalism.",
-  },
-  {
-    icon: Globe,
-    title: "Worldwide Connections",
-    description:
-      "Strong international investor network combined with deep knowledge of UAE real estate opportunities.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Investment Strategy",
-    description:
-      "Data-driven investment advice focused on maximizing returns and long-term value.",
-  },
-];
-
 export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
+  const features = [
+    {
+      icon: Award,
+      titleKey: "why.expertise",
+      descKey: "why.expertiseDesc",
+    },
+    {
+      icon: Settings,
+      titleKey: "why.tailored",
+      descKey: "why.tailoredDesc",
+    },
+    {
+      icon: Globe,
+      titleKey: "why.connections",
+      descKey: "why.connectionsDesc",
+    },
+    {
+      icon: TrendingUp,
+      titleKey: "why.strategy",
+      descKey: "why.strategyDesc",
+    },
+  ];
 
   return (
     <section
@@ -46,7 +61,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
           ? "bg-[#07080a]"
           : "bg-[#FAFAFA]"
       }`}
-      aria-label="Why Choose City Global Real Estate"
+      aria-label={t("why.title", lang)}
     >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -132,7 +147,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
               theme === "dark" ? "text-[#d4af37]" : "text-[#0A1F5A]"
             }`}
           >
-            Our Benefits
+            {t("why.label", lang)}
           </motion.p>
 
           <motion.h2
@@ -143,15 +158,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
               theme === "dark" ? "text-white" : "text-[#0A1F5A]"
             }`}
           >
-            Why Choose City Global
-            <br />
-            <span
-              className={
-                theme === "dark" ? "text-[#d4af37]" : "text-[#0A1F5A]/80"
-              }
-            >
-              Real Estate?
-            </span>
+            {t("why.title", lang)}
           </motion.h2>
         </div>
 
@@ -161,7 +168,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
             const Icon = feature.icon;
             return (
               <motion.article
-                key={feature.title}
+                key={feature.titleKey}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{
@@ -171,7 +178,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
                 }}
                 tabIndex={0}
                 role="article"
-                aria-label={feature.title}
+                aria-label={t(feature.titleKey, lang)}
                 className={`group relative rounded-[24px] p-10 text-center cursor-default transition-all duration-[400ms] ease-out outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2 ${
                   theme === "dark"
                     ? "bg-[#0c0d14] border border-gray-900/60 shadow-xl hover:-translate-y-3 hover:border-[#d4af37]/50 hover:shadow-[0_20px_60px_-15px_rgba(212,175,55,0.12)]"
@@ -216,7 +223,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
                       : "text-[#0A1F5A] group-hover:text-[#d4af37]"
                   }`}
                 >
-                  {feature.title}
+                  {t(feature.titleKey, lang)}
                 </h3>
 
                 {/* Description */}
@@ -227,7 +234,7 @@ export default function WhyChooseUs({ theme }: WhyChooseUsProps) {
                       : "text-stone-500 group-hover:text-stone-600"
                   }`}
                 >
-                  {feature.description}
+                  {t(feature.descKey, lang)}
                 </p>
 
                 {/* Hover gold accent line */}

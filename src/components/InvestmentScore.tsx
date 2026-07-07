@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Shield, TrendingUp, ArrowUpRight, BarChart3, Lock } from "lucide-react";
 import { Property } from "../types";
+import { t } from "../utils/translations";
 import { GradientBackground } from "./ui/gradient-background-4";
 import { ScrollReveal, SlideIn, StaggerContainer, StaggerItem } from "./ui/scroll-reveal";
 import { motion, useInView } from "motion/react";
@@ -41,6 +42,23 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
 export default function InvestmentScore({ properties, theme }: InvestmentScoreProps) {
   const isDark = theme === "dark";
   const [selectedPropId, setSelectedPropId] = useState<string>("frond-g-villa");
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
 
   const fallbackProperty: Property = {
     id: "loading",
@@ -72,10 +90,10 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
   const metrics = [
     {
       icon: TrendingUp,
-      label: "Rental Yield",
+      label: t("score.rentalYield", lang),
       value: activeProp.rentalYield,
       suffix: "%",
-      badge: "High",
+      badge: t("score.high", lang),
       badgeColor: "emerald",
       gradient: "from-emerald-500/20 to-emerald-600/5",
       iconBg: "bg-emerald-500/10",
@@ -84,10 +102,10 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
     },
     {
       icon: ArrowUpRight,
-      label: "Appreciation",
+      label: t("score.appreciation", lang),
       value: activeProp.appreciation,
       suffix: "%",
-      badge: "Very High",
+      badge: t("score.veryHigh", lang),
       badgeColor: "emerald",
       gradient: "from-emerald-500/20 to-emerald-600/5",
       iconBg: "bg-emerald-500/10",
@@ -96,10 +114,10 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
     },
     {
       icon: BarChart3,
-      label: "Capital Growth",
+      label: t("score.capitalGrowth", lang),
       value: activeProp.capitalGrowth,
       suffix: "%",
-      badge: "Very High",
+      badge: t("score.veryHigh", lang),
       badgeColor: "emerald",
       gradient: "from-emerald-500/20 to-emerald-600/5",
       iconBg: "bg-emerald-500/10",
@@ -108,10 +126,10 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
     },
     {
       icon: Shield,
-      label: "Risk Level",
+      label: t("score.riskLevel", lang),
       value: 0,
       suffix: "",
-      badge: "Very Safe",
+      badge: t("score.verySafe", lang),
       badgeColor: "gold",
       gradient: "from-[#C9A227]/20 to-[#C9A227]/5",
       iconBg: "bg-[#C9A227]/10",
@@ -133,11 +151,10 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-[#1c1917]"}`}>
-              Investment Score
+              {t("score.title", lang)}
             </h2>
             <p className={`text-sm max-w-xl mx-auto leading-relaxed ${isDark ? "text-gray-400" : "text-stone-500"}`}>
-              Real-time analysis of rental yields, capital appreciation,
-              and risk factors across Dubai's real estate market.
+              {t("score.desc", lang)}
             </p>
           </div>
         </ScrollReveal>
@@ -146,7 +163,7 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
         <ScrollReveal delay={0.1}>
           <div className="flex justify-center mb-12">
             <div className={`inline-flex items-center gap-4 p-2 rounded-2xl ${isDark ? "border-white/10 bg-white/5" : "border-stone-200/60 bg-stone-50"} border`}>
-              <span className={`text-xs px-3 ${isDark ? "text-gray-400" : "text-stone-500"}`}>Analyzing:</span>
+              <span className={`text-xs px-3 ${isDark ? "text-gray-400" : "text-stone-500"}`}>{t("score.analyzing", lang)}</span>
               <select
                 value={selectedPropId}
                 onChange={(e) => setSelectedPropId(e.target.value)}
@@ -172,7 +189,7 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
           <SlideIn from="left" className="lg:col-span-5">
             <div className={`rounded-3xl p-8 md:p-10 text-center ${isDark ? "border-white/10 bg-white/5" : "border-stone-200/60 bg-white/80 shadow-sm"} border`}>
               <div className="relative z-10">
-                <p className={`text-xs mb-8 ${isDark ? "text-gray-500" : "text-stone-400"}`}>Investment Score</p>
+                <p className={`text-xs mb-8 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("score.investmentScore", lang)}</p>
 
                 {/* Circular Gauge */}
                 <div className="relative w-48 h-48 mx-auto mb-8">
@@ -202,7 +219,7 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
                 </div>
 
                 {/* Score Label */}
-                <p className={`text-xs mb-6 ${isDark ? "text-gray-400" : "text-stone-500"}`}>{score >= 80 ? "Excellent" : score >= 60 ? "Good" : "Average"} Investment</p>
+                <p className={`text-xs mb-6 ${isDark ? "text-gray-400" : "text-stone-500"}`}>{score >= 80 ? t("score.excellent", lang) : score >= 60 ? t("score.good", lang) : t("score.average", lang)} {t("score.investment", lang)}</p>
 
                 {/* Property Info */}
                 <div className="pt-4 border-t border-white/5">
@@ -251,8 +268,8 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
                           <div className={`flex items-center gap-3 p-3 rounded-xl ${isDark ? "bg-white/[0.03]" : "bg-stone-50 border-stone-200/60 border"}`}>
                             <Lock className="w-5 h-5 text-[#C9A227]" />
                             <div>
-                              <p className="text-xs text-[#E7C96A] font-semibold">RERA Monitored</p>
-                              <p className={`text-[10px] ${isDark ? "text-gray-500" : "text-stone-400"}`}>Government Escrow Protection</p>
+                              <p className="text-xs text-[#E7C96A] font-semibold">{t("score.reraMonitored", lang)}</p>
+                              <p className={`text-[10px] ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("score.escrowProtection", lang)}</p>
                             </div>
                           </div>
                         ) : (
@@ -284,10 +301,10 @@ export default function InvestmentScore({ properties, theme }: InvestmentScorePr
             <ScrollReveal delay={0.3}>
               <div className={`mt-4 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 ${isDark ? "bg-white/[0.02] border-white/5" : "bg-stone-50/80 border-stone-200/60"} border`}>
                 <p className={`text-xs ${isDark ? "text-gray-400" : "text-stone-500"}`}>
-                  Scores updated in real-time using market analysis
+                  {t("score.scoresUpdated", lang)}
                 </p>
                 <a href="#how" className="text-xs text-[#C9A227] hover:text-[#E7C96A] transition-colors">
-                  How it Works
+                  {t("score.howItWorks", lang)}
                 </a>
               </div>
             </ScrollReveal>

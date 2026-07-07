@@ -51,13 +51,6 @@ const aiExampleChips = [
   "Downtown Apartments",
 ];
 
-const stats = [
-  { label: "Properties Sold", value: "15,000+", icon: Home },
-  { label: "Happy Investors", value: "8,500+", icon: Users },
-  { label: "Countries Served", value: "25+", icon: Globe },
-  { label: "ROI Achieved", value: "18%", icon: TrendingUp },
-];
-
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -109,6 +102,31 @@ export default function Hero({
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const heroRef = useRef<HTMLElement>(null);
+
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
+  const stats = [
+    { label: t("hero.statProperties", lang), value: "15,000+", icon: Home },
+    { label: t("hero.statInvestors", lang), value: "8,500+", icon: Users },
+    { label: t("hero.statCountries", lang), value: "25+", icon: Globe },
+    { label: t("hero.statRoi", lang), value: "18%", icon: TrendingUp },
+  ];
 
   // Mouse parallax
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
@@ -292,7 +310,7 @@ export default function Hero({
           >
             <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#C9A227] animate-pulse" />
             <span className="font-sans text-[10px] sm:text-xs tracking-[0.4em] uppercase text-[#C9A227] font-semibold">
-              Dubai Real Estate Experts
+              {t("hero.subtitle", lang)}
             </span>
             <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#C9A227] animate-pulse" />
           </motion.div>
@@ -304,11 +322,11 @@ export default function Hero({
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="font-serif text-[40px] sm:text-[56px] md:text-[72px] font-bold leading-[1.05] tracking-[0.02em] mb-6 max-w-5xl"
           >
-            <span className="text-white">Your Gateway to</span>
+            <span className="text-white">{t("hero.title1", lang)}</span>
             <br />
-            <span className="shimmer-text">Premium Living</span>
+            <span className="shimmer-text">{t("hero.title2", lang)}</span>
             <br />
-            <span className="text-white">& Smart Investments</span>
+            <span className="text-white">{t("hero.title3", lang)}</span>
           </motion.h1>
 
           {/* Gold Divider */}
@@ -326,9 +344,7 @@ export default function Hero({
             transition={{ duration: 0.8, delay: 0.6 }}
             className="font-sans text-sm sm:text-base md:text-lg text-[#B7B7B7] max-w-[750px] leading-[1.8] mb-10"
           >
-            Discover extraordinary properties in Dubai's most prestigious
-            locations. From Palm Jumeirah waterfront villas to Downtown
-            penthouses — curated investments with exceptional returns.
+            {t("hero.desc", lang)}
           </motion.p>
 
           {/* CTAs */}
@@ -342,7 +358,7 @@ export default function Hero({
               href="#featured-properties"
               className="group flex items-center gap-3 bg-gradient-to-r from-[#C9A227] to-[#E7C96A] text-black font-sans text-xs uppercase font-bold tracking-widest px-8 py-4 rounded-full hover:brightness-110 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(201,162,39,0.4)] transition-all duration-500"
             >
-              <span>Explore Properties</span>
+              <span>{t("hero.explore", lang)}</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1" />
             </a>
 
@@ -357,7 +373,7 @@ export default function Hero({
                 <Play className="w-5 h-5 text-[#C9A227] fill-[#C9A227] ml-0.5" />
               </div>
               <span className="font-sans text-xs uppercase tracking-widest text-[#B7B7B7] group-hover:text-[#C9A227] transition-colors duration-500">
-                Watch Investment Guide
+                {t("hero.watch", lang)}
               </span>
             </a>
           </motion.div>
@@ -623,7 +639,7 @@ export default function Hero({
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
         >
           <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-gray-500">
-            Scroll to Explore
+            {t("hero.scrollExplore", lang)}
           </span>
           <div className="w-5 h-8 border border-gray-600 rounded-full flex justify-center pt-1.5">
             <div

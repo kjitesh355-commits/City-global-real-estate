@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { t } from "../utils/translations";
 import { MapPin, ArrowRight, ArrowLeftRight, Building, ChevronDown, Star, TrendingUp, Maximize2, Home } from "lucide-react";
 import { Property } from "../types";
 import { Map, MapMarker, MarkerContent, MarkerLabel } from "./ui/mapcn-marker-label";
@@ -21,6 +22,24 @@ interface AreaDetails {
 
 export default function ExploreAndCompare({ properties, theme }: ExploreAndCompareProps) {
   const isDark = theme === "dark";
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
   const [selectedArea, setSelectedArea] = useState<string>("Downtown Dubai");
 
   const areas: { [key: string]: AreaDetails } = {
@@ -111,10 +130,10 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className={`font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-wide ${isDark ? "text-white" : "text-[#1c1917]"}`}>
-              Explore & Compare
+              {t("explore.title", lang)}
             </h2>
             <p className={`text-sm max-w-lg mx-auto leading-relaxed ${isDark ? "text-gray-400" : "text-stone-500"}`}>
-              Discover Dubai's prime neighborhoods and compare investment potential side by side.
+              {t("explore.desc", lang)}
             </p>
           </div>
         </ScrollReveal>
@@ -128,10 +147,10 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
               <div className="flex items-center justify-between mb-5">
                 <h3 className={`font-serif text-xl font-bold flex items-center gap-2 ${isDark ? "text-white" : "text-[#1c1917]"}`}>
                   <MapPin className="w-5 h-5 text-[#d4af37]" />
-                  Dubai Map
+                  {t("explore.dubaiMap", lang)}
                 </h3>
                 <button className={`text-xs transition-colors flex items-center gap-1 hover:text-[#d4af37] ${isDark ? "text-gray-400" : "text-stone-500"}`}>
-                  View All <ArrowRight className="w-3 h-3" />
+                  {t("explore.viewAll", lang)} <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
 
@@ -184,8 +203,8 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
                     </div>
                     <div className="text-left min-w-0">
                       <h4 className="font-serif text-sm font-bold text-[#f3e5ab] truncate">{activeAreaDetails.name}</h4>
-                      <p className={`text-[10px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{activeAreaDetails.count} properties</p>
-                      <p className="text-[11px] font-semibold text-[#d4af37]">From {activeAreaDetails.minPrice}</p>
+                      <p className={`text-[10px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>{activeAreaDetails.count} {t("explore.properties", lang)}</p>
+                      <p className="text-[11px] font-semibold text-[#d4af37]">{t("explore.from", lang)} {activeAreaDetails.minPrice}</p>
                     </div>
                   </div>
                 </div>
@@ -221,7 +240,7 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
               <div className="flex items-center justify-between mb-5">
                 <h3 className={`font-serif text-xl font-bold flex items-center gap-2 ${isDark ? "text-white" : "text-[#1c1917]"}`}>
                   <ArrowLeftRight className="w-5 h-5 text-[#d4af37]" />
-                  Compare Properties
+                  {t("explore.compareTitle", lang)}
                 </h3>
               </div>
 
@@ -230,7 +249,7 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
                 {/* Property Selectors */}
                 <div className="grid grid-cols-[1fr_auto_1fr] gap-3 items-end">
                   <div className="flex flex-col gap-1.5 text-left">
-                    <label className={`text-[10px] font-medium uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Property A</label>
+                    <label className={`text-[10px] font-medium uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.propertyA", lang)}</label>
                     <div className="relative">
                       <select
                         value={compareId1}
@@ -246,11 +265,11 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
                   </div>
 
                   <div className="w-9 h-9 rounded-full bg-[#d4af37] text-black text-xs font-bold flex items-center justify-center mb-0.5 shadow-lg shadow-[#d4af37]/20">
-                    VS
+                    {t("explore.vs", lang)}
                   </div>
 
                   <div className="flex flex-col gap-1.5 text-left">
-                    <label className={`text-[10px] font-medium uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Property B</label>
+                    <label className={`text-[10px] font-medium uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.propertyB", lang)}</label>
                     <div className="relative">
                       <select
                         value={compareId2}
@@ -281,23 +300,23 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
 
                     <div className="space-y-2.5 flex-1">
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Price</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.price", lang)}</span>
                         <span className="font-mono text-sm font-bold text-[#f3e5ab]">{formatPrice(prop1.price)}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Yield</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.yield", lang)}</span>
                         <span className="font-mono text-sm font-bold text-emerald-400">{prop1.rentalYield}%</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Size</span>
-                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.size.toLocaleString()} sqft</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.size", lang)}</span>
+                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.size.toLocaleString()} {t("explore.sqft", lang)}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Config</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.config", lang)}</span>
                         <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop1.beds} Bed / {prop1.baths} Bath</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Status</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.status", lang)}</span>
                         <span className="text-xs text-[#d4af37] font-medium">{prop1.completion}</span>
                       </div>
                     </div>
@@ -316,23 +335,23 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
 
                     <div className="space-y-2.5 flex-1">
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Price</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.price", lang)}</span>
                         <span className="font-mono text-sm font-bold text-[#f3e5ab]">{formatPrice(prop2.price)}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Yield</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.yield", lang)}</span>
                         <span className="font-mono text-sm font-bold text-emerald-400">{prop2.rentalYield}%</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Size</span>
-                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.size.toLocaleString()} sqft</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.size", lang)}</span>
+                        <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.size.toLocaleString()} {t("explore.sqft", lang)}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Config</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.config", lang)}</span>
                         <span className={`font-mono text-xs ${isDark ? "text-gray-300" : "text-stone-600"}`}>{prop2.beds} Bed / {prop2.baths} Bath</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>Status</span>
+                        <span className={`text-[10px] uppercase tracking-wider ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("explore.status", lang)}</span>
                         <span className="text-xs text-[#d4af37] font-medium">{prop2.completion}</span>
                       </div>
                     </div>
@@ -344,8 +363,8 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
                   <TrendingUp className="w-4 h-4 text-[#d4af37] flex-shrink-0" />
                   <p className={`text-[11px] ${isDark ? "text-gray-400" : "text-stone-500"}`}>
                     <span className={`${isDark ? "text-white" : "text-[#1c1917]"} font-medium`}>{bestYield.name}</span> offers{" "}
-                    <span className="text-[#d4af37] font-semibold">{yieldDiff}% higher yield</span>
-                    {" "}than {bestYield.id === prop1.id ? prop2.name : prop1.name}
+                    <span className="text-[#d4af37] font-semibold">{yieldDiff}% {t("explore.higherYield", lang)}</span>
+                    {" "}{t("explore.than", lang)} {bestYield.id === prop1.id ? prop2.name : prop1.name}
                   </p>
                 </div>
               </div>

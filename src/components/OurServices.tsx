@@ -1,42 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "motion/react";
 import { Building2, Building, Home, ArrowRight } from "lucide-react";
 import { GradientBackground } from "./ui/gradient-background-4";
 import { ScrollReveal } from "./ui/scroll-reveal";
+import { t } from "../utils/translations";
 
 interface OurServicesProps {
   theme: "light" | "dark";
   onNavigate?: (page: "projects" | "ready" | "rentals") => void;
 }
 
-const services = [
-  {
-    icon: Building2,
-    title: "Off Plan Projects",
-    description:
-      "Discover premium off-plan developments from Dubai's leading developers with expert investment guidance and flexible payment plans.",
-    button: "Explore Projects",
-    featured: false,
-    navigateTo: "projects" as const,
-  },
-  {
-    icon: Building,
-    title: "Secondary Property",
-    description:
-      "Buy and invest in ready properties across Dubai with verified listings, transparent pricing, and professional advisory support.",
-    button: "View Properties",
-    featured: true,
-    navigateTo: "ready" as const,
-  },
-  {
-    icon: Home,
-    title: "Rental Properties",
-    description:
-      "Find luxury apartments, villas, and commercial spaces that perfectly match your lifestyle and investment requirements.",
-    button: "Find Rentals",
-    featured: false,
-    navigateTo: "rentals" as const,
-  },
+const serviceKeys = [
+  { key: "offPlan", icon: Building2, featured: false, navigateTo: "projects" as const },
+  { key: "secondary", icon: Building, featured: true, navigateTo: "ready" as const },
+  { key: "rentals", icon: Home, featured: false, navigateTo: "rentals" as const },
 ];
 
 function RippleButton({
@@ -92,6 +69,24 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
 
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
   return (
     <>
       <style>{`
@@ -110,7 +105,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
         className={`relative z-10 w-full overflow-hidden transition-colors duration-500 ${
           theme === "dark" ? "bg-[#07080a]" : "bg-[#FAFAFA]"
         }`}
-        aria-label="Our Services"
+        aria-label={t("services.label", lang)}
       >
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -196,7 +191,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                 theme === "dark" ? "text-[#d4af37]" : "text-[#071B63]"
               }`}
             >
-              Our Services
+              {t("services.label", lang)}
             </motion.p>
 
             <motion.h2
@@ -207,7 +202,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                 theme === "dark" ? "text-white" : "text-[#071B63]"
               }`}
             >
-              What We Do?
+              {t("services.title", lang)}
             </motion.h2>
 
             <motion.p
@@ -218,18 +213,20 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                 theme === "dark" ? "text-gray-400" : "text-stone-500"
               }`}
             >
-              Providing comprehensive real estate solutions tailored for
-              investors, homeowners, and tenants across the UAE.
+              {t("services.desc", lang)}
             </motion.p>
           </div>
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {services.map((service, index) => {
+            {serviceKeys.map((service, index) => {
               const Icon = service.icon;
+              const title = t(`services.${service.key}`, lang);
+              const desc = t(`services.${service.key}Desc`, lang);
+              const btn = t(`services.${service.key}Btn`, lang);
               return (
                 <motion.article
-                  key={service.title}
+                  key={service.key}
                   initial={{ opacity: 0, y: 40 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{
@@ -239,7 +236,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                   }}
                   tabIndex={0}
                   role="article"
-                  aria-label={service.title}
+                  aria-label={title}
                   className={`group relative rounded-[24px] p-10 flex flex-col transition-all duration-[400ms] ease-out outline-none focus-visible:ring-2 focus-visible:ring-[#d4af37] focus-visible:ring-offset-2 ${
                     service.featured
                       ? theme === "dark"
@@ -254,7 +251,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                   {service.featured && (
                     <div className="absolute top-6 right-6">
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-[#d4af37]/10 border border-[#d4af37]/30 text-[10px] font-sans font-bold uppercase tracking-wider text-[#d4af37]">
-                        Popular
+                        {t("services.popular", lang)}
                       </span>
                     </div>
                   )}
@@ -306,7 +303,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                         : "text-[#071B63] group-hover:text-[#d4af37]"
                     }`}
                   >
-                    {service.title}
+                    {title}
                   </h3>
 
                   {/* Description */}
@@ -317,7 +314,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                         : "text-stone-500 group-hover:text-stone-600"
                     }`}
                   >
-                    {service.description}
+                    {desc}
                   </p>
 
                   {/* Button */}
@@ -333,7 +330,7 @@ export default function OurServices({ theme, onNavigate }: OurServicesProps) {
                         : "bg-transparent text-[#071B63] border border-stone-200 hover:bg-[#071B63] hover:text-white hover:border-[#071B63]"
                     }`}
                   >
-                    {service.button}
+                    {btn}
                     <ArrowRight className="w-4 h-4 transition-transform duration-[400ms] ease-out group-hover:translate-x-1" />
                   </RippleButton>
 

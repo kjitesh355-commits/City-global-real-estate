@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Sparkles, Send, X, Bot, User, RotateCcw, Copy, Check, MessageCircle } from "lucide-react";
 import { ChatMessage } from "../types";
+import { t } from "../utils/translations";
 
 interface AIConciergeProps {
   theme: "light" | "dark";
@@ -8,26 +9,43 @@ interface AIConciergeProps {
 
 export default function AIConcierge({ theme }: AIConciergeProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
-      content: "Welcome to City Global Real Estate. I am your elite AI Real Estate Consultant. Ask me anything about Dubai property yields, Golden Visa regulations, premium neighborhoods, or investment ROI models."
+      content: t("ai.welcome", lang)
     }
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const promptChips = [
-    { icon: "💎", text: "Best investment under AED 5M?" },
-    { icon: "🏙️", text: "Compare Downtown vs Dubai Marina" },
-    { icon: "🏗️", text: "Show me off plan projects" },
-    { icon: "📅", text: "Book a property viewing" },
-    { icon: "📊", text: "ROI analysis for Palm Jumeirah" },
-    { icon: "🛂", text: "Golden Visa requirements" }
+    { icon: "💎", key: "ai_chip1", text: t("ai.chip1", lang) },
+    { icon: "🏙️", key: "ai_chip2", text: t("ai.chip2", lang) },
+    { icon: "🏗️", key: "ai_chip3", text: t("ai.chip3", lang) },
+    { icon: "📅", key: "ai_chip4", text: t("ai.chip4", lang) },
+    { icon: "📊", key: "ai_chip5", text: t("ai.chip5", lang) },
+    { icon: "🛂", key: "ai_chip6", text: t("ai.chip6", lang) }
   ];
 
   useEffect(() => {
@@ -60,7 +78,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to consult AI. Please try again.");
+        throw new Error(t("ai.errorConnection", lang));
       }
 
       const data = await response.json();
@@ -69,23 +87,23 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
       console.error(err);
       setMessages(prev => [
         ...prev,
-        { role: "assistant", content: "I apologize, but I'm unable to connect to our AI service at the moment. Please try again in a few moments, or contact our team directly for assistance." }
+        { role: "assistant", content: t("ai.errorGeneral", lang) }
       ]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleChipClick = (chipText: string) => {
-    const chipMap: Record<string, string> = {
-      "Best investment under AED 5M?": "What are the absolute best investment properties under AED 5 Million in Dubai right now in terms of capital appreciation and high rental yields?",
-      "Compare Downtown vs Dubai Marina": "Can you compare Downtown Dubai and Dubai Marina for a real estate investor? Please contrast current average rental yields, capital appreciation trends, and occupant demographics.",
-      "Show me off plan projects": "Which off-plan projects in Dubai are currently attracting the most smart institutional investment, and what are their estimated completion dates?",
-      "Book a property viewing": "I would like to schedule a private viewing for one of your luxury beachfront properties. What is the process and what documents are required for non-resident investors?",
-      "ROI analysis for Palm Jumeirah": "Provide a detailed ROI analysis for investing in Palm Jumeirah properties. Include rental yields, capital appreciation projections, and service charge breakdown.",
-      "Golden Visa requirements": "What are the current Golden Visa requirements for real estate investors in Dubai? What is the minimum property value and what benefits does it include?"
+  const handleChipClick = (chipKey: string) => {
+    const chipPrompts: Record<string, string> = {
+      ai_chip1: "What are the absolute best investment properties under AED 5 Million in Dubai right now in terms of capital appreciation and high rental yields?",
+      ai_chip2: "Can you compare Downtown Dubai and Dubai Marina for a real estate investor? Please contrast current average rental yields, capital appreciation trends, and occupant demographics.",
+      ai_chip3: "Which off-plan projects in Dubai are currently attracting the most smart institutional investment, and what are their estimated completion dates?",
+      ai_chip4: "I would like to schedule a private viewing for one of your luxury beachfront properties. What is the process and what documents are required for non-resident investors?",
+      ai_chip5: "Provide a detailed ROI analysis for investing in Palm Jumeirah properties. Include rental yields, capital appreciation projections, and service charge breakdown.",
+      ai_chip6: "What are the current Golden Visa requirements for real estate investors in Dubai? What is the minimum property value and what benefits does it include?"
     };
-    handleSendMessage(chipMap[chipText] || chipText);
+    handleSendMessage(chipPrompts[chipKey] || chipKey);
   };
 
   const handleCopyMessage = (content: string, index: number) => {
@@ -98,7 +116,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
     setMessages([
       {
         role: "assistant",
-        content: "Welcome to City Global Real Estate. I am your elite AI Real Estate Consultant. Ask me anything about Dubai property yields, Golden Visa regulations, premium neighborhoods, or investment ROI models."
+        content: t("ai.welcome", lang)
       }
     ]);
   };
@@ -115,7 +133,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
             ? "bg-gradient-to-br from-[#d4af37] via-[#f3e5ab] to-[#aa7c11] shadow-[0_4px_24px_rgba(212,175,55,0.4)] hover:shadow-[0_4px_32px_rgba(212,175,55,0.6)]"
             : "bg-gradient-to-br from-[#aa7c11] via-[#d4af37] to-[#aa7c11] shadow-[0_4px_24px_rgba(170,124,17,0.35)] hover:shadow-[0_4px_32px_rgba(170,124,17,0.5)]"
         }`}
-        aria-label="Open AI Concierge"
+        aria-label={t("ai.header", lang)}
       >
         {isOpen ? (
           <X className="w-6 h-6 text-black" />
@@ -161,10 +179,10 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
               <div className="text-left">
                 <h4 className={`font-serif text-sm font-bold leading-none mb-0.5 transition-colors duration-300 ${
                   theme === "dark" ? "text-[#f3e5ab]" : "text-[#6b4f1d]"
-                }`}>Global Elite Consultant</h4>
+                }`}>{t("ai.header", lang)}</h4>
                 <p className={`text-[10px] font-sans flex items-center gap-1.5 ${theme === "dark" ? "text-gray-500" : "text-stone-400"}`}>
                   <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-                  Powered by Gemini AI
+                  {t("ai.poweredBy", lang)}
                 </p>
               </div>
             </div>
@@ -174,7 +192,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
                 className={`p-2 rounded-xl transition-all duration-200 ${
                   theme === "dark" ? "hover:bg-gray-800/60 text-gray-400 hover:text-white" : "hover:bg-stone-100 text-stone-400 hover:text-stone-700"
                 }`}
-                title="Clear chat"
+                title={t("ai.clearChat", lang)}
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
@@ -187,8 +205,8 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
           }`}>
             {promptChips.map((chip) => (
               <button
-                key={chip.text}
-                onClick={() => handleChipClick(chip.text)}
+                key={chip.key}
+                onClick={() => handleChipClick(chip.key)}
                 className={`cursor-pointer text-[10px] font-sans px-2.5 py-1.5 rounded-full whitespace-nowrap transition-all duration-200 flex items-center gap-1 ${
                   theme === "dark"
                     ? "bg-[#1a1d2a]/70 border border-gray-800/40 text-gray-300 hover:bg-[#d4af37]/10 hover:border-[#d4af37]/30 hover:text-[#f3e5ab]"
@@ -241,7 +259,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
                         className={`self-start px-1 py-0.5 rounded transition-all duration-200 ${
                           theme === "dark" ? "text-gray-600 hover:text-gray-400" : "text-stone-300 hover:text-stone-500"
                         }`}
-                        title="Copy"
+                        title={t("ai.copy", lang)}
                       >
                         {copiedIndex === index ? <Check className="w-3 h-3 text-emerald-500" /> : <Copy className="w-3 h-3" />}
                       </button>
@@ -269,7 +287,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
                     <span className={`w-1.5 h-1.5 rounded-full animate-bounce ${theme === "dark" ? "bg-[#d4af37]" : "bg-[#aa7c11]"}`} style={{ animationDelay: '300ms' }} />
                   </div>
                   <span className={`text-[10px] font-sans italic ${theme === "dark" ? "text-gray-500" : "text-stone-400"}`}>
-                    Analyzing market data...
+                    {t("ai.loading", lang)}
                   </span>
                 </div>
               </div>
@@ -289,7 +307,7 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSendMessage(inputValue)}
-                placeholder="Ask about Dubai Real Estate..."
+                placeholder={t("ai.inputPlaceholder", lang)}
                 className={`flex-1 rounded-xl px-3.5 py-2.5 text-xs transition-all duration-300 border font-sans ${
                   theme === "dark"
                     ? "bg-[#0d0f15] border-gray-800/50 text-white placeholder-gray-600 focus:border-[#d4af37]/40"

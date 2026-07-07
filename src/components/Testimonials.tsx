@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { t } from "../utils/translations";
 import { Star, Quote, ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { TestimonialsColumn, Testimonial } from "./ui/testimonials-columns-1";
 import { Sparkles } from "./ui/sparkles";
@@ -14,6 +15,23 @@ interface TestimonialsProps {
 
 export default function Testimonials({ theme }: TestimonialsProps) {
   const [activeDevIndex, setActiveDevIndex] = useState(0);
+  const [lang, setLang] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("app-lang") || "en";
+    }
+    return "en";
+  });
+
+  useEffect(() => {
+    const handleLangChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setLang(customEvent.detail);
+      }
+    };
+    window.addEventListener("lang-change", handleLangChange);
+    return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
 
   const developers = [
     { name: "EMAAR", tagline: "Shaping Dubai's Skyline", logo: "https://companieslogo.com/img/emaar-properties/logo-e9236da7.png" },
@@ -109,17 +127,17 @@ export default function Testimonials({ theme }: TestimonialsProps) {
       <div className="mb-20">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#d4af37] font-bold mb-3">Our Partners</p>
+          <p className="font-sans text-[11px] uppercase tracking-[0.3em] text-[#d4af37] font-bold mb-3">{t("test.partners", lang)}</p>
           <h3 className={`font-serif text-3xl sm:text-4xl font-bold tracking-wide mb-4 transition-colors duration-300 ${
             theme === "dark" ? "text-white" : "text-stone-900"
-          }`}>Our Trusted Developers</h3>
+          }`}>{t("test.trustedDevs", lang)}</h3>
           <div className="flex items-center justify-center gap-3 mb-2">
             <div className={`h-px w-16 ${theme === "dark" ? "bg-gradient-to-r from-transparent to-[#d4af37]/50" : "bg-gradient-to-r from-transparent to-[#aa7c11]/50"}`} />
             <div className="w-2 h-2 rotate-45 bg-[#d4af37]" />
             <div className={`h-px w-16 ${theme === "dark" ? "bg-gradient-to-l from-transparent to-[#d4af37]/50" : "bg-gradient-to-l from-transparent to-[#aa7c11]/50"}`} />
           </div>
           <p className={`font-sans text-xs max-w-md mx-auto ${theme === "dark" ? "text-gray-500" : "text-stone-400"}`}>
-            Partnered with Dubai's most prestigious real estate developers
+            {t("test.partnersDesc", lang)}
           </p>
         </div>
 
@@ -229,10 +247,10 @@ export default function Testimonials({ theme }: TestimonialsProps) {
       <ScrollReveal delay={0.2}>
       <div>
         <div className="text-left mb-10">
-          <p className="font-sans text-[10px] uppercase tracking-widest text-[#d4af37] font-semibold mb-1">Endorsements</p>
+          <p className="font-sans text-[10px] uppercase tracking-widest text-[#d4af37] font-semibold mb-1">{t("test.endorsements", lang)}</p>
           <h3 className={`font-serif text-xl sm:text-2xl font-bold tracking-wide transition-colors duration-300 ${
             theme === "dark" ? "text-white" : "text-stone-900"
-          }`}>What Our Clients Say</h3>
+          }`}>{t("test.title", lang)}</h3>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-stretch">
@@ -246,10 +264,10 @@ export default function Testimonials({ theme }: TestimonialsProps) {
             <div>
               <p className={`font-sans text-[10px] uppercase tracking-wider font-semibold mb-1 transition-colors duration-300 ${
                 theme === "dark" ? "text-gray-400" : "text-stone-500"
-              }`}>Audit Score</p>
+              }`}>{t("test.auditScore", lang)}</p>
               <h4 className={`font-serif text-base font-bold tracking-wide mb-3 transition-colors duration-300 ${
                 theme === "dark" ? "text-white" : "text-stone-900"
-              }`}>Google Reviews</h4>
+              }`}>{t("test.googleReviews", lang)}</h4>
               
               <div className="flex items-baseline gap-2 mt-4 mb-1">
                 <span className={`font-mono text-4xl font-extrabold transition-colors duration-300 ${
@@ -264,7 +282,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
                 ))}
               </div>
 
-              <p className={`font-sans text-[11px] transition-colors duration-300 ${theme === "dark" ? "text-gray-400" : "text-stone-600"}`}>Based on 320+ premium client reviews and RERA audits.</p>
+              <p className={`font-sans text-[11px] transition-colors duration-300 ${theme === "dark" ? "text-gray-400" : "text-stone-600"}`}>{t("test.basedOn", lang)}</p>
             </div>
 
             {/* Overlapping small faces representing reviewers */}
@@ -277,7 +295,7 @@ export default function Testimonials({ theme }: TestimonialsProps) {
               </div>
               <div className="flex items-center gap-1.5 text-[10px] text-emerald-500 font-sans font-semibold uppercase">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Verified Client Reviews</span>
+                <span>{t("test.verifiedReviews", lang)}</span>
               </div>
             </div>
 
