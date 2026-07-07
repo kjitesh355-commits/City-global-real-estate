@@ -601,7 +601,7 @@ export default function App() {
       )}
 
       {/* Floating Action Button - WhatsApp & Social Links */}
-      <div className="fixed bottom-6 right-4 sm:right-12 z-40">
+      <div className="fixed bottom-6 right-4 sm:right-12 z-[60]">
         <FloatingButton
           triggerContent={
             <button className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-br from-[#d4af37] via-[#aa7c11] to-[#d4af37] text-black shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all duration-300 hover:scale-110 cursor-pointer animate-pulse" style={{ animationDuration: '3s' }}>
@@ -674,7 +674,7 @@ export default function App() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-28 left-6 z-40 w-11 h-11 rounded-full bg-gradient-to-br from-[#d4af37] via-[#aa7c11] to-[#d4af37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-110 cursor-pointer flex items-center justify-center animate-in fade-in slide-in-from-bottom-4"
+          className="fixed bottom-28 left-6 z-[60] w-11 h-11 rounded-full bg-gradient-to-br from-[#d4af37] via-[#aa7c11] to-[#d4af37] text-black shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-110 cursor-pointer flex items-center justify-center animate-in fade-in slide-in-from-bottom-4"
           aria-label="Scroll to top"
         >
           <ChevronUp className="w-5 h-5" />
