@@ -230,24 +230,34 @@ export default function PropertyDetailModal({ property, onClose, theme }: Proper
           {/* Floor Plans Preview */}
           {property.floorPlanUrl && (
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-serif text-lg font-bold text-white">Floor Plans</h3>
-                <a
-                  href={property.floorPlanUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-[10px] font-sans font-semibold"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Download PDF
-                </a>
-              </div>
-              <div className={`rounded-lg overflow-hidden border ${theme === "dark" ? "border-white/10" : "border-stone-200"}`}>
-                <iframe
-                  src={property.floorPlanUrl}
-                  className="w-full h-[400px]"
-                  title="Floor Plans"
-                />
+              <h3 className="font-serif text-lg font-bold text-white mb-4">Floor Plans</h3>
+              <div className={`rounded-lg overflow-hidden border p-6 ${theme === "dark" ? "border-white/10 bg-white/5" : "border-stone-200 bg-stone-50"}`}>
+                <div className="flex flex-col items-center text-center">
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${theme === "dark" ? "bg-[#d4af37]/10" : "bg-[#aa7c11]/10"}`}>
+                    <Download className="w-8 h-8 text-[#d4af37]" />
+                  </div>
+                  <p className="font-sans text-sm text-gray-300 mb-2">Floor Plans PDF</p>
+                  <p className="font-sans text-[10px] text-gray-500 mb-4">Click to view or download the floor plans document</p>
+                  <div className="flex gap-3">
+                    <a
+                      href={property.floorPlanUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#d4af37] text-black font-sans text-xs font-bold hover:bg-[#f3e5ab] transition-all"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View PDF
+                    </a>
+                    <a
+                      href={property.floorPlanUrl}
+                      download
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white border border-white/20 font-sans text-xs font-bold hover:bg-white/20 transition-all"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -255,24 +265,34 @@ export default function PropertyDetailModal({ property, onClose, theme }: Proper
           {/* Brochure Preview */}
           {property.brochureUrl && (
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-serif text-lg font-bold text-white">Brochure</h3>
-                <a
-                  href={property.brochureUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-[10px] font-sans font-semibold"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  Download PDF
-                </a>
-              </div>
-              <div className={`rounded-lg overflow-hidden border ${theme === "dark" ? "border-white/10" : "border-stone-200"}`}>
-                <iframe
-                  src={property.brochureUrl}
-                  className="w-full h-[400px]"
-                  title="Brochure"
-                />
+              <h3 className="font-serif text-lg font-bold text-white mb-4">Brochure</h3>
+              <div className={`rounded-lg overflow-hidden border p-6 ${theme === "dark" ? "border-white/10 bg-white/5" : "border-stone-200 bg-stone-50"}`}>
+                <div className="flex flex-col items-center text-center">
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${theme === "dark" ? "bg-[#d4af37]/10" : "bg-[#aa7c11]/10"}`}>
+                    <Download className="w-8 h-8 text-[#d4af37]" />
+                  </div>
+                  <p className="font-sans text-sm text-gray-300 mb-2">Project Brochure</p>
+                  <p className="font-sans text-[10px] text-gray-500 mb-4">Click to view or download the project brochure</p>
+                  <div className="flex gap-3">
+                    <a
+                      href={property.brochureUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#d4af37] text-black font-sans text-xs font-bold hover:bg-[#f3e5ab] transition-all"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View PDF
+                    </a>
+                    <a
+                      href={property.brochureUrl}
+                      download
+                      className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-white border border-white/20 font-sans text-xs font-bold hover:bg-white/20 transition-all"
+                    >
+                      <Download className="w-4 h-4" />
+                      Download
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -280,18 +300,7 @@ export default function PropertyDetailModal({ property, onClose, theme }: Proper
           {/* Map Preview */}
           {property.mapUrl && (
             <div className="mb-8">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-serif text-lg font-bold text-white">Location</h3>
-                <a
-                  href={property.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-[10px] font-sans font-semibold"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Open in Google Maps
-                </a>
-              </div>
+              <h3 className="font-serif text-lg font-bold text-white mb-4">Location</h3>
               <div className={`rounded-lg overflow-hidden border ${theme === "dark" ? "border-white/10" : "border-stone-200"}`}>
                 <iframe
                   src={property.mapUrl.replace("maps?q=", "maps/embed?place=&q=")}
@@ -300,6 +309,15 @@ export default function PropertyDetailModal({ property, onClose, theme }: Proper
                   loading="lazy"
                 />
               </div>
+              <a
+                href={property.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 mt-3 text-[#d4af37] hover:text-[#f3e5ab] text-xs font-sans"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Open in Google Maps
+              </a>
             </div>
           )}
         </div>
