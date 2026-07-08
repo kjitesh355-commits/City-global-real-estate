@@ -48,25 +48,6 @@ const PROPERTIES = [
     }
   },
   {
-    id: "address-residences",
-    name: "Address Residences",
-    area: "Downtown Dubai",
-    price: 8200000,
-    beds: 3,
-    baths: 4,
-    size: 2100,
-    imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-    developer: "EMAAR",
-    rentalYield: 5.8,
-    appreciation: 6.9,
-    capitalGrowth: 7.5,
-    risk: "Very Low Risk",
-    completion: "Q4 2025",
-    description: "Luxury high-rise apartments directly facing the Burj Khalifa and Dubai Fountain, fully furnished and managed by the Address Hotels + Resorts.",
-    coordinates: { x: 34, y: 38 },
-    popular: false
-  },
-  {
     id: "verdana-residence-2",
     name: "Verdana Residence 2",
     area: "Dubai Investments Park",
@@ -83,6 +64,25 @@ const PROPERTIES = [
     completion: "Q4 2026",
     description: "A contemporary apartment in Verdana community, Dubai Investments Park. Modern Italian design with premium finishes, featuring amenities like gym, swimming pool, BBQ areas, and kids' play area.",
     coordinates: { x: 25, y: 60 },
+    popular: false
+  },
+  {
+    id: "address-residences",
+    name: "Address Residences",
+    area: "Downtown Dubai",
+    price: 8200000,
+    beds: 3,
+    baths: 4,
+    size: 2100,
+    imageUrl: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    developer: "EMAAR",
+    rentalYield: 5.8,
+    appreciation: 6.9,
+    capitalGrowth: 7.5,
+    risk: "Very Low Risk",
+    completion: "Q4 2025",
+    description: "Luxury high-rise apartments directly facing the Burj Khalifa and Dubai Fountain, fully furnished and managed by the Address Hotels + Resorts.",
+    coordinates: { x: 34, y: 38 },
     popular: false
   },
   {
