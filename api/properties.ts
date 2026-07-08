@@ -67,6 +67,25 @@ const PROPERTIES = [
     popular: false
   },
   {
+    id: "verdana-residence-2",
+    name: "Verdana Residence 2",
+    area: "Dubai Investments Park",
+    price: 985000,
+    beds: 1,
+    baths: 1,
+    size: 633,
+    imageUrl: "https://files.remapp.ae/rem-offplan-v3/project-covers/1770640558459-4212adfde84e5056.jpg",
+    developer: "Reportage Properties",
+    rentalYield: 6.5,
+    appreciation: 7.2,
+    capitalGrowth: 7.8,
+    risk: "Low Risk",
+    completion: "Q4 2026",
+    description: "A contemporary apartment in Verdana community, Dubai Investments Park. Modern Italian design with premium finishes, featuring amenities like gym, swimming pool, BBQ areas, and kids' play area.",
+    coordinates: { x: 25, y: 60 },
+    popular: false
+  },
+  {
     id: "one-zaabeel",
     name: "One Za'abeel Penthouse",
     area: "Downtown Dubai",
@@ -159,25 +178,6 @@ const PROPERTIES = [
     completion: "Q3 2026",
     description: "Set in the newly designed ultra-smart waterfront city. Spectacular views of the wildlife sanctuary, Dubai Creek tower, and Downtown skyline.",
     coordinates: { x: 41, y: 58 },
-    popular: false
-  },
-  {
-    id: "verdana-residence-2",
-    name: "Verdana Residence 2",
-    area: "Dubai Investments Park",
-    price: 985000,
-    beds: 1,
-    baths: 1,
-    size: 633,
-    imageUrl: "https://files.remapp.ae/rem-offplan-v3/project-covers/1770640558459-4212adfde84e5056.jpg",
-    developer: "Reportage Properties",
-    rentalYield: 6.5,
-    appreciation: 7.2,
-    capitalGrowth: 7.8,
-    risk: "Low Risk",
-    completion: "Q4 2026",
-    description: "A contemporary apartment in Verdana community, Dubai Investments Park. Modern Italian design with premium finishes, featuring amenities like gym, swimming pool, BBQ areas, and kids' play area.",
-    coordinates: { x: 25, y: 60 },
     popular: false
   }
 ];
