@@ -227,42 +227,81 @@ export default function PropertyDetailModal({ property, onClose, theme }: Proper
             </div>
           )}
 
-          {/* Download Links */}
-          <div className="flex flex-wrap gap-3">
-            {property.floorPlanUrl && (
-              <a
-                href={property.floorPlanUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-xs font-sans font-semibold"
-              >
-                <Download className="w-4 h-4" />
-                Floor Plans
-              </a>
-            )}
-            {property.brochureUrl && (
-              <a
-                href={property.brochureUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-xs font-sans font-semibold"
-              >
-                <Download className="w-4 h-4" />
-                Brochure
-              </a>
-            )}
-            {property.mapUrl && (
-              <a
-                href={property.mapUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-xs font-sans font-semibold"
-              >
-                <ExternalLink className="w-4 h-4" />
-                View on Map
-              </a>
-            )}
-          </div>
+          {/* Floor Plans Preview */}
+          {property.floorPlanUrl && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-serif text-lg font-bold text-white">Floor Plans</h3>
+                <a
+                  href={property.floorPlanUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-[10px] font-sans font-semibold"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download PDF
+                </a>
+              </div>
+              <div className={`rounded-lg overflow-hidden border ${theme === "dark" ? "border-white/10" : "border-stone-200"}`}>
+                <iframe
+                  src={property.floorPlanUrl}
+                  className="w-full h-[400px]"
+                  title="Floor Plans"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Brochure Preview */}
+          {property.brochureUrl && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-serif text-lg font-bold text-white">Brochure</h3>
+                <a
+                  href={property.brochureUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-[10px] font-sans font-semibold"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download PDF
+                </a>
+              </div>
+              <div className={`rounded-lg overflow-hidden border ${theme === "dark" ? "border-white/10" : "border-stone-200"}`}>
+                <iframe
+                  src={property.brochureUrl}
+                  className="w-full h-[400px]"
+                  title="Brochure"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Map Preview */}
+          {property.mapUrl && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-serif text-lg font-bold text-white">Location</h3>
+                <a
+                  href={property.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/30 hover:bg-[#d4af37] hover:text-black transition-all text-[10px] font-sans font-semibold"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  Open in Google Maps
+                </a>
+              </div>
+              <div className={`rounded-lg overflow-hidden border ${theme === "dark" ? "border-white/10" : "border-stone-200"}`}>
+                <iframe
+                  src={property.mapUrl.replace("maps?q=", "maps/embed?place=&q=")}
+                  className="w-full h-[300px]"
+                  title="Location Map"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
