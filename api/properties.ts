@@ -64,7 +64,14 @@ const PROPERTIES = [
     completion: "Q4 2026",
     description: "A contemporary apartment in Verdana community, Dubai Investments Park. Modern Italian design with premium finishes, featuring amenities like gym, swimming pool, BBQ areas, and kids' play area.",
     coordinates: { x: 25, y: 60 },
-    popular: false
+    popular: false,
+    views: {
+      exterior: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989423971-075d642722b1d2df.jpg",
+      living: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989432972-9a7eaf7828d3f560.jpg",
+      kitchen: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989428851-719805c3f16a4b51.jpg",
+      bedroom: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989443233-081eea692ef446df.jpg",
+      tour3d: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989449694-1b07ebecf0db0d1e.jpg"
+    }
   },
   {
     id: "address-residences",
