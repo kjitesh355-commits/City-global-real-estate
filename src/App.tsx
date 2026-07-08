@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import StatsGrid from "./components/StatsGrid";
 import FeaturedProperties from "./components/FeaturedProperties";
+import PropertyDetailModal from "./components/PropertyDetailModal";
 import ExploreAndCompare from "./components/ExploreAndCompare";
 import InvestmentScore from "./components/InvestmentScore";
 import Calculators from "./components/Calculators";
@@ -68,6 +69,7 @@ export default function App() {
   const [consultationOpen, setConsultationOpen] = useState(false);
   const [successBooking, setSuccessBooking] = useState(false);
   const [selected3DProperty, setSelected3DProperty] = useState<Property | null>(null);
+  const [selectedDetailProperty, setSelectedDetailProperty] = useState<Property | null>(null);
 
   // Form Fields
   const [clientName, setClientName] = useState("");
@@ -317,6 +319,7 @@ export default function App() {
           aiError={aiError}
           onClearAISearch={handleClearAISearch}
           onOpen3DModal={(property) => setSelected3DProperty(property)}
+          onPropertyClick={(property) => setSelectedDetailProperty(property)}
           theme={theme}
         />
 
@@ -598,6 +601,15 @@ export default function App() {
 
           </div>
         </div>
+      )}
+
+      {/* --- PROPERTY DETAIL MODAL --- */}
+      {selectedDetailProperty && (
+        <PropertyDetailModal
+          property={selectedDetailProperty}
+          onClose={() => setSelectedDetailProperty(null)}
+          theme={theme}
+        />
       )}
 
       {/* Floating Action Button - WhatsApp & Social Links */}

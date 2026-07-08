@@ -25,6 +25,20 @@ export interface Property {
   };
   matchPercentage?: number;
   aiExplanation?: string;
+  amenities?: string[];
+  nearbyLocations?: { name: string; distance: string }[];
+  allImages?: string[];
+  mapUrl?: string;
+  floorPlanUrl?: string;
+  brochureUrl?: string;
+  developerInfo?: {
+    name: string;
+    description: string;
+    phone: string;
+    email: string;
+    website: string;
+    address: string;
+  };
 }
 
 export interface ChatMessage {

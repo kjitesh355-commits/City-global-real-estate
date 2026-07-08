@@ -17,6 +17,7 @@ interface FeaturedPropertiesProps {
   aiError: string | null;
   onClearAISearch: () => void;
   onOpen3DModal: (property: Property) => void;
+  onPropertyClick: (property: Property) => void;
   theme: "light" | "dark";
 }
 
@@ -27,6 +28,7 @@ export default function FeaturedProperties({
   aiError,
   onClearAISearch,
   onOpen3DModal,
+  onPropertyClick,
   theme
 }: FeaturedPropertiesProps) {
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -126,9 +128,12 @@ export default function FeaturedProperties({
     }
 
     return (
-      <div className={`relative w-full h-full rounded-xl overflow-hidden flex flex-col sm:flex-row shadow-2xl group text-left transition-all duration-300 ${
-        theme === "dark" ? "bg-[#0e1015] border border-white/10" : "bg-white border-2 border-stone-200/90 shadow-md"
-      }`}>
+      <div 
+        className={`relative w-full h-full rounded-xl overflow-hidden flex flex-col sm:flex-row shadow-2xl group text-left transition-all duration-300 cursor-pointer ${
+          theme === "dark" ? "bg-[#0e1015] border border-white/10" : "bg-white border-2 border-stone-200/90 shadow-md"
+        }`}
+        onClick={() => onPropertyClick(p)}
+      >
         {/* Left/Top: Image Area */}
         <div className="relative w-full sm:w-1/2 h-44 sm:h-full overflow-hidden flex-shrink-0">
           <img
@@ -380,11 +385,12 @@ export default function FeaturedProperties({
               return (
                 <div
                   key={property.id}
-                  className={`relative rounded-lg overflow-hidden flex flex-col h-full shadow-xl transition-all duration-500 hover:border-[#d4af37]/40 border ${
+                  className={`relative rounded-lg overflow-hidden flex flex-col h-full shadow-xl transition-all duration-500 hover:border-[#d4af37]/40 border cursor-pointer ${
                     theme === "dark"
                       ? `bg-[#0e1015]/90 border border-white/10 ${isPopular ? "gold-border-glow bg-[#121110]" : ""}`
                       : `bg-white border-stone-200/95 ${isPopular ? "gold-border-glow bg-stone-50" : ""}`
                   }`}
+                  onClick={() => onPropertyClick(property)}
                 >
                   
                   {/* Image & Badges Container */}

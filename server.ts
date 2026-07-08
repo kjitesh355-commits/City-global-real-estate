@@ -68,7 +68,7 @@ const PROPERTIES = [
     capitalGrowth: 7.8,
     risk: "Low Risk",
     completion: "Q4 2026",
-    description: "A contemporary apartment in Verdana community, Dubai Investments Park. Modern Italian design with premium finishes, featuring amenities like gym, swimming pool, BBQ areas, and kids' play area.",
+    description: "Verdana Residence 2 is another architectural gem added to the luxury collection of Verdana community. It is a beautiful blend of modernity and natural serene views, offering a contemporary lifestyle for those who seek privacy, functionality, and a resort-like living experience within the bustling life of Dubai. The building features high-quality finishing, modern facades, and world-class facilities that bring all the city life to your doorstep.",
     coordinates: { x: 25, y: 60 },
     popular: false,
     views: {
@@ -77,6 +77,39 @@ const PROPERTIES = [
       kitchen: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989428851-719805c3f16a4b51.jpg",
       bedroom: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989443233-081eea692ef446df.jpg",
       tour3d: "https://files.remapp.ae/rem-offplan-v3/project-images/1770989449694-1b07ebecf0db0d1e.jpg"
+    },
+    amenities: ["Gymnasium", "BBQ Areas", "Large Swimming Pool", "Kids' Swimming Pools", "Kids' Play Area", "Shaded Seating Areas"],
+    nearbyLocations: [
+      { name: "Ewan Child Park", distance: "4.2 KM" },
+      { name: "Souq Extra", distance: "4.5 KM" },
+      { name: "Marina Beach", distance: "25.3 KM" },
+      { name: "Al Maktoum International Airport", distance: "20.8 KM" },
+      { name: "Downtown Dubai", distance: "34.4 KM" },
+      { name: "The International School of Choueifat", distance: "3.8 KM" }
+    ],
+    allImages: [
+      "https://files.remapp.ae/rem-offplan-v3/project-covers/1770640558459-4212adfde84e5056.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989432972-9a7eaf7828d3f560.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989443233-081eea692ef446df.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989449694-1b07ebecf0db0d1e.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989452980-06477585371399e2.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989436496-068c658a0a046230.png",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989423971-075d642722b1d2df.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989440091-125b915f91a34f27.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989446888-ebcd46dc31f56781.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989456262-1845e252052cf9a9.jpg",
+      "https://files.remapp.ae/rem-offplan-v3/project-images/1770989428851-719805c3f16a4b51.jpg"
+    ],
+    mapUrl: "https://www.google.com/maps?q=24.989703896691616,55.17886168244739&z=15",
+    floorPlanUrl: "https://files.remapp.ae/rem-offplan-v3/project-files/1770989462400-0697c6d6e89df7ea.pdf",
+    brochureUrl: "https://files.remapp.ae/rem-offplan-v3/project-files/1770989471733-19e03b7d60b29196.pdf",
+    developerInfo: {
+      name: "Reportage Properties",
+      description: "Reportage Properties is a prestigious developer with a confident international status based in the United Arab Emirates. The company is a key participant in the real estate market and we present magnificent projects combining modern design, high quality and innovative solutions. Reportage Properties demonstrates more than 15 years of experience in the field of real estate development.",
+      phone: "+971562341318",
+      email: "info@reportageuae.com",
+      website: "https://reportageuae.com/",
+      address: "3rd Floor, Anantara Tower, Business Bay, Dubai"
     }
   },
   {
