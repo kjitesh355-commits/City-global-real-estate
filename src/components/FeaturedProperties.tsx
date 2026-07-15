@@ -3,6 +3,7 @@ import { Bed, Bath, Maximize2, Heart, Star, Sparkles, RefreshCw, Eye, LayoutGrid
 import { Property } from "../types";
 import { CardStack, CardStackItem } from "./ui/card-stack";
 import { t } from "../utils/translations";
+import { formatPrice as formatPriceCurrency, CurrencyCode } from "../utils/currency";
 import { GradientBackground } from "./ui/gradient-background-4";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "./ui/scroll-reveal";
 
@@ -51,6 +52,25 @@ export default function FeaturedProperties({
     window.addEventListener("lang-change", handleLangChange);
     return () => window.removeEventListener("lang-change", handleLangChange);
   }, []);
+
+  // Currency State
+  const [currency, setCurrency] = useState<CurrencyCode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("app-currency") as CurrencyCode) || "AED";
+    }
+    return "AED";
+  });
+
+  useEffect(() => {
+    const handleCurrencyChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setCurrency(customEvent.detail);
+      }
+    };
+    window.addEventListener("currency-change", handleCurrencyChange);
+    return () => window.removeEventListener("currency-change", handleCurrencyChange);
+  }, []);
   // Store selected sub-image category for each property
   const [viewCategories, setViewCategories] = useState<{ [propId: string]: string }>({});
   
@@ -91,10 +111,7 @@ export default function FeaturedProperties({
   };
 
   const formatPrice = (price: number) => {
-    if (price >= 1000000) {
-      return `AED ${(price / 1000000).toFixed(1)}M`;
-    }
-    return `AED ${price.toLocaleString()}`;
+    return formatPriceCurrency(price, currency);
   };
 
   // Determine what list to display

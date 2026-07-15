@@ -35,7 +35,7 @@ const NavbarHero: React.FC<NavbarHeroProps> = ({
   }, []);
 
   const handleEmailSubmit = () => {
-    console.log("Email submitted:", email);
+    // Email submission logic here
   };
 
   const toggleDropdown = (dropdownName: string) => {

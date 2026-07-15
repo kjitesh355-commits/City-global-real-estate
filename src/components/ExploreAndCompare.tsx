@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { t } from "../utils/translations";
+import { formatPrice as formatPriceCurrency, CurrencyCode } from "../utils/currency";
 import { MapPin, ArrowRight, ArrowLeftRight, Building, ChevronDown, Star, TrendingUp, Maximize2, Home } from "lucide-react";
 import { Property } from "../types";
 import { Map, MapMarker, MarkerContent, MarkerLabel } from "./ui/mapcn-marker-label";
@@ -38,6 +39,25 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
     };
     window.addEventListener("lang-change", handleLangChange);
     return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
+  // Currency State
+  const [currency, setCurrency] = useState<CurrencyCode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("app-currency") as CurrencyCode) || "AED";
+    }
+    return "AED";
+  });
+
+  useEffect(() => {
+    const handleCurrencyChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setCurrency(customEvent.detail);
+      }
+    };
+    window.addEventListener("currency-change", handleCurrencyChange);
+    return () => window.removeEventListener("currency-change", handleCurrencyChange);
   }, []);
 
   const [selectedArea, setSelectedArea] = useState<string>("Downtown Dubai");
@@ -114,8 +134,7 @@ export default function ExploreAndCompare({ properties, theme }: ExploreAndCompa
   const prop2 = properties.find((p) => p.id === compareId2) || properties[1] || properties[0] || fallbackProperty;
 
   const formatPrice = (price: number) => {
-    if (price >= 1000000) return `AED ${(price / 1000000).toFixed(1)}M`;
-    return `AED ${(price / 1000).toFixed(0)}K`;
+    return formatPriceCurrency(price, currency);
   };
 
   const bestYield = prop1.rentalYield > prop2.rentalYield ? prop1 : prop2;

@@ -5,6 +5,7 @@ import { ScrollReveal, SlideIn } from "./ui/scroll-reveal";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { t } from "../utils/translations";
+import { formatPrice as formatPriceCurrency, CurrencyCode } from "../utils/currency";
 
 interface CalculatorsProps {
   theme: "light" | "dark";
@@ -54,6 +55,25 @@ export default function Calculators({ theme }: CalculatorsProps) {
     };
     window.addEventListener("lang-change", handleLangChange);
     return () => window.removeEventListener("lang-change", handleLangChange);
+  }, []);
+
+  // Currency State
+  const [currency, setCurrency] = useState<CurrencyCode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("app-currency") as CurrencyCode) || "AED";
+    }
+    return "AED";
+  });
+
+  useEffect(() => {
+    const handleCurrencyChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setCurrency(customEvent.detail);
+      }
+    };
+    window.addEventListener("currency-change", handleCurrencyChange);
+    return () => window.removeEventListener("currency-change", handleCurrencyChange);
   }, []);
 
   // --- Mortgage Calculator States ---
@@ -135,8 +155,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
   const offsetInterest = dCirc - ((dpPct + princPct) / 100) * dCirc;
 
   const formatPrice = (val: number) => {
-    if (val >= 1000000) return `AED ${(val / 1000000).toFixed(2)}M`;
-    return `AED ${(val / 1000).toFixed(0)}K`;
+    return formatPriceCurrency(val, currency);
   };
 
   return (
@@ -175,7 +194,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                 <div className={`mb-8 p-5 rounded-2xl ${isDark ? "bg-white/[0.03] border border-white/5" : "bg-stone-50 border border-stone-200/60"}`}>
                   <p className={`text-xs mb-1 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{t("calc.monthlyEmi", lang)}</p>
                   <span className="font-num text-3xl md:text-4xl font-extrabold text-[#E7C96A]">
-                    AED {monthlyEmi.toLocaleString()}
+                    {formatPrice(monthlyEmi)}
                   </span>
                 </div>
 
@@ -323,7 +342,7 @@ export default function Calculators({ theme }: CalculatorsProps) {
                       {netRoi}%
                     </span>
                     <span className={`text-sm ${isDark ? "text-gray-500" : "text-stone-400"}`}>
-                      = AED {netAnnualReturn.toLocaleString()} / year
+                      = {formatPrice(netAnnualReturn)} / year
                     </span>
                   </div>
                   <p className={`text-xs mt-2 ${isDark ? "text-gray-500" : "text-stone-400"}`}>{roiRating}</p>

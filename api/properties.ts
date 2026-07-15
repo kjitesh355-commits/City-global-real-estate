@@ -1,6 +1,16 @@
 import express from "express";
 import { GoogleGenAI, Type } from "@google/genai";
 
+// Input sanitization helper
+function sanitizeInput(input: string): string {
+  // Remove potentially dangerous characters and limit length
+  return input
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocol
+    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .substring(0, 1000); // Limit length to prevent abuse
+}
+
 const PROPERTIES = [
   {
     id: "serenia-living",
@@ -319,9 +329,12 @@ export default async function handler(req, res) {
 
       const client = getGeminiClient();
       
+      // Sanitize user input
+      const sanitizedDescription = sanitizeInput(description);
+      
       const response = await client.models.generateContent({
         model: "gemini-3.5-flash",
-        contents: `You are an elite real estate expert in Dubai. Filter our property database based on the user's dream house description: "${description}".
+        contents: `You are an elite real estate expert in Dubai. Filter our property database based on the user's dream house description: "${sanitizedDescription}".
 
 Our properties database:
 ${JSON.stringify(PROPERTIES, null, 2)}
@@ -384,7 +397,7 @@ Return ONLY a raw JSON array matching this schema:
       res.status(200).json(enrichedMatches);
     } catch (error) {
       console.error("AI Property Finder Error:", error);
-      res.status(500).json({ error: error.message || "An error occurred with the AI assistant" });
+      res.status(500).json({ error: "An error occurred with the AI assistant" });
     }
   }
 }

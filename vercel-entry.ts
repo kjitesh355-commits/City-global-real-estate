@@ -7,7 +7,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-dotenv.config();
+// Input sanitization helper
+function sanitizeInput(input: string): string {
+  // Remove potentially dangerous characters and limit length
+  return input
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocol
+    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .substring(0, 1000); // Limit length to prevent abuse
+}
 
 const PROPERTIES = [
   {
@@ -386,6 +394,90 @@ async function handler(req: any, res: any) {
       res.setHeader("Content-Type", "application/json");
       return res.end(JSON.stringify(PROPERTIES));
     }
+
+    if (pathname === "bayut/properties" && req.method === "GET") {
+      try {
+        const params = new URLSearchParams(url.split("?")[1] || "");
+        const purpose = params.get("purpose") || "for-sale";
+        const page = params.get("page") || "1";
+        const categories = params.get("categories") || "apartments,villas,townhouses";
+
+        const bayutParams = new URLSearchParams();
+        bayutParams.set("purpose", purpose);
+        bayutParams.set("page", page);
+        bayutParams.set("langs", "en");
+        if (categories) bayutParams.set("categories", categories);
+
+        const response = await fetch(
+          `https://uae-real-estate3.p.rapidapi.com/search-property?${bayutParams.toString()}`,
+          {
+            method: "GET",
+            headers: {
+              "x-rapidapi-key": "213e95f05amshf56b22019680baep1ff887jsnff862e680013",
+              "x-rapidapi-host": "uae-real-estate3.p.rapidapi.com",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          console.error("BayutAPI error:", response.status);
+          res.setHeader("Content-Type", "application/json");
+          return res.end(JSON.stringify({ properties: PROPERTIES }));
+        }
+
+        const data = await response.json();
+        const results = data?.data?.properties || [];
+
+        const mapped = results.map((p: any) => {
+          const loc = p.location || [];
+          const community = loc.find((l: any) => l.level === 2)?.name || loc.find((l: any) => l.level === 1)?.name || "Dubai";
+          const subCommunity = loc.find((l: any) => l.level === 3)?.name || "";
+
+          return {
+            id: "bayut-" + p.id,
+            name: (p.title?.en || "Premium Property").substring(0, 60),
+            area: subCommunity || community,
+            price: p.price || 0,
+            beds: p.rooms || 0,
+            baths: p.baths || 0,
+            size: Math.round(p.area || 0),
+            imageUrl: p.coverPhoto?.url || "",
+            developer: p.project?.developer?.name?.en || "Unknown Developer",
+            rentalYield: Math.round((5.5 + Math.random() * 3) * 10) / 10,
+            appreciation: Math.round((4 + Math.random() * 5) * 10) / 10,
+            capitalGrowth: Math.round((7 + Math.random() * 4) * 10) / 10,
+            risk: p.completionStatus === "completed" ? "Low Risk" : "Medium Risk",
+            completion: p.completionStatus === "completed" ? "Ready" : "Off-Plan",
+            description: p.title?.en || "Premium property in Dubai",
+            coordinates: p.geography?.lat
+              ? { x: p.geography?.lng || 55.27, y: p.geography?.lat || 25.2 }
+              : { x: 55.27, y: 25.2 },
+            popular: false,
+            amenities: (p.amenities || []).map((a: any) => a.name || a),
+            allImages: (p.pictures || []).map((pic: any) => pic.url || pic),
+            views: {
+              exterior: p.coverPhoto?.url || "",
+              living: p.pictures?.[0]?.url || p.coverPhoto?.url || "",
+              kitchen: p.pictures?.[1]?.url || p.coverPhoto?.url || "",
+              bedroom: p.pictures?.[2]?.url || p.coverPhoto?.url || "",
+              tour3d: p.coverPhoto?.url || "",
+            },
+          };
+        });
+
+        res.setHeader("Content-Type", "application/json");
+        return res.end(JSON.stringify({
+          properties: mapped,
+          total: data?.data?.total || 0,
+          page: Number(page),
+          totalPages: data?.data?.totalPages || 1,
+        }));
+      } catch (error) {
+        console.error("BayutAPI proxy error:", error);
+        res.setHeader("Content-Type", "application/json");
+        return res.end(JSON.stringify({ properties: PROPERTIES }));
+      }
+    }
     
     if (pathname === "search-properties" && req.method === "POST") {
       try {
@@ -396,9 +488,12 @@ async function handler(req: any, res: any) {
 
         const client = getGeminiClient();
         
+        // Sanitize user input
+        const sanitizedDescription = sanitizeInput(description);
+        
         const response = await client.models.generateContent({
           model: "gemini-3.5-flash",
-          contents: `You are an elite real estate expert in Dubai. Filter our property database based on the user's dream house description: "${description}".
+          contents: `You are an elite real estate expert in Dubai. Filter our property database based on the user's dream house description: "${sanitizedDescription}".
 
 Our properties database:
 ${JSON.stringify(PROPERTIES, null, 2)}
@@ -461,7 +556,7 @@ Return ONLY a raw JSON array matching this schema:
         return res.status(200).json(enrichedMatches);
       } catch (error) {
         console.error("AI Property Finder Error:", error);
-        return res.status(500).json({ error: error.message || "An error occurred with the AI assistant" });
+        return res.status(500).json({ error: "An error occurred with the AI assistant" });
       }
     }
     
@@ -494,7 +589,7 @@ Return ONLY a raw JSON array matching this schema:
         return res.status(200).json({ content: response.text });
       } catch (error) {
         console.error("AI Concierge Chat Error:", error);
-        return res.status(500).json({ error: error.message || "An error occurred with the AI assistant" });
+        return res.status(500).json({ error: "An error occurred with the AI assistant" });
       }
     }
     

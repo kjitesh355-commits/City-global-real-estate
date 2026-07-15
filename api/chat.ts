@@ -1,5 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 
+// Input sanitization helper
+function sanitizeInput(input: string): string {
+  // Remove potentially dangerous characters and limit length
+  return input
+    .replace(/[<>]/g, '') // Remove angle brackets
+    .replace(/javascript:/gi, '') // Remove javascript: protocol
+    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .substring(0, 1000); // Limit length to prevent abuse
+}
+
 let geminiClient = null;
 
 function getGeminiClient() {
@@ -53,6 +63,6 @@ export default async function handler(req, res) {
     res.status(200).json({ content: response.text });
   } catch (error) {
     console.error("AI Concierge Chat Error:", error);
-    res.status(500).json({ error: error.message || "An error occurred with the AI assistant" });
+    res.status(500).json({ error: "An error occurred with the AI assistant" });
   }
 }

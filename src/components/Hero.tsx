@@ -248,14 +248,14 @@ export default function Hero({
             poster="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1920&auto=format&fit=crop"
           >
             <source
-              src="https://api3.webm.to/static/uploads/726733d9-fcb0-43ba-861b-c0af95058137/Video-Project.mp4"
+              src="/hero-video-4k.mp4"
               type="video/mp4"
             />
           </video>
         </div>
 
         {/* Dark Overlay */}
-        <div className="absolute inset-0 z-[1] bg-black/85" />
+        <div className="absolute inset-0 z-[1] bg-black/50" />
 
         {/* Animated Gold Light Streaks */}
         <div className="absolute inset-0 z-[2] overflow-hidden pointer-events-none">

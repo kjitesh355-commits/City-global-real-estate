@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { X, Bed, Bath, Maximize2, MapPin, Building, ChevronLeft, ChevronRight, Download, ExternalLink, Phone, Mail, Globe, MapPinOff } from "lucide-react";
 import { Property } from "../types";
+import { formatPrice as formatPriceCurrency, CurrencyCode } from "../utils/currency";
 
 interface PropertyDetailModalProps {
   property: Property;
@@ -12,11 +13,27 @@ export default function PropertyDetailModal({ property, onClose, theme }: Proper
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = property.allImages || [property.imageUrl];
 
-  const formatPrice = (price: number) => {
-    if (price >= 1000000) {
-      return `AED ${(price / 1000000).toFixed(1)}M`;
+  // Currency State
+  const [currency, setCurrency] = useState<CurrencyCode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("app-currency") as CurrencyCode) || "AED";
     }
-    return `AED ${price.toLocaleString()}`;
+    return "AED";
+  });
+
+  useEffect(() => {
+    const handleCurrencyChange = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail) {
+        setCurrency(customEvent.detail);
+      }
+    };
+    window.addEventListener("currency-change", handleCurrencyChange);
+    return () => window.removeEventListener("currency-change", handleCurrencyChange);
+  }, []);
+
+  const formatPrice = (price: number) => {
+    return formatPriceCurrency(price, currency);
   };
 
   const nextImage = () => {

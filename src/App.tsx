@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { HelmetProvider } from "react-helmet-async";
+import { motion, AnimatePresence } from "motion/react";
+import LoadingScreen from "./components/LoadingScreen";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import StatsGrid from "./components/StatsGrid";
@@ -29,6 +31,13 @@ import { X, Calendar, User, Mail, Phone, Clock, Sparkles, Compass, Plus, Faceboo
 import { FloatingButton, FloatingButtonItem } from "./components/ui/floating-button";
 
 export default function App() {
+  // Loading screen state (plays on every page load)
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleLoadingComplete = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   // Page routing
   const [activePage, setActivePage] = useState<"home" | "about" | "projects" | "ready" | "rentals" | "blog" | "agents" | "contact">("home");
   const [allProperties, setAllProperties] = useState<Property[]>([]);
@@ -83,12 +92,35 @@ export default function App() {
     return localStorage.getItem("cookie_consent") === "accepted";
   });
 
+  // Preload hero video during intro
+  useEffect(() => {
+    const video = document.createElement("video");
+    video.src = "https://api3.webm.to/static/uploads/726733d9-fcb0-43ba-861b-c0af95058137/Video-Project.mp4";
+    video.preload = "auto";
+  }, []);
+
   // Scroll to Top button visibility
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Fetch properties from Express API on startup
+  // Fetch properties from BayutAPI (with local fallback)
   useEffect(() => {
     async function fetchProperties() {
+      try {
+        // Try BayutAPI first
+        const bayutRes = await fetch("/api/bayut/properties?page=1&categories=apartments,villas,townhouses");
+        if (bayutRes.ok) {
+          const bayutData = await bayutRes.json();
+          if (bayutData.properties && bayutData.properties.length > 0) {
+            setAllProperties(bayutData.properties);
+            setFilteredProperties(bayutData.properties);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("BayutAPI unavailable, falling back to local:", e);
+      }
+
+      // Fallback to local properties
       try {
         const response = await fetch("/api/properties");
         if (response.ok) {
@@ -218,6 +250,7 @@ export default function App() {
 
   return (
     <HelmetProvider>
+    {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
     <div className={`relative min-h-screen transition-colors duration-500 selection:bg-[#d4af37]/40 overflow-x-hidden ${
       theme === "dark" ? "bg-[#07080a] text-white" : "bg-[#fcfbf9] text-[#14161d]"
     }`}>
@@ -231,7 +264,17 @@ export default function App() {
       {activePage === "blog" && <SEO title="Blog" description="Latest insights on Dubai real estate market, investment tips, golden visa updates, and property guides." />}
       {activePage === "agents" && <SEO title="Our Agents" description="Meet our expert real estate agents in Dubai. Professional, multilingual, and dedicated to finding your perfect property." />}
       {activePage === "contact" && <SEO title="Contact Us" description="Get in touch with City Global Real Estate. Free consultation, WhatsApp support, and office visits available." />}
-      <Navbar onOpenConsultation={() => setConsultationOpen(true)} theme={theme} onToggleTheme={toggleTheme} activePage={activePage} onNavigateHome={() => setActivePage("home")} onNavigateAbout={() => setActivePage("about")} onNavigateProjects={() => setActivePage("projects")} onNavigateReady={() => setActivePage("ready")} onNavigateRentals={() => setActivePage("rentals")} onNavigateBlog={() => setActivePage("blog")} onNavigateAgents={() => setActivePage("agents")} onNavigateContact={() => setActivePage("contact")} />
+      <AnimatePresence>
+        {!isLoading && (
+          <motion.div
+            initial={{ y: -80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Navbar onOpenConsultation={() => setConsultationOpen(true)} theme={theme} onToggleTheme={toggleTheme} activePage={activePage} onNavigateHome={() => setActivePage("home")} onNavigateAbout={() => setActivePage("about")} onNavigateProjects={() => setActivePage("projects")} onNavigateReady={() => setActivePage("ready")} onNavigateRentals={() => setActivePage("rentals")} onNavigateBlog={() => setActivePage("blog")} onNavigateAgents={() => setActivePage("agents")} onNavigateContact={() => setActivePage("contact")} />
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Section Navigation Sidebar */}
       {activePage === "home" && <SectionNav theme={theme} />}
