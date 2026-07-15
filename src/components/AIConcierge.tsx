@@ -96,12 +96,12 @@ export default function AIConcierge({ theme }: AIConciergeProps) {
 
   const handleChipClick = (chipKey: string) => {
     const chipPrompts: Record<string, string> = {
-      ai_chip1: "What are the absolute best investment properties under AED 5 Million in Dubai right now in terms of capital appreciation and high rental yields?",
-      ai_chip2: "Can you compare Downtown Dubai and Dubai Marina for a real estate investor? Please contrast current average rental yields, capital appreciation trends, and occupant demographics.",
-      ai_chip3: "Which off-plan projects in Dubai are currently attracting the most smart institutional investment, and what are their estimated completion dates?",
-      ai_chip4: "I would like to schedule a private viewing for one of your luxury beachfront properties. What is the process and what documents are required for non-resident investors?",
-      ai_chip5: "Provide a detailed ROI analysis for investing in Palm Jumeirah properties. Include rental yields, capital appreciation projections, and service charge breakdown.",
-      ai_chip6: "What are the current Golden Visa requirements for real estate investors in Dubai? What is the minimum property value and what benefits does it include?"
+      ai_chip1: "I have a budget of AED 2 million or less. Which properties from your portfolio offer the best combination of rental yield and capital appreciation? I want maximum ROI with low risk.",
+      ai_chip2: "Compare the investment fundamentals of Downtown Dubai vs Dubai Marina. Which area has better rental yields, capital growth potential, and occupancy rates right now?",
+      ai_chip3: "What off-plan projects do you currently offer with the best payment plans? I'm interested in post-handover payment plans and which developers offer the most attractive terms.",
+      ai_chip4: "I'm interested in the UAE Golden Visa through real estate investment. Which of your properties qualify (above AED 2M)? What's the process, timeline, and what benefits does it include for my family?",
+      ai_chip5: "Which of your current properties offer the highest rental yield? I'm looking for the best passive income opportunity — compare yields across all your available units.",
+      ai_chip6: "I'm looking for a family home that also makes financial sense. Which 3+ bedroom properties do you offer that combine good living space with strong ROI potential?"
     };
     handleSendMessage(chipPrompts[chipKey] || chipKey);
   };

@@ -329,26 +329,33 @@ export default async function handler(req, res) {
 
       const client = getGeminiClient();
       
-      // Sanitize user input
       const sanitizedDescription = sanitizeInput(description);
       
+      const propertySummary = PROPERTIES.map(p => 
+        `ID: "${p.id}" | ${p.name} | ${p.area} | AED ${p.price.toLocaleString()} | ${p.beds}BR/${p.baths}BA | ${p.size}sqft | Yield: ${p.rentalYield}% | Appreciation: ${p.appreciation}% | Risk: ${p.risk} | Status: ${p.completion} | Developer: ${p.developer}`
+      ).join("\n");
+
       const response = await client.models.generateContent({
         model: "gemini-3.5-flash",
-        contents: `You are an elite real estate expert in Dubai. Filter our property database based on the user's dream house description: "${sanitizedDescription}".
+        contents: `You are City Global Real Estate's Chief Investment Analyst — a world-class property advisor with deep expertise in Dubai's real estate market. A client has shared their investment vision. Analyze it carefully and match the best properties from our portfolio.
 
-Our properties database:
-${JSON.stringify(PROPERTIES, null, 2)}
+CLIENT'S REQUEST: "${sanitizedDescription}"
 
-Provide your recommendations in JSON format as an array containing matching property objects, where each recommendation has the property "id" (must match our property id exactly), "matchPercentage" (integer 0-100), and "aiExplanation" (custom narrative explaining why this property matches their dream in a luxurious, professional tone).
+OUR PORTFOLIO:
+${propertySummary}
 
-Return ONLY a raw JSON array matching this schema:
-[
-  {
-    "id": "property-id-string",
-    "matchPercentage": 95,
-    "aiExplanation": "A short, elegant explanation of why this property fits..."
-  }
-]`,
+YOUR TASK:
+1. Analyze the client's request for: investment goals, budget range, lifestyle preferences, location preferences, size needs, and risk tolerance.
+2. Match properties that best align with their vision. Consider ROI potential, location prestige, developer reputation, and lifestyle fit.
+3. For each match, write a compelling 1-2 sentence explanation that highlights the specific investment value proposition — mention the area, yield, appreciation potential, or unique selling point.
+4. Rank by match quality. Only include properties that genuinely fit. It's better to recommend 2-3 strong matches than 5 weak ones.
+
+Return a JSON array. Each entry must have:
+- "id": exact property ID from our list
+- "matchPercentage": integer 0-100 (be honest — a 70% match is fine, don't inflate)
+- "aiExplanation": 1-2 sentences of expert analysis explaining why this property matches their vision. Be specific about numbers, location benefits, and investment returns.
+
+Return ONLY the raw JSON array, no additional text.`,
         config: {
           responseMimeType: "application/json",
           responseSchema: {
@@ -356,9 +363,9 @@ Return ONLY a raw JSON array matching this schema:
             items: {
               type: Type.OBJECT,
               properties: {
-                id: { type: Type.STRING, description: "The exact property ID matching our list" },
-                matchPercentage: { type: Type.INTEGER, description: "Percentage representing the match quality (0-100)" },
-                aiExplanation: { type: Type.STRING, description: "Exquisite description explaining the match reasons" }
+                id: { type: Type.STRING, description: "The exact property ID from our portfolio" },
+                matchPercentage: { type: Type.INTEGER, description: "Honest match score 0-100" },
+                aiExplanation: { type: Type.STRING, description: "Expert investment analysis, 1-2 sentences with specific numbers" }
               },
               required: ["id", "matchPercentage", "aiExplanation"]
             }
@@ -374,24 +381,20 @@ Return ONLY a raw JSON array matching this schema:
         if (!prop) return null;
         return {
           ...prop,
-          matchPercentage: m.matchPercentage,
+          matchPercentage: Math.min(100, Math.max(0, m.matchPercentage)),
           aiExplanation: m.aiExplanation
         };
       }).filter(Boolean);
 
+      enrichedMatches.sort((a: any, b: any) => (b.matchPercentage || 0) - (a.matchPercentage || 0));
+
       if (enrichedMatches.length === 0) {
-        return res.json([
-          {
-            ...PROPERTIES[1],
-            matchPercentage: 90,
-            aiExplanation: "While we couldn't match your request exactly, Frond G Villa is our most popular off-plan property on Palm Jumeirah offering unparalleled beachfront luxury."
-          },
-          {
-            ...PROPERTIES[2],
-            matchPercentage: 85,
-            aiExplanation: "As a prime luxury high-rise, Address Residences provides Burj-facing luxury suited for smart investments in the heart of Downtown."
-          }
-        ]);
+        const fallback = PROPERTIES.slice(0, 2).map((p, i) => ({
+          ...p,
+          matchPercentage: 90 - i * 5,
+          aiExplanation: `Based on your search, ${p.name} in ${p.area} stands out as a strong option — AED ${p.price.toLocaleString()} with ${p.rentalYield}% rental yield and ${p.appreciation}% annual appreciation. ${p.developer} delivers proven quality in this emerging micro-market.`
+        }));
+        return res.json(fallback);
       }
 
       res.status(200).json(enrichedMatches);

@@ -139,22 +139,22 @@ export const translations: Record<string, Record<LangCode, string>> = {
     ru: "Посмотреть все объекты"
   },
   "prop.consulting": {
-    en: "Consulting AI Knowledge Graphs...",
-    ar: "جاري استشارة الرسوم البيانية لمعرفة الذكاء الاصطناعي...",
-    hi: "AI नॉलेज ग्राफ़ से परामर्श किया जा रहा है...",
-    ur: "AI نالج گراف سے مشورہ کیا جا رہا ہے...",
-    tl: "Sumasangguni sa AI Knowledge Graphs...",
-    zh: "正在咨询人工智能知识图谱...",
-    ru: "Консультация с AI-графами знаний..."
+    en: "Our AI analyst is reviewing your vision...",
+    ar: "يقوم محللنا الذكي بمراجعة رؤيتك...",
+    hi: "हमारा AI विश्लेषक आपकी दृष्टि की समीक्षा कर रहा है...",
+    ur: "ہمارا AI تجزیہ کار آپ کے خواب کا جائزہ لے رہا ہے...",
+    tl: "Sinasuri ng aming AI analyst ang iyong pangarap...",
+    zh: "我们的AI分析师正在审核您的投资愿景...",
+    ru: "Наш AI-аналитик изучает ваш запрос..."
   },
   "prop.engineParsing": {
-    en: "Our real estate engine is parsing your request, auditing luxury inventory, and designing custom matched recommendation profiles.",
-    ar: "يقوم محرك العقارات لدينا بتحليل طلبك، وتدقيق المخزون الفاخر، وتصميم ملفات تعريف توصية مطابقة مخصصة.",
-    hi: "हमारा रियल एस्टेट इंजन आपके अनुरोध का विश्लेषण कर रहा है, लक्जरी इन्वेंट्री का ऑडिट कर रहा है, और कस्टम मिलान वाले अनुशंसा प्रोफाइल तैयार कर रहा है।",
-    ur: "ہمارا رئیل اسٹیٹ انجن آپ کی درخواست کا تجزیہ کر رہا ہے، لگژری انوینٹری کا آڈٹ کر رہا ہے، اور کسٹم مماثل سفارشی پروفائلز ڈیزائن کر رہا ہے۔",
-    tl: "Sinusuri ng aming real estate engine ang iyong kahilingan, tinitingnan ang marangyang imbentaryo, at nagdidisenyo ng mga tugmang rekomendasyon.",
-    zh: "我们的房地产引擎正在解析您的请求，审核奢华库存，并设计自定义的匹配推荐属性。",
-    ru: "Наш движок недвижимости анализирует ваш запрос, проверяет премиальный инвентарь и формирует индивидуальные рекомендации."
+    en: "Cross-referencing market data, rental yields, and appreciation trends to find your ideal investment match.",
+    ar: "نقوم ب Compare بين بيانات السوق والعوائد الإيجارية واتجاهات القيمة لإيجاد استثمارك المثالي.",
+    hi: "बाजार डेटा, किराया यील्ड और सराहना रुझानों का क्रॉस-संदर्भ आपके आदर्श निवेश मैच खोजने के लिए।",
+    ur: "آپ کے مثالی سرمایہ کاری میچ کو تلاش کرنے کے لیے مارکیٹ ڈیٹا، کرایہ یلڈز اور قیمت میں اضافہ کے رجحات کا موازنہ کیا جا رہا ہے۔",
+    tl: "Sinasaliksik ang market data, rental yields, at appreciation trends para mahanap ang iyong perpektong investment.",
+    zh: "正在交叉参考市场数据、租金收益率和增值趋势，为您的投资愿景寻找最佳匹配。",
+    ru: "Сопоставляем рыночные данные, арендную доходность и тенденции роста, чтобы найти идеальный вариант для вашей инвестиции."
   },
   "prop.clearSearch": {
     en: "Clear Search",
@@ -1531,58 +1531,58 @@ export const translations: Record<string, Record<LangCode, string>> = {
     ru: "Копировать"
   },
   "ai.chip1": {
-    en: "Best investment under AED 5M?",
-    ar: "أفضل استثمار تحت 5 مليون درهم؟",
-    hi: "50 लाख AED से कम में सबसे अच्छा निवेश?",
-    ur: "50 لاکھ AED سے کم میں بہترین سرمایہ کاری؟",
-    tl: "Pinakamainam na investment sa ilalim ng AED 5M?",
-    zh: "500万迪拉姆以下的最佳投资？",
-    ru: "Лучшая инвестиция до 5 млн AED?"
+    en: "Best investment under AED 2M?",
+    ar: "أفضل استثمار تحت 2 مليون درهم؟",
+    hi: "20 लाख AED से कम में सबसे अच्छा निवेश?",
+    ur: "20 لاکھ AED سے کم میں بہترین سرمایہ کاری؟",
+    tl: "Pinakamainam na investment sa ilalim ng AED 2M?",
+    zh: "200万迪拉姆以下的最佳投资？",
+    ru: "Лучшая инвестиция до 2 млн AED?"
   },
   "ai.chip2": {
-    en: "Compare Downtown vs Dubai Marina",
-    ar: "قارن بين وسط مدينة دبي ودبي مارينا",
-    hi: "डाउनटाउन बनाम दुबई मारिना की तुलना करें",
-    ur: "ڈاؤن ٹاؤن بنام دبئی مارینا کا موازنہ کریں",
-    tl: "Ihambing ang Downtown vs Dubai Marina",
-    zh: "对比市中心与迪拜码头",
-    ru: "Сравните Downtown и Dubai Marina"
+    en: "Compare Downtown vs Marina yields",
+    ar: "قارن عوائد وسط مدينة دبي ودبي مارينا",
+    hi: "डाउनटाउन बनाम मारिना यील्ड की तुलना करें",
+    ur: "ڈاؤن ٹاؤن بنام مارینا یلڈز کا موازنہ کریں",
+    tl: "Ihambing ang Downtown vs Marina yields",
+    zh: "对比市中心与码头区收益率",
+    ru: "Сравните доходность Downtown и Marina"
   },
   "ai.chip3": {
-    en: "Show me off plan projects",
-    ar: "اعرض لي المشاريع على الخارطة",
-    hi: "मुझे ऑफ प्लान प्रोजेक्ट्स दिखाएं",
-    ur: "مجھے آف پلان پروجیکٹس دکھائیں",
-    tl: "Ipakita sa akin ang mga off plan project",
-    zh: "显示期房项目",
-    ru: "Покажите проекты на стадии строительства"
+    en: "Best off-plan payment plans",
+    ar: "أفضل خطط الدفع للمشاريع على الخارطة",
+    hi: "सर्वोत्तम ऑफ-प्लान भुगतान योजनाएं",
+    ur: "بہترین آف پلان ادائیگی کے منصوبے",
+    tl: "Pinakamainam na off-plan payment plans",
+    zh: "最佳期房付款方案",
+    ru: "Лучшие планы оплаты на стадии строительства"
   },
   "ai.chip4": {
-    en: "Book a property viewing",
-    ar: "احجز موعد معاينة عقار",
-    hi: "संपत्ति देखने का समय बुक करें",
-    ur: "پراپرٹی دیکھنے کا وقت بک کریں",
-    tl: "Mag-book ng property viewing",
-    zh: "预约看房",
-    ru: "Записаться на просмотр объекта"
+    en: "Which properties qualify for Golden Visa?",
+    ar: "أي العقارات تؤهل للتأشيرة الذهبية؟",
+    hi: "कौन सी संपत्तियां गोल्डन वीज़ा के लिए योग्य हैं?",
+    ur: "کون سی پراپرٹیز گولڈن ویزا کے لیے اہل ہیں؟",
+    tl: "Aling mga ari-arian ang qualify sa Golden Visa?",
+    zh: "哪些房产符合黄金签证资格？",
+    ru: "Какие объекты подходят для Золотой визы?"
   },
   "ai.chip5": {
-    en: "ROI analysis for Palm Jumeirah",
-    ar: "تحليل العائد على الاستثمار لنخلة جميرا",
-    hi: "पाम जुमेराह के लिए ROI विश्लेषण",
-    ur: "پام جمیرہ کے لیے ROI تجزیہ",
-    tl: "ROI analysis para sa Palm Jumeirah",
-    zh: "棕榈岛投资回报分析",
-    ru: "Анализ доходности Palm Jumeirah"
+    en: "Highest rental yield properties",
+    ar: "العقارات الأعلى عائدًا إيجاريًا",
+    hi: "सबसे ज्यादा किराया यील्ड वाली संपत्तियां",
+    ur: "سب سے زیادہ کرایہ یلڈ والی پراپرٹیز",
+    tl: "Mga ari-arian na may pinakamataas na rental yield",
+    zh: "最高租金回报率的房产",
+    ru: "Объекты с наибольшей арендной доходностью"
   },
   "ai.chip6": {
-    en: "Golden Visa requirements",
-    ar: "متطلبات التأشيرة الذهبية",
-    hi: "गोल्डन वीज़ा आवश्यकताएं",
-    ur: "گولڈن ویزا کی تقاضائیں",
-    tl: "Mga kinakailangan para sa Golden Visa",
-    zh: "黄金签证要求",
-    ru: "Требования к золотой визе"
+    en: "Family homes with good ROI",
+    ar: "منازل عائلية بعائد استثماري جيد",
+    hi: "अच्छे ROI वाले पारिवारिक घर",
+    ur: "اچھے ROI والے خاندانی گھر",
+    tl: "Mga family home na may magandang ROI",
+    zh: "具有良好投资回报的家庭住宅",
+    ru: "Семейные дома с хорошей доходностью"
   },
   "ai.errorConnection": {
     en: "Failed to consult AI. Please try again.",

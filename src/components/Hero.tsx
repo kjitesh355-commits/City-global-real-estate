@@ -43,12 +43,12 @@ const popularSearches = [
 ];
 
 const aiExampleChips = [
-  "Best ROI in Dubai",
-  "Luxury Villas",
-  "Rental Yield",
-  "Golden Visa",
-  "Off Plan",
-  "Downtown Apartments",
+  "Best ROI under AED 2M",
+  "Luxury waterfront villas",
+  "High rental yield studios",
+  "Golden Visa eligible properties",
+  "Off-plan investment opportunities",
+  "Family homes in Dubai Hills",
 ];
 
 function AnimatedCounter({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -167,8 +167,17 @@ export default function Hero({
   };
 
   const handleTagClick = (tag: string) => {
-    setAiPrompt(tag);
-    handleAISearch(tag);
+    const detailedQueries: Record<string, string> = {
+      "Best ROI under AED 2M": "I want the best return on investment properties in Dubai under AED 2 million. Focus on rental yield and capital appreciation. Which properties give the highest ROI?",
+      "Luxury waterfront villas": "Show me luxury waterfront villas in Dubai with private beach access. I'm looking for premium beachfront living with strong investment potential.",
+      "High rental yield studios": "What are the highest rental yield studio apartments in Dubai? I want maximum passive income with low entry price.",
+      "Golden Visa eligible properties": "Which of your properties qualify for the UAE Golden Visa program? I need properties above AED 2M that grant 10-year residency.",
+      "Off-plan investment opportunities": "Which off-plan projects offer the best investment opportunity? I'm looking for pre-handover payment plans with strong capital growth potential.",
+      "Family homes in Dubai Hills": "I need a family home in Dubai Hills Estate or similar community. Looking for 3+ bedrooms, modern amenities, and good schools nearby.",
+    };
+    const query = detailedQueries[tag] || tag;
+    setAiPrompt(query);
+    handleAISearch(query);
   };
 
   return (
