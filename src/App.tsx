@@ -102,25 +102,9 @@ export default function App() {
   // Scroll to Top button visibility
   const [showScrollTop, setShowScrollTop] = useState(false);
 
-  // Fetch properties from BayutAPI (with local fallback)
+  // Fetch properties from local API
   useEffect(() => {
     async function fetchProperties() {
-      try {
-        // Try BayutAPI first
-        const bayutRes = await fetch("/api/bayut/properties?page=1&categories=apartments,villas,townhouses");
-        if (bayutRes.ok) {
-          const bayutData = await bayutRes.json();
-          if (bayutData.properties && bayutData.properties.length > 0) {
-            setAllProperties(bayutData.properties);
-            setFilteredProperties(bayutData.properties);
-            return;
-          }
-        }
-      } catch (e) {
-        console.warn("BayutAPI unavailable, falling back to local:", e);
-      }
-
-      // Fallback to local properties
       try {
         const response = await fetch("/api/properties");
         if (response.ok) {
