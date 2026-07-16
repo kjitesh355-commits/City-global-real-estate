@@ -19,35 +19,46 @@ const PROPERTIES = [
   { id: "creek-harbour-penthouse", name: "Creek Harbour Penthouse", area: "Dubai Creek Harbour", price: 11200000, beds: 4, baths: 5, size: 3800, developer: "EMAAR", rentalYield: 6.7, appreciation: 8.0, completion: "Q3 2026", risk: "Low Risk", description: "Smart waterfront penthouse.", coordinates: { x: 41, y: 58 }, imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80", views: { exterior: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80", living: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80", kitchen: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80", bedroom: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80", tour3d: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=80" } }
 ];
 
-async function callGemini(contents: any[], systemInstruction?: string, responseSchema?: any): Promise<string> {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error("GEMINI_API_KEY environment variable is required");
-  const body: any = { contents, generationConfig: {} };
+async function callGroq(contents: any[], systemInstruction?: string, responseSchema?: any): Promise<string> {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) throw new Error("GROQ_API_KEY environment variable is required");
+
+  const messages: any[] = [];
   if (systemInstruction) {
-    body.systemInstruction = { parts: [{ text: systemInstruction }] };
+    messages.push({ role: "system", content: systemInstruction });
   }
+  for (const msg of contents) {
+    messages.push({ role: msg.role === "user" ? "user" : "assistant", content: msg.parts?.[0]?.text || "" });
+  }
+
+  const body: any = {
+    model: "llama-3.3-70b-versatile",
+    messages,
+    max_tokens: 1024,
+    temperature: 0.7
+  };
+
   if (responseSchema) {
-    body.generationConfig.responseMimeType = "application/json";
-    body.generationConfig.responseSchema = responseSchema;
+    body.response_format = { type: "json_object" };
   }
-  const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${key}`;
-  const res = await fetch(apiUrl, {
+
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${key}`
+    },
     body: JSON.stringify(body)
   });
+
   const rawText = await res.text();
   if (!res.ok) {
-    throw new Error(`Gemini API error ${res.status}: ${rawText}`);
+    throw new Error(`Groq API error ${res.status}: ${rawText.substring(0, 500)}`);
   }
-  let data: any;
-  try {
-    data = JSON.parse(rawText);
-  } catch (e) {
-    throw new Error(`Invalid JSON from Gemini: ${rawText.substring(0, 200)}`);
-  }
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error(`No text in Gemini response: ${JSON.stringify(data).substring(0, 200)}`);
+
+  const data = JSON.parse(rawText);
+  const text = data?.choices?.[0]?.message?.content;
+  if (!text) throw new Error("No text in Groq response");
   return text;
 }
 
@@ -88,21 +99,10 @@ Return a JSON array. Each entry:
 
 Return ONLY the JSON array.`;
 
-      const text = await callGemini(
+      const text = await callGroq(
         [{ role: "user", parts: [{ text: userPrompt }] }],
         undefined,
-        {
-          type: "ARRAY",
-          items: {
-            type: "OBJECT",
-            properties: {
-              id: { type: "STRING" },
-              matchPercentage: { type: "INTEGER" },
-              aiExplanation: { type: "STRING" }
-            },
-            required: ["id", "matchPercentage", "aiExplanation"]
-          }
-        }
+        { type: "json_object" }
       );
 
       let matches;

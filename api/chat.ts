@@ -11,26 +11,33 @@ const PROPERTIES = [
   { id: "creek-harbour-penthouse", name: "Creek Harbour Penthouse", area: "Dubai Creek Harbour", price: 11200000, beds: 4, baths: 5, size: 3800, developer: "EMAAR", rentalYield: 6.7, appreciation: 8.0, completion: "Q3 2026", risk: "Low Risk" }
 ];
 
-async function callGeminiStream(contents: any[], systemInstruction?: string): Promise<ReadableStream> {
-  const key = process.env.GEMINI_API_KEY;
-  if (!key) throw new Error("GEMINI_API_KEY environment variable is required");
-  const body: any = {
-    contents,
-    generationConfig: {
-      maxOutputTokens: 512,
-      temperature: 0.7
-    }
+async function callGroqStream(messages: any[], systemInstruction: string): Promise<ReadableStream> {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) throw new Error("GROQ_API_KEY environment variable is required");
+
+  const body = {
+    model: "llama-3.3-70b-versatile",
+    messages: [
+      { role: "system", content: systemInstruction },
+      ...messages
+    ],
+    max_tokens: 512,
+    temperature: 0.7,
+    stream: true
   };
-  if (systemInstruction) {
-    body.systemInstruction = { parts: [{ text: systemInstruction }] };
-  }
-  const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?alt=sse&key=${key}`,
-    { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
-  );
+
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${key}`
+    },
+    body: JSON.stringify(body)
+  });
+
   if (!res.ok) {
     const rawText = await res.text();
-    throw new Error(`Gemini API error ${res.status}: ${rawText.substring(0, 500)}`);
+    throw new Error(`Groq API error ${res.status}: ${rawText.substring(0, 500)}`);
   }
   if (!res.body) throw new Error("No response body");
   return res.body;
@@ -57,8 +64,8 @@ export default async function handler(req: any, res: any) {
     if (!messages || !Array.isArray(messages)) return res.status(400).json({ error: "Messages array is required" });
 
     const chatMessages = messages.map((msg: any) => ({
-      role: msg.role === "user" ? "user" as const : "model" as const,
-      parts: [{ text: msg.content }]
+      role: msg.role === "user" ? "user" : "assistant",
+      content: msg.content
     }));
 
     const propertyBrief = PROPERTIES.map(p =>
@@ -72,7 +79,7 @@ PORTFOLIO: ${propertyBrief}
 
 RULES: 2-3 short paragraphs max. Mention specific properties with real numbers. End with a question or call-to-action. Never fabricate data.`;
 
-    const stream = await callGeminiStream(chatMessages, systemInstruction);
+    const stream = await callGroqStream(chatMessages, systemInstruction);
 
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
@@ -92,14 +99,16 @@ RULES: 2-3 short paragraphs max. Mention specific properties with real numbers. 
 
       for (const line of lines) {
         if (line.startsWith("data: ")) {
+          const data = line.slice(6).trim();
+          if (data === "[DONE]") break;
           try {
-            const data = JSON.parse(line.slice(6));
-            const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+            const parsed = JSON.parse(data);
+            const text = parsed.choices?.[0]?.delta?.content;
             if (text) {
               res.write(`data: ${JSON.stringify({ text })}\n\n`);
             }
           } catch {
-            // skip invalid JSON lines
+            // skip
           }
         }
       }
